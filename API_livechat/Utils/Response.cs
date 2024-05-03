@@ -1,8 +1,8 @@
 ﻿namespace API_livechat.Utils
 {
-    public class Status
+    public class Response
     {
-        public string Stato { get; set; } = null!;
+        public string Status { get; set; } = null!;
         public object? Data {  get; set; }
     }
 }

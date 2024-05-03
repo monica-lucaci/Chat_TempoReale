@@ -9,16 +9,16 @@
     "Parameters": [
       {
         "Name": "userDTO",
-        "Type": "API_livechat.DTO.UserlDTO",
+        "Type": "API_livechat.DTO.UserDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API_livechat.Controllers.UserlController",
+    "ContainingType": "API_livechat.Controllers.UserController",
     "Method": "GetListOfUsers",
-    "RelativePath": "User",
+    "RelativePath": "User/ListOfUsers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -26,7 +26,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API_livechat.Controllers.UserlController",
+    "ContainingType": "API_livechat.Controllers.UserController",
     "Method": "Register",
     "RelativePath": "User/register",
     "HttpMethod": "POST",
@@ -35,10 +35,20 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "API_livechat.DTO.UserlDTO",
+        "Type": "API_livechat.DTO.UserDTO",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.UserController",
+    "Method": "GetUserProfile",
+    "RelativePath": "User/UserProfile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

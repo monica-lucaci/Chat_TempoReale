@@ -6,11 +6,11 @@ namespace API_livechat.Models
     {
         public loginContext(DbContextOptions<loginContext> options) : base(options) { }
 
-        public DbSet<Userl> Users { get; set; }
+        public DbSet<UserProfile> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Userl>()
+            modelBuilder.Entity<UserProfile>()
                 .HasKey(u => new { u.UserId });
         }
     }

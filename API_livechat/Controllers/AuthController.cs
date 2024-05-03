@@ -16,20 +16,22 @@ namespace API_livechat.Controllers
     public class AuthController : Controller
     {
         #region service
-        private readonly UserlService _service;
+        private readonly UserService _service;
 
-        public AuthController(UserlService service)
+        public AuthController(UserService service)
         {
             _service = service;
         }
         #endregion
 
-        private object? CreateToken(UserlDTO userDTO)
+        private object? CreateToken(UserLogin usL)
         {
             List<Claim> claimsList = new List<Claim>()
                 {
-                new Claim(JwtRegisteredClaimNames.Sub, userDTO.User),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Sub, usL.Username),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("UserRole", "USER"),
+                new Claim("Username", usL.Username)
                 };
 
             //Creazione dell'algoritmo di cifratura e stabilire la chiave
@@ -53,11 +55,12 @@ namespace API_livechat.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult LoginProcedure(UserlDTO userDTO)
+        public IActionResult LoginProcedure(UserDTO userDTO)
         {
             if (_service.CheckUser(userDTO))
             {
-                return Ok(CreateToken(userDTO));
+                UserLogin usL = _service.ConvertToUserLogin(userDTO);
+                return Ok(CreateToken(usL));
             }
             
             return Unauthorized();

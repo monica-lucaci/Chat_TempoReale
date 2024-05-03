@@ -1,4 +1,5 @@
 ﻿using API_livechat.DTO;
+using API_livechat.Filter;
 using API_livechat.Repositories;
 using API_livechat.Services;
 using API_livechat.Utils;
@@ -9,12 +10,12 @@ namespace API_livechat.Controllers
 {
     [ApiController]
     [Route("User")]
-    public class UserlController : Controller
+    public class UserController : Controller
     {
         #region service
-        private readonly UserlService _service;
+        private readonly UserService _service;
 
-        public UserlController(UserlService service)
+        public UserController(UserService service)
         {
             _service = service;
         }
@@ -23,31 +24,52 @@ namespace API_livechat.Controllers
         #region HTTP requests
 
         [HttpPost("register")]
-        public IActionResult Register(UserlDTO user)
+        public IActionResult Register([FromBody]UserDTO user)
         {
             if(user.User.Trim().Equals("") || user.Pass.Trim().Equals("")) {
-                return BadRequest(new Status()
+                return BadRequest(new Response()
                 {
-                    Stato = "ERROR",
+                    Status = "ERROR",
                     Data = "Riempire i campi"
                 });
             }
 
-            return Ok(new Status()
+            return Ok(new Response()
             {
-                Stato = "SUCCESS",
+                Status = "SUCCESS",
                 Data = _service.Register(user)
             });
         }
 
-        [HttpGet]
+        [HttpGet("ListOfUsers")]
         public IActionResult GetListOfUsers(){
-            return Ok(new Status()
+            return Ok(new Response()
             {
-                Stato = "SUCCESS",
+                Status = "SUCCESS",
                 Data = _service.GetListOfUsers()
             });
         }
+
+        [HttpGet("UserProfile")]
+        [AuthorizeUserRole("USER")]
+        public IActionResult GetUserProfile()
+        {
+            var name = User.Claims.FirstOrDefault(n => n.Type == "Username")?.Value;
+
+            if(name != null)
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.GetUser(name)
+                });
+            }
+            return Ok(new Response()
+            {
+                Status = "ERROR"
+            });
+        }
+
         /*
         [HttpPost("update")]
         public IActionResult UpdateUserPassword(UserlDTO user, string newPassword) {
@@ -55,14 +77,14 @@ namespace API_livechat.Controllers
             {
                 return BadRequest(new Status()
                 {
-                    Stato = "SUCCESS",
+                    Status = "SUCCESS",
                     Data = "Il campo è vuoto"
                 });
             }
 
             return Ok(new Status()
             {
-                Stato = "SUCCESS",
+                Status = "SUCCESS",
                 Data = _service.UpdateUserPassword(user)
             });
         }

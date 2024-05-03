@@ -126,7 +126,6 @@ G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\D
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\API_livechat.csproj.CoreCompileInputs.cache
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\API_livechat.MvcApplicationPartsAssemblyInfo.cs
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\API_livechat.MvcApplicationPartsAssemblyInfo.cache
-G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\API_livechat.sourcelink.json
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\staticwebassets.build.json
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\staticwebassets.development.json
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\staticwebassets\msbuild.API_livechat.Microsoft.AspNetCore.StaticWebAssets.props
