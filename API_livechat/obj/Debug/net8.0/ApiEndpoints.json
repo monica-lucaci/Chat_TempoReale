@@ -43,6 +43,27 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.UserController",
+    "Method": "UpdateUserPassword",
+    "RelativePath": "User/update/password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDTO",
+        "Type": "API_livechat.DTO.UserDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "newPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.UserController",
     "Method": "GetUserProfile",
     "RelativePath": "User/UserProfile",
     "HttpMethod": "GET",

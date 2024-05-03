@@ -5,6 +5,7 @@ using API_livechat.Services;
 using API_livechat.Utils;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace API_livechat.Controllers
 {
@@ -34,11 +35,22 @@ namespace API_livechat.Controllers
                 });
             }
 
-            return Ok(new Response()
+            if(_service.Register(user))
             {
-                Status = "SUCCESS",
-                Data = _service.Register(user)
-            });
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.GetByUsername(user)
+                });
+            }
+            else
+            {
+                return BadRequest(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Registrazione non effettuata"
+                });
+            }
         }
 
         [HttpGet("ListOfUsers")]
@@ -70,25 +82,33 @@ namespace API_livechat.Controllers
             });
         }
 
-        /*
-        [HttpPost("update")]
-        public IActionResult UpdateUserPassword(UserlDTO user, string newPassword) {
-            if (user.User.Trim().Equals(""))
+        [HttpPost("ResetPassword")]
+        public IActionResult ResetPassword(UserDTO userDTO, string newPassword) {
+            if (userDTO.User.Trim().Equals(""))
             {
-                return BadRequest(new Status()
+                return BadRequest(new Response()
                 {
-                    Status = "SUCCESS",
+                    Status = "ERROR",
                     Data = "Il campo è vuoto"
                 });
             }
-
-            return Ok(new Status()
+            if (_service.CheckUserLog(userDTO))
             {
-                Status = "SUCCESS",
-                Data = _service.UpdateUserPassword(user)
-            });
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.UpdateUserPassword(userDTO, newPassword)
+                });
+            }else
+            {
+                return Ok(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Utente non esistente o credenziali errate"
+                });
+            }
         }
-        */
+
         #endregion
 
 

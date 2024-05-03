@@ -112,7 +112,6 @@ namespace API_livechat.Services
 
             if (!verified) return false;
 
-            UserLogin userLogin = ConvertToUserLogin(us);
             return true;
         }
 
@@ -121,17 +120,6 @@ namespace API_livechat.Services
             UserDTO us = ConvertToUserDTO(_repository.GetByUsername(userDTO.User));
             UserLogin userLogin = ConvertToUserLogin(us);
             return userLogin != null;
-        }
-
-        public static bool VerifySha384Hash(string inputData, string storedHash)
-        {
-            // Hash the input.
-            string hashOfInput = BCrypt.Net.BCrypt.HashPassword(inputData);
-
-            // Create a StringComparer and compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-            return comparer.Compare(hashOfInput, storedHash) == 0;
         }
     }
 }
