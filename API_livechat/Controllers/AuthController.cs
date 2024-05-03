@@ -57,7 +57,7 @@ namespace API_livechat.Controllers
         [HttpPost("login")]
         public IActionResult LoginProcedure(UserDTO userDTO)
         {
-            if (_service.CheckUser(userDTO))
+            if (_service.CheckUserLog(userDTO))
             {
                 UserLogin usL = _service.ConvertToUserLogin(userDTO);
                 return Ok(CreateToken(usL));

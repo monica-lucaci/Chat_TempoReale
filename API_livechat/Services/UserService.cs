@@ -2,6 +2,9 @@
 using API_livechat.Repositories;
 using Microsoft.EntityFrameworkCore.Metadata;
 using API_livechat.DTO;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace API_livechat.Services
 {
@@ -52,7 +55,7 @@ namespace API_livechat.Services
 
         public bool Register(UserDTO userDTO)
         {
-            if(CheckUser(userDTO)) {
+            if(CheckUserReg(userDTO)) {
                 return _repository.Register(new UserProfile()
                 {
                     Username = userDTO.User,
@@ -99,12 +102,36 @@ namespace API_livechat.Services
             return _repository.UpdateUser(user);
         }
 
-        public bool CheckUser(UserDTO userDTO)
+        public bool CheckUserLog(UserDTO userDTO)
         {
             UserDTO us = ConvertToUserDTO(_repository.GetByUsername(userDTO.User));
-            if (us.User == null || us.Pass == null) return false;
+            
+            if(us.Pass == null || us.User == null) return false;
+
+            bool verified = BCrypt.Net.BCrypt.Verify(userDTO.Pass, us.Pass);
+
+            if (!verified) return false;
+
             UserLogin userLogin = ConvertToUserLogin(us);
-            return userLogin != null;                
+            return true;
+        }
+
+        public bool CheckUserReg(UserDTO userDTO)
+        {
+            UserDTO us = ConvertToUserDTO(_repository.GetByUsername(userDTO.User));
+            UserLogin userLogin = ConvertToUserLogin(us);
+            return userLogin != null;
+        }
+
+        public static bool VerifySha384Hash(string inputData, string storedHash)
+        {
+            // Hash the input.
+            string hashOfInput = BCrypt.Net.BCrypt.HashPassword(inputData);
+
+            // Create a StringComparer and compare the hashes.
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            return comparer.Compare(hashOfInput, storedHash) == 0;
         }
     }
 }

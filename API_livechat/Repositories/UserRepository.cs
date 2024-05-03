@@ -1,4 +1,5 @@
-﻿using API_livechat.Models;
+﻿using API_livechat.DTO;
+using API_livechat.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_livechat.Repositories
@@ -37,7 +38,10 @@ namespace API_livechat.Repositories
             {
                 return _dbContext.Users.Single(u => u.Code == code);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
 
             return new UserProfile();
         }
@@ -124,8 +128,10 @@ namespace API_livechat.Repositories
             {
                 return _dbContext.Users.Single(u => u.Passwrd == password);
             }
-            catch { }
-
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
             return new UserProfile();
         }
 
