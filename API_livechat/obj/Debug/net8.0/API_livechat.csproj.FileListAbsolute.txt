@@ -142,3 +142,16 @@ G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\D
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\obj\Debug\net8.0\ref\API_livechat.dll
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\BCrypt.Net-Next.dll
 G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\AWSSDK.Core.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\AWSSDK.SecurityToken.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\DnsClient.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\MongoDB.Bson.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\MongoDB.Driver.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\MongoDB.Driver.Core.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\MongoDB.Libmongocrypt.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\SharpCompress.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\Snappier.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\ZstdSharp.dll
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\runtimes\linux\native\libmongocrypt.so
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
+G:\Lavoro\Informatica\I&M\Appunti ing G. Pace\Tasks\task_chat\API_livechat\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll

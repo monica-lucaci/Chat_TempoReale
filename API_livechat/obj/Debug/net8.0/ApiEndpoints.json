@@ -16,6 +16,101 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "NewChatRoom",
+    "RelativePath": "ChatRoom",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newRoom",
+        "Type": "API_livechat.DTO.ChatRoomDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "GetRoomAndMessages",
+    "RelativePath": "ChatRoom/chat/{chatRoomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "chatRoomId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "AddUserToChatRoom",
+    "RelativePath": "ChatRoom/chat/addUser/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "GetUserByRoom",
+    "RelativePath": "ChatRoom/userOfRoom/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "chatRoomId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.MessageController",
+    "Method": "InsertMessage",
+    "RelativePath": "Message/sendMessage/{ChatRoomId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "m",
+        "Type": "API_livechat.DTO.MessageDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "ChatRoomId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API_livechat.Controllers.UserController",
     "Method": "GetListOfUsers",
     "RelativePath": "User/ListOfUsers",
@@ -43,8 +138,8 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.UserController",
-    "Method": "UpdateUserPassword",
-    "RelativePath": "User/update/password",
+    "Method": "ResetPassword",
+    "RelativePath": "User/ResetPassword",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

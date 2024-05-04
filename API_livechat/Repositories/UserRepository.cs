@@ -17,7 +17,6 @@ namespace API_livechat.Repositories
         }
         #endregion
 
-        #region crud login
         public List<UserProfile> GetListOfUsers()
         {
             try
@@ -139,6 +138,5 @@ namespace API_livechat.Repositories
         {
             return (_dbContext.Users.FirstOrDefault(u => u.Username == usL.Username && u.Passwrd == usL.Passwrd)) != null;
         }
-        #endregion
     }
 }

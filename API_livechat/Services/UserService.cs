@@ -10,7 +10,7 @@ namespace API_livechat.Services
 {
     public class UserService
     {
-        #region service
+        #region repository
         private readonly UserRepository _repository;
 
         public UserService(UserRepository repository)
@@ -47,11 +47,6 @@ namespace API_livechat.Services
             };
         }
         #endregion
-
-        /*
-        public bool UpdateUserPassword(Userl user);
-        bool DeleteByPassword(string pwd);
-         */
 
         public bool Register(UserDTO userDTO)
         {
