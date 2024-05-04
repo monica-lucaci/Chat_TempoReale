@@ -28,9 +28,17 @@ namespace API_livechat.Repositories
 
         #endregion
 
-        public List<ChatRoom> GetAll()
+        public List<ChatRoom>? GetChatRooms()
         {
-            return _chatRooms.Find(cr => true).ToList();
+            try
+            {
+                return _chatRooms.Find(cr => true).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return null;
         }
 
         public ChatRoom? GetById(ObjectId chatRoomId)
@@ -46,35 +54,59 @@ namespace API_livechat.Repositories
             }
         }
 
-        public ChatRoom? GetChatRoom(ObjectId chatRoomId)
+        public ChatRoom? GetByCode(string cr_code)
         {
-            ChatRoom? cr = GetById(chatRoomId);
-            
+            try
+            {
+                return _chatRooms.Find(r => r.ChatRoomCode == cr_code).ToList()[0];
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return null;
+            }
+        }
+
+        public ChatRoom? GetChatRoom(string cr_code)
+        {
+            ChatRoom? cr = GetByCode(cr_code);
             if(cr == null) return null;
 
             cr.Messages = new List<Message>();
-            cr.Messages = _messageRepository.GetMessages(chatRoomId);
+            cr.Messages = _messageRepository.GetMessages(cr.ChatRoomId);
             return cr;
         }
 
-        public List<string>? GetUsersByChatRoom(ObjectId chatRoomId)
+        public List<string>? GetUsersByChatRoom(string cr_code)
         {
-            ChatRoom? cr = GetChatRoom(chatRoomId);
+
+            ChatRoom? cr = GetChatRoom(cr_code);
             if(cr != null) return cr.Users;
             return null;
         }
 
         public List<ChatRoom>? GetRoomByUser(string username)
         {
-            List<ChatRoom> cr = new List<ChatRoom>();
-            foreach(ChatRoom r in GetAll())
+            try
             {
-                if (r.Users.Contains(username))
+                List<ChatRoom> cr = new List<ChatRoom>();
+                if(GetChatRooms() != null)
                 {
-                    cr.Add(r);
+                    foreach(ChatRoom r in GetChatRooms())
+                    {
+                        if (r.Users.Contains(username))
+                        {
+                            cr.Add(r);
+                        }
+                    }
+                    return cr;
                 }
             }
-            return cr;
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return null;
         }
 
         public bool Create(ChatRoom chatRoom, string user)
@@ -96,9 +128,9 @@ namespace API_livechat.Repositories
             return false;
         }
 
-        public bool InsertUserIntoChatRoom(string username, ObjectId chatRoomId)
+        public bool InsertUserIntoChatRoom(string username, string cr_code)
         {
-            ChatRoom? cr_temp = GetById(chatRoomId);
+            ChatRoom? cr_temp = GetByCode(cr_code);
 
             if (cr_temp != null)
             {
@@ -118,5 +150,22 @@ namespace API_livechat.Repositories
             return false;
         }
 
+        public bool DeleteChatRoomByCode(string cr_code) 
+        {
+            try
+            {
+                var filter = Builders<ChatRoom>.Filter.Eq(c => c.ChatRoomCode, cr_code);
+                if (filter != null)
+                {
+                    _chatRooms.DeleteOneAsync(filter);
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return false;
+        }
     }
 }

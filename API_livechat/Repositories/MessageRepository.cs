@@ -1,4 +1,5 @@
-﻿using API_livechat.Models;
+﻿using API_livechat.DTO;
+using API_livechat.Models;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -26,7 +27,7 @@ namespace API_livechat.Repositories
 
         public List<Message> GetMessages(ObjectId roomRif)
         {
-            var filter = Builders<Message>.Filter.Eq(m => m.ChatRoomRIF, roomRif);
+            var filter = Builders<Message>.Filter.Eq(cr => cr.ChatRoomRIF, roomRif);
             return _message.Find(filter).ToList();
         }
 
@@ -45,5 +46,6 @@ namespace API_livechat.Repositories
 
             return false;
         }
+
     }
 }

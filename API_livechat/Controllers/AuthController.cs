@@ -55,11 +55,11 @@ namespace API_livechat.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult LoginProcedure(UserDTO userDTO)
+        public IActionResult LoginProcedure(UserLoginDTO userLDTO)
         {
-            if (_service.CheckUserLog(userDTO))
+            if (_service.CheckUserLog(userLDTO))
             {
-                UserLogin usL = _service.ConvertToUserLogin(userDTO);
+                UserLogin usL = _service.ConvertToUserLogin(userLDTO);
                 return Ok(CreateToken(usL));
             }
             

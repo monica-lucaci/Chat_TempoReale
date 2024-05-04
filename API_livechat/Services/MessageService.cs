@@ -21,25 +21,39 @@ namespace API_livechat.Services
         {
             return messages.Select(m => new MessageDTO()
             {
+                MCod = m.MessageCode,
                 Data = m.Data,
                 Date = m.Date,
-                Sder = m.Sender,
+                Sder = m.Sender
             }).ToList();
+        }
+
+        MessageDTO ConvertToMessageDTO(Message msg)
+        {
+            return new MessageDTO()
+            {
+                MCod = msg.MessageCode,
+                Data = msg.Data,
+                Date = msg.Date,
+                Sder = msg.Sender
+            };
+        }
+
+        Message ConvertToMessage(MessageDTO msgDTO)
+        {
+            return new Message()
+            {
+                MessageCode = msgDTO.MCod,
+                Data = msgDTO.Data,
+                Date = msgDTO.Date,
+                Sender = msgDTO.Sder
+            };
         }
         #endregion
 
         public bool InsertMessage(MessageDTO messageDTO)
         {
-            return _repository.InsertMessage(new Message()
-            {
-                MessageCode = messageDTO.MCod,
-                Data = messageDTO.Data,
-                Date = messageDTO.Date,
-                Sender = messageDTO.Sder
-
-            });
+            return _repository.InsertMessage(ConvertToMessage(messageDTO));
         }
-
-        
     }
 }

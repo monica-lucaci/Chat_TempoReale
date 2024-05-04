@@ -19,7 +19,7 @@ namespace API_livechat.Controllers
         }
         #endregion
 
-        [HttpPost]
+        [HttpPost("newChatRoom")]
         [AuthorizeUserRole("ROLE")]
         public IActionResult NewChatRoom(ChatRoomDTO newRoom)
         {
@@ -39,22 +39,32 @@ namespace API_livechat.Controllers
             return BadRequest();
         }
 
-        [HttpGet("chat/{chatRoomId}")]
-        public IActionResult GetRoomAndMessages(string chatRoomId)
+        [HttpGet("chat/viewList")]
+        public IActionResult GetListChatRooms()
+        {
+            return Ok(new Response
+            {
+                Status = "SUCCESS",
+                Data = _service.GetAllChatRooms()
+            });
+        }
+
+        [HttpGet("chat/{cr_code}")]
+        public IActionResult GetChatRoomAndMessages(string cr_code)
         {
             return Ok(new Response()
             {
                 Status = "SUCCESS",
-                Data = _service.GetById(new ObjectId(chatRoomId))
+                Data = _service.GetByCode(cr_code)
             });
         }
 
-        [HttpPost("chat/addUser/{id}")]
-        public IActionResult AddUserToChatRoom(string id, string username)
+        [HttpPost("chat/addUser/{cr_code}")]
+        public IActionResult AddUserToChatRoom(string cr_code, string username)
         {
             try
             {
-                if (_service.InsertUserIntoChatRoom(username, new ObjectId(id))) return Ok(new Response() { Status = "SUCCESS" });
+                if (_service.InsertUserIntoChatRoom(username, cr_code)) return Ok(new Response() { Status = "SUCCESS" });
             }
             catch (Exception ex)
             {
@@ -62,13 +72,22 @@ namespace API_livechat.Controllers
             }
             return BadRequest();
         }
-        [HttpGet("userOfRoom/{id}")]
-        public IActionResult GetUserByRoom(string chatRoomId)
+        [HttpGet("userOfRoom/{cr_code}")]
+        public IActionResult GetUserByRoom(string cr_code)
         {
             return Ok(new Response()
             {
                 Status = "SUCCESS",
-                Data = _service.GetUsersByChatRoom(new ObjectId(chatRoomId))
+                Data = _service.GetUsersByChatRoom(cr_code)
+            });
+        }
+        [HttpDelete("chat/deleteChatRoom/{cr_code}")]
+        public IActionResult DeleteChatRoom(string cr_code, string Username)
+        {
+            return Ok(new Response()
+            {
+                Status = "SUCCESS",
+                Data = _service.Delete(cr_code, Username)
             });
         }
     }

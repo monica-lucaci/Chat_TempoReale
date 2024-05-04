@@ -1,9 +1,7 @@
 ﻿namespace API_livechat.DTO
 {
-    public class UserDTO
+    public class UserDTO : UserLoginDTO
     {
-        public string User { get; set; } = null!;
-        public string Pass { get; set; } = null!;
         public string? Img { get; set; }
         public List<ChatRoomDTO> MyChats { get; set; }
     }

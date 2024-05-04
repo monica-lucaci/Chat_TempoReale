@@ -21,7 +21,7 @@ namespace API_livechat.Services
         {
             return chatRooms.Select(cr => new ChatRoomDTO()
             {
-                CRCD = cr.ChatRoomCode,
+                CRCd = cr.ChatRoomCode,
                 Titl = cr.Title,
                 Desc = cr.Description,
                 Usrs = cr.Users.ToList(),
@@ -33,11 +33,23 @@ namespace API_livechat.Services
         {
             return new ChatRoomDTO()
             {
-                CRCD = chatRoom.ChatRoomCode,
+                CRCd = chatRoom.ChatRoomCode,
                 Titl = chatRoom.Title,
                 Desc = chatRoom.Description,
                 Usrs = chatRoom.Users.ToList(),
                 Mges = ConvertToMessagesDTO(chatRoom.Messages.ToList())
+            };
+        }
+
+        ChatRoom ConvertToChatRoom(ChatRoomDTO chatRoomDTO) 
+        {
+            return new ChatRoom()
+            {
+                ChatRoomCode = chatRoomDTO.CRCd,
+                Title = chatRoomDTO.Titl,
+                Description = chatRoomDTO.Desc,
+                Users = chatRoomDTO.Usrs.ToList(),
+                Messages = ConvertToMessages(chatRoomDTO.Mges.ToList())
             };
         }
 
@@ -52,22 +64,44 @@ namespace API_livechat.Services
                 RRIF = m.ChatRoomRIF
             }).ToList();
         }
+
+        public List<Message> ConvertToMessages(List<MessageDTO> msgsDTO)
+        {
+            return msgsDTO.Select(m => new Message()
+            {
+                MessageCode = m.MCod,
+                Data = m.Data,
+                Date = m.Date,
+                Sender = m.Sder,
+                ChatRoomRIF = m.RRIF
+            }).ToList();
+        }
+
+        public string ConvertIdToCod(ChatRoomDTO chatRoomDTO)
+        {
+            if (chatRoomDTO == null) return $"Errore di conversione";
+            return chatRoomDTO.CRCd;
+        }
+
         #endregion
 
-        public IEnumerable<ChatRoomDTO> GetAll()
+        public IEnumerable<ChatRoomDTO>? GetAllChatRooms()
         {
-            return ConvertToChatRoomsDTO(_repository.GetAll());
-        }
-
-        public ChatRoomDTO? GetById(ObjectId chatRoomId)
-        {
-            ChatRoom? cr = _repository.GetChatRoom(chatRoomId);
-            if(cr != null) return ConvertToChatRoomDTO(cr);
+            List<ChatRoom>? cr = _repository.GetChatRooms();
+            if(cr != null) return ConvertToChatRoomsDTO(cr);
             return null;
         }
-        public List<string>? GetUsersByChatRoom(ObjectId chatRoomId)
+
+        public ChatRoomDTO? GetByCode(string cr_code)
         {
-            return _repository.GetUsersByChatRoom(chatRoomId);
+            ChatRoom? cr = _repository.GetChatRoom(cr_code);
+            if (cr != null) return ConvertToChatRoomDTO(cr);
+            return null;
+        }
+
+        public List<string>? GetUsersByChatRoom(string cr_code)
+        {
+            return _repository.GetUsersByChatRoom(cr_code);
         }
 
         public bool Insert(ChatRoomDTO chatRoomDTO, string user) {
@@ -75,6 +109,23 @@ namespace API_livechat.Services
             cr.Description = chatRoomDTO.Desc;
             cr.Title = chatRoomDTO.Titl;
             return _repository.Create(cr, user);
+        }
+
+        public bool Delete(string cr_code, string user) 
+        {
+            List<ChatRoomDTO>? chatRoomDTOs = GetRoomsByUser(user);
+            
+            if(chatRoomDTOs != null)
+            {
+                foreach(ChatRoomDTO cr in chatRoomDTOs)
+                {
+                    if(cr_code == cr.CRCd)
+                    {
+                        if(_repository.DeleteChatRoomByCode(ConvertToChatRoom(cr).ChatRoomCode)) return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public List<ChatRoomDTO>? GetRoomsByUser(string username)
@@ -88,7 +139,7 @@ namespace API_livechat.Services
                 {
                     ChatRoomDTO cr = new ChatRoomDTO()
                     {
-                        CRCD = chatRoom.ChatRoomCode,
+                        CRCd = chatRoom.ChatRoomCode,
                         Titl = chatRoom.Title,
                         Desc = chatRoom.Description,
                         Usrs = chatRoom.Users,
@@ -99,9 +150,9 @@ namespace API_livechat.Services
             return chatRoomDTOs;
         }
 
-        public bool InsertUserIntoChatRoom(string username, ObjectId chatRoomId)
+        public bool InsertUserIntoChatRoom(string username, string cr_code)
         {
-            return _repository.InsertUserIntoChatRoom(username, chatRoomId);
+            return _repository.InsertUserIntoChatRoom(username, cr_code);
         }
     }
 }

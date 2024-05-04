@@ -8,8 +8,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userDTO",
-        "Type": "API_livechat.DTO.UserDTO",
+        "Name": "userLDTO",
+        "Type": "API_livechat.DTO.UserLoginDTO",
         "IsRequired": true
       }
     ],
@@ -17,8 +17,76 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "GetChatRoomAndMessages",
+    "RelativePath": "ChatRoom/chat/{cr_code}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cr_code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "AddUserToChatRoom",
+    "RelativePath": "ChatRoom/chat/addUser/{cr_code}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cr_code",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "DeleteChatRoom",
+    "RelativePath": "ChatRoom/chat/deleteChatRoom/{cr_code}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cr_code",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "GetListChatRooms",
+    "RelativePath": "ChatRoom/chat/viewList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
     "Method": "NewChatRoom",
-    "RelativePath": "ChatRoom",
+    "RelativePath": "ChatRoom/newChatRoom",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -33,57 +101,15 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.ChatRoomController",
-    "Method": "GetRoomAndMessages",
-    "RelativePath": "ChatRoom/chat/{chatRoomId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "chatRoomId",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API_livechat.Controllers.ChatRoomController",
-    "Method": "AddUserToChatRoom",
-    "RelativePath": "ChatRoom/chat/addUser/{id}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "username",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API_livechat.Controllers.ChatRoomController",
     "Method": "GetUserByRoom",
-    "RelativePath": "ChatRoom/userOfRoom/{id}",
+    "RelativePath": "ChatRoom/userOfRoom/{cr_code}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "chatRoomId",
+        "Name": "cr_code",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -112,6 +138,22 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.UserController",
+    "Method": "DeleteImage",
+    "RelativePath": "User/DeleteImage",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userLoginDTO",
+        "Type": "API_livechat.DTO.UserLoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.UserController",
     "Method": "GetListOfUsers",
     "RelativePath": "User/ListOfUsers",
     "HttpMethod": "GET",
@@ -130,7 +172,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "API_livechat.DTO.UserDTO",
+        "Type": "API_livechat.DTO.UserLoginDTO",
         "IsRequired": true
       }
     ],
@@ -145,12 +187,33 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userDTO",
-        "Type": "API_livechat.DTO.UserDTO",
+        "Name": "userLoginDTO",
+        "Type": "API_livechat.DTO.UserLoginDTO",
         "IsRequired": true
       },
       {
         "Name": "newPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.UserController",
+    "Method": "UpdateImage",
+    "RelativePath": "User/UpdateImage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userLoginDTO",
+        "Type": "API_livechat.DTO.UserLoginDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "img",
         "Type": "System.String",
         "IsRequired": false
       }

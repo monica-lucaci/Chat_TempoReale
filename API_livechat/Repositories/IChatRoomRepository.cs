@@ -5,12 +5,14 @@ namespace API_livechat.Repositories
 {
     public interface IChatRoomRepository
     {
-        public List<ChatRoom> GetAll();
+        public List<ChatRoom>? GetChatRooms();
         public ChatRoom? GetById(ObjectId chatRoomId);
-        public ChatRoom? GetChatRoom(ObjectId chatRoomId);
-        public List<string>? GetUsersByChatRoom(ObjectId chatRoomId);
+        public ChatRoom? GetByCode(string cr_code);
+        public ChatRoom? GetChatRoom(string cr_code);
+        public List<string>? GetUsersByChatRoom(string cr_code);
         public List<ChatRoom>? GetRoomByUser(string user);
         public bool Create(ChatRoom chatRoom, string user);
-        public bool InsertUserIntoChatRoom(string user, ObjectId chatRoomId);
+        public bool InsertUserIntoChatRoom(string user, string cr_code);
+        public bool DeleteChatRoomByCode(string cr_code);
     }
 }

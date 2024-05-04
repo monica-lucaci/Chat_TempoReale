@@ -41,13 +41,10 @@ namespace API_livechat
 
             builder.Services.AddScoped<UserRepository>();
             builder.Services.AddScoped<UserService>();
-            builder.Services.AddScoped<UserController>();
             builder.Services.AddScoped<MessageRepository>();
             builder.Services.AddScoped<MessageService>();
-            builder.Services.AddScoped<MessageController>();
             builder.Services.AddScoped<ChatRoomRepository>();
             builder.Services.AddScoped<ChatRoomService>();
-            builder.Services.AddScoped<ChatRoomController>();
 
             var app = builder.Build();
 

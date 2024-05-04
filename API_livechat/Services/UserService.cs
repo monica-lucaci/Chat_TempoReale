@@ -20,7 +20,7 @@ namespace API_livechat.Services
         #endregion
 
         #region private metods
-        List<UserDTO> ConvertToUsersDTO(List<UserProfile> users)
+        public List<UserDTO> ConvertToUsersDTO(List<UserProfile> users)
         {
             return users.Select(u => new UserDTO()
             {
@@ -29,7 +29,7 @@ namespace API_livechat.Services
             }).ToList();
         }
 
-        UserDTO ConvertToUserDTO(UserProfile user)
+        public UserDTO ConvertToUserDTO(UserProfile user)
         {
             return new UserDTO()
             {
@@ -38,17 +38,26 @@ namespace API_livechat.Services
             };
         }
 
-        public UserLogin ConvertToUserLogin(UserDTO userDTO)
+        public UserLoginDTO ConvertToUserLoginDTO(UserProfile user)
+        {
+            return new UserLoginDTO()
+            {
+                User = user.Username,
+                Pass = user.Passwrd
+            };
+        }
+
+        public UserLogin ConvertToUserLogin(UserLoginDTO userLDTO)
         {
             return new UserLogin()
             {
-                Username = userDTO.User,
-                Passwrd = userDTO.Pass
+                Username = userLDTO.User,
+                Passwrd = userLDTO.Pass
             };
         }
         #endregion
 
-        public bool Register(UserDTO userDTO)
+        public bool Register(UserLoginDTO userDTO)
         {
             if(CheckUserReg(userDTO)) {
                 return _repository.Register(new UserProfile()
@@ -60,6 +69,7 @@ namespace API_livechat.Services
             return false;            
         }
 
+
         public List<UserDTO> GetListOfUsers()
         {
             return ConvertToUsersDTO(_repository.GetListOfUsers());
@@ -69,6 +79,11 @@ namespace API_livechat.Services
         {
 
             return ConvertToUserDTO(_repository.GetByUsername(userDTO.User));
+        }
+
+        public UserDTO GetByUserLog(UserLoginDTO userLoginDTO)
+        {
+            return ConvertToUserDTO(_repository.GetByUsername(userLoginDTO.User));
         }
 
         public UserDTO GetByPassword(UserDTO userDTO)
@@ -88,7 +103,7 @@ namespace API_livechat.Services
             return null;
         }
 
-        public bool UpdateUserPassword(UserDTO userDTO, string newPassword)
+        public bool UpdateUserPassword(UserLoginDTO userDTO, string newPassword)
         {
             UserProfile user = _repository.GetByUsername(userDTO.User);
 
@@ -96,25 +111,51 @@ namespace API_livechat.Services
 
             return _repository.UpdateUser(user);
         }
-
-        public bool CheckUserLog(UserDTO userDTO)
+        public bool UpdateImage(UserLoginDTO userLDTO, string newImage)
         {
-            UserDTO us = ConvertToUserDTO(_repository.GetByUsername(userDTO.User));
+            if (CheckUserReg(userLDTO))
+            {
+                UserProfile user = _repository.GetByUsername(userLDTO.User);
+
+                user.UsImg = newImage;
+
+                return _repository.UpdateUser(user);
+            }
+            return false;
+        }
+
+        public bool CheckUserLog(UserLoginDTO userLDTO)
+        {
+            UserLoginDTO us = ConvertToUserDTO(_repository.GetByUsername(userLDTO.User));
             
             if(us.Pass == null || us.User == null) return false;
 
-            bool verified = BCrypt.Net.BCrypt.Verify(userDTO.Pass, us.Pass);
+            bool verified = BCrypt.Net.BCrypt.Verify(userLDTO.Pass, us.Pass);
 
             if (!verified) return false;
 
             return true;
         }
 
-        public bool CheckUserReg(UserDTO userDTO)
+        public bool CheckUserReg(UserLoginDTO userLDTO)
         {
-            UserDTO us = ConvertToUserDTO(_repository.GetByUsername(userDTO.User));
+            UserLoginDTO us = ConvertToUserLoginDTO(_repository.GetByUsername(userLDTO.User));
             UserLogin userLogin = ConvertToUserLogin(us);
             return userLogin != null;
         }
+
+        public bool DeleteImage(UserLoginDTO userLDTO)
+        {
+            if (CheckUserReg(userLDTO))
+            {
+                UserProfile user = _repository.GetByUsername(userLDTO.User);
+
+                user.UsImg = null;
+
+                return _repository.UpdateUser(user);
+            }
+            return false;
+        }
+
     }
 }

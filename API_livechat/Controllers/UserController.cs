@@ -22,10 +22,8 @@ namespace API_livechat.Controllers
         }
         #endregion
 
-        #region HTTP requests
-
         [HttpPost("register")]
-        public IActionResult Register([FromBody]UserDTO user)
+        public IActionResult Register([FromBody]UserLoginDTO user)
         {
             if(user.User.Trim().Equals("") || user.Pass.Trim().Equals("")) {
                 return BadRequest(new Response()
@@ -40,7 +38,7 @@ namespace API_livechat.Controllers
                 return Ok(new Response()
                 {
                     Status = "SUCCESS",
-                    Data = _service.GetByUsername(user)
+                    Data = _service.GetByUserLog(user)
                 });
             }
             else
@@ -83,8 +81,8 @@ namespace API_livechat.Controllers
         }
 
         [HttpPost("ResetPassword")]
-        public IActionResult ResetPassword(UserDTO userDTO, string newPassword) {
-            if (userDTO.User.Trim().Equals(""))
+        public IActionResult ResetPassword(UserLoginDTO userLoginDTO, string newPassword) {
+            if (userLoginDTO.User.Trim().Equals(""))
             {
                 return BadRequest(new Response()
                 {
@@ -92,12 +90,12 @@ namespace API_livechat.Controllers
                     Data = "Il campo è vuoto"
                 });
             }
-            if (_service.CheckUserLog(userDTO))
+            if (_service.CheckUserLog(userLoginDTO))
             {
                 return Ok(new Response()
                 {
                     Status = "SUCCESS",
-                    Data = _service.UpdateUserPassword(userDTO, newPassword)
+                    Data = _service.UpdateUserPassword(userLoginDTO, newPassword)
                 });
             }else
             {
@@ -109,8 +107,62 @@ namespace API_livechat.Controllers
             }
         }
 
-        #endregion
+        [HttpPost("UpdateImage")]
+        public IActionResult UpdateImage(UserLoginDTO userLoginDTO, string img)
+        {
+            if (userLoginDTO.User.Trim().Equals(""))
+            {
+                return BadRequest(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Il campo è vuoto"
+                });
+            }
+            if (_service.CheckUserLog(userLoginDTO))
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.UpdateImage(userLoginDTO, img)
+                });
+            }
+            else
+            {
+                return Ok(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Utente non esistente o credenziali errate"
+                });
+            }
+        }
 
-
+        [HttpDelete("DeleteImage")]
+        public IActionResult DeleteImage(UserLoginDTO userLoginDTO)
+        {
+            if (userLoginDTO.User.Trim().Equals(""))
+            {
+                return BadRequest(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Il campo è vuoto"
+                });
+            }
+            if (_service.CheckUserLog(userLoginDTO))
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.DeleteImage(userLoginDTO)
+                });
+            }
+            else
+            {
+                return Ok(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Utente non esistente o credenziali errate"
+                });
+            }
+        }
     }
 }
