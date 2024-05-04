@@ -21,11 +21,11 @@ namespace API_livechat.Services
         {
             return chatRooms.Select(cr => new ChatRoomDTO()
             {
+                CRId = cr.ChatRoomId,
                 CRCd = cr.ChatRoomCode,
                 Titl = cr.Title,
                 Desc = cr.Description,
-                Usrs = cr.Users.ToList(),
-                Mges = ConvertToMessagesDTO(cr.Messages.ToList())
+                Usrs = cr.Users.ToList()
             }).ToList();
         }
 
@@ -33,11 +33,11 @@ namespace API_livechat.Services
         {
             return new ChatRoomDTO()
             {
+                CRId = chatRoom.ChatRoomId,
                 CRCd = chatRoom.ChatRoomCode,
                 Titl = chatRoom.Title,
                 Desc = chatRoom.Description,
-                Usrs = chatRoom.Users.ToList(),
-                Mges = ConvertToMessagesDTO(chatRoom.Messages.ToList())
+                Usrs = chatRoom.Users.ToList()
             };
         }
 
@@ -45,23 +45,24 @@ namespace API_livechat.Services
         {
             return new ChatRoom()
             {
-                ChatRoomCode = chatRoomDTO.CRCd,
+                ChatRoomCode = chatRoomDTO.CRCd!,
                 Title = chatRoomDTO.Titl,
                 Description = chatRoomDTO.Desc,
-                Users = chatRoomDTO.Usrs.ToList(),
-                Messages = ConvertToMessages(chatRoomDTO.Mges.ToList())
+                Users = chatRoomDTO.Usrs.ToList()
             };
         }
 
         public List<MessageDTO> ConvertToMessagesDTO(List<Message> msgs)
         {
-            return msgs.Select(m => new MessageDTO()
+
+            return msgs!.Select(m => new MessageDTO()
             {
+                MsId = m.MessageId,
                 MCod = m.MessageCode,
                 Data = m.Data,
                 Date = m.Date,
                 Sder = m.Sender,
-                RRIF = m.ChatRoomRIF
+                RRIF = m.ChatRoomRIF,
             }).ToList();
         }
 
@@ -69,24 +70,25 @@ namespace API_livechat.Services
         {
             return msgsDTO.Select(m => new Message()
             {
-                MessageCode = m.MCod,
+                MessageCode = m.MCod!,
                 Data = m.Data,
                 Date = m.Date,
-                Sender = m.Sder,
-                ChatRoomRIF = m.RRIF
+                Sender = m.Sder
             }).ToList();
         }
 
         public string ConvertIdToCod(ChatRoomDTO chatRoomDTO)
         {
             if (chatRoomDTO == null) return $"Errore di conversione";
-            return chatRoomDTO.CRCd;
+            return chatRoomDTO.CRCd!;
         }
 
         #endregion
 
         public IEnumerable<ChatRoomDTO>? GetAllChatRooms()
         {
+            return ConvertToChatRoomsDTO(_repository.GetChatRooms());
+
             List<ChatRoom>? cr = _repository.GetChatRooms();
             if(cr != null) return ConvertToChatRoomsDTO(cr);
             return null;

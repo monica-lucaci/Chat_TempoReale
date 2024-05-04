@@ -5,11 +5,11 @@ namespace API_livechat.DTO
 {
     public class MessageDTO
     {
-        public string MsId { get; set; } = null!;
-        public string MCod { get; set; } = null!;
-        public string Data { get; set; } = null!;
-        public DateTime Date { get; set; }
-        public string Sder { get; set; } = null!;
-        public ObjectId RRIF { get; set; }
+        public ObjectId? MsId { get; set; }
+        public string? MCod { get; set; }
+        public string? Data { get; set; }
+        public DateTime Date { get; set; } 
+        public string? Sder { get; set; }
+        public ObjectId? RRIF { get; set; }
     }
 }

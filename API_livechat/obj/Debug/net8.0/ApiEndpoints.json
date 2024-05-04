@@ -66,7 +66,7 @@
         "IsRequired": true
       },
       {
-        "Name": "Username",
+        "Name": "username",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -86,7 +86,7 @@
   {
     "ContainingType": "API_livechat.Controllers.ChatRoomController",
     "Method": "NewChatRoom",
-    "RelativePath": "ChatRoom/newChatRoom",
+    "RelativePath": "ChatRoom/newChatRoom/{user}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -94,6 +94,11 @@
       {
         "Name": "newRoom",
         "Type": "API_livechat.DTO.ChatRoomDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "user",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -118,7 +123,7 @@
   {
     "ContainingType": "API_livechat.Controllers.MessageController",
     "Method": "InsertMessage",
-    "RelativePath": "Message/sendMessage/{ChatRoomId}",
+    "RelativePath": "Message/sendMessage/{cr_Id}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -129,7 +134,7 @@
         "IsRequired": true
       },
       {
-        "Name": "ChatRoomId",
+        "Name": "cr_Id",
         "Type": "System.String",
         "IsRequired": true
       }

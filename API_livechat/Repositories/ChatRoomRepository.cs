@@ -26,7 +26,7 @@ namespace API_livechat.Repositories
         }
         #endregion
 
-        public List<ChatRoom>? GetChatRooms()
+        public List<ChatRoom> GetChatRooms()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace API_livechat.Repositories
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return new List<ChatRoom>();
         }
 
         public ChatRoom? GetById(ObjectId chatRoomId)
@@ -107,6 +107,7 @@ namespace API_livechat.Repositories
             return null;
         }
 
+        //TO DO: SOSTITUISCI STRING USERNAME CON UN OGGETTO UTENTE
         public bool Create(ChatRoom chatRoom, string user)
         {
             try
@@ -125,7 +126,7 @@ namespace API_livechat.Repositories
 
             return false;
         }
-
+        //TO DO : SOSTITUISCI STRING USERNAME CON UN OGGETTO UTENTE
         public bool InsertUserIntoChatRoom(string username, string cr_code)
         {
             ChatRoom? cr_temp = GetByCode(cr_code);

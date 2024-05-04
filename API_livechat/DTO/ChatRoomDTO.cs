@@ -6,10 +6,10 @@ namespace API_livechat.DTO
 {
     public class ChatRoomDTO
     {
-        public string? CRId { get; set; } = null!;
-        public string CRCd { get; set; } = null!;
-        public string Titl { get; set; } = null!;
-        public string Desc { get; set; } = null!;
+        public ObjectId? CRId { get; set; }
+        public string? CRCd { get; set; }
+        public string? Titl { get; set; }
+        public string? Desc { get; set; }
         public List<string> Usrs { get; set; } = new List<string>();
         public List<ObjectId> MRIF{ get; set; } = new List<ObjectId>();
         public List<MessageDTO>? Mges { get; set; }

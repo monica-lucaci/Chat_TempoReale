@@ -13,30 +13,31 @@ namespace API_livechat.Controllers
     {
         #region service
         private readonly ChatRoomService _service;
-        private ChatRoomController(ChatRoomService service)
+        public ChatRoomController(ChatRoomService service)
         {
             _service = service;
         }
         #endregion
 
-        [HttpPost("newChatRoom")]
-        [AuthorizeUserRole("ROLE")]
-        public IActionResult NewChatRoom(ChatRoomDTO newRoom)
+        [HttpPost("newChatRoom/{user}")]
+        public IActionResult NewChatRoom(ChatRoomDTO newRoom, string user)
         {
-            try
+            if (_service.Insert(newRoom, user))
             {
-                if(User.Claims.FirstOrDefault(u => u.Type == "Username")?.Value != null)
+                return Ok(new Response()
                 {
-                    string username = User.Claims.First(u => u.Type == "Username").Value;
-                    if (_service.Insert(newRoom, username))
-                        return Ok(new Response() { Status = "SUCCESS" });
-                }
-            }catch (Exception ex) 
-            {
-                Console.WriteLine(ex.Message);
+                    Status = "SUCCESS",
+                    Data = "Registrazione effettuata"
+                });
             }
-
-            return BadRequest();
+            else
+            {
+                return BadRequest(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Registrazione non effettuata"
+                });
+            }
         }
 
         [HttpGet("chat/viewList")]
@@ -82,12 +83,12 @@ namespace API_livechat.Controllers
             });
         }
         [HttpDelete("chat/deleteChatRoom/{cr_code}")]
-        public IActionResult DeleteChatRoom(string cr_code, string Username)
+        public IActionResult DeleteChatRoom(string cr_code, string username)
         {
             return Ok(new Response()
             {
                 Status = "SUCCESS",
-                Data = _service.Delete(cr_code, Username)
+                Data = _service.Delete(cr_code, username)
             });
         }
     }
