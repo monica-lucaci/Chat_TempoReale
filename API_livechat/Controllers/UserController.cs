@@ -10,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace API_livechat.Controllers
 {
     [ApiController]
-    [Route("User")]
+    [Route("[Controller]")]
     public class UserController : Controller
     {
         #region service
@@ -80,6 +80,64 @@ namespace API_livechat.Controllers
             });
         }
 
+        [HttpDelete("DeleteImage")]
+        public IActionResult DeleteImage(UserLoginDTO userLoginDTO)
+        {
+            if (userLoginDTO.User.Trim().Equals(""))
+            {
+                return BadRequest(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Il campo è vuoto"
+                });
+            }
+            if (_service.CheckUserLog(userLoginDTO))
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.DeleteImage(userLoginDTO)
+                });
+            }
+            else
+            {
+                return Ok(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Utente non esistente o credenziali errate"
+                });
+            }
+        }
+
+        [HttpDelete("DeleteUser")]
+        public IActionResult DeleteUser(UserLoginDTO userLoginDTO)
+        {
+            if (userLoginDTO.User.Trim().Equals(""))
+            {
+                return BadRequest(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Il campo è vuoto"
+                });
+            }
+            if (_service.CheckUserLog(userLoginDTO))
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.DeleteUser(userLoginDTO)
+                });
+            }
+            else
+            {
+                return Ok(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Utente non esistente o credenziali errate"
+                });
+            }
+        }
+
         [HttpPost("ResetPassword")]
         public IActionResult ResetPassword(UserLoginDTO userLoginDTO, string newPassword) {
             if (userLoginDTO.User.Trim().Equals(""))
@@ -136,33 +194,5 @@ namespace API_livechat.Controllers
             }
         }
 
-        [HttpDelete("DeleteImage")]
-        public IActionResult DeleteImage(UserLoginDTO userLoginDTO)
-        {
-            if (userLoginDTO.User.Trim().Equals(""))
-            {
-                return BadRequest(new Response()
-                {
-                    Status = "ERROR",
-                    Data = "Il campo è vuoto"
-                });
-            }
-            if (_service.CheckUserLog(userLoginDTO))
-            {
-                return Ok(new Response()
-                {
-                    Status = "SUCCESS",
-                    Data = _service.DeleteImage(userLoginDTO)
-                });
-            }
-            else
-            {
-                return Ok(new Response()
-                {
-                    Status = "ERROR",
-                    Data = "Utente non esistente o credenziali errate"
-                });
-            }
-        }
     }
 }

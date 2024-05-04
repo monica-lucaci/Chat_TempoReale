@@ -25,7 +25,8 @@ namespace API_livechat.Services
             return users.Select(u => new UserDTO()
             {
                 User = u.Username,
-                Pass = u.Passwrd
+                Pass = u.Passwrd,
+                Img = u.UsImg
             }).ToList();
         }
 
@@ -34,7 +35,8 @@ namespace API_livechat.Services
             return new UserDTO()
             {
                 User = user.Username,
-                Pass = user.Passwrd
+                Pass = user.Passwrd,
+                Img = user.UsImg
             };
         }
 
@@ -113,7 +115,7 @@ namespace API_livechat.Services
         }
         public bool UpdateImage(UserLoginDTO userLDTO, string newImage)
         {
-            if (CheckUserReg(userLDTO))
+            if (CheckUserLog(userLDTO))
             {
                 UserProfile user = _repository.GetByUsername(userLDTO.User);
 
@@ -146,7 +148,7 @@ namespace API_livechat.Services
 
         public bool DeleteImage(UserLoginDTO userLDTO)
         {
-            if (CheckUserReg(userLDTO))
+            if (CheckUserLog(userLDTO))
             {
                 UserProfile user = _repository.GetByUsername(userLDTO.User);
 
@@ -157,5 +159,13 @@ namespace API_livechat.Services
             return false;
         }
 
+        public bool DeleteUser(UserLoginDTO userLDTO)
+        {
+            if (CheckUserLog(userLDTO))
+            {
+                return _repository.DeleteByUser(userLDTO.User);
+            }
+            return false;
+        }
     }
 }

@@ -16,10 +16,10 @@ namespace API_livechat.Repositories
         {
             this._logger = logger;
 
-            string? connessioneLocale = configuration.GetValue<string>("ConnectionStrings:MongoDbConnection");
+            string? localConnection = configuration.GetValue<string>("ConnectionStrings:MongoDbConnection");
             string? databaseName = configuration.GetValue<string>("ConnectionStrings:MongoDbName");
 
-            MongoClient client = new MongoClient(connessioneLocale);
+            MongoClient client = new MongoClient(localConnection);
             IMongoDatabase _database = client.GetDatabase(databaseName);
             _message = _database.GetCollection<Message>("Message");
         }

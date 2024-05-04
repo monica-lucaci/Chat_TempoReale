@@ -2,7 +2,7 @@
 {
     public class UserDTO : UserLoginDTO
     {
-        public string? Img { get; set; }
-        public List<ChatRoomDTO> MyChats { get; set; }
+        public string Img { get; set; } = null!;
+        public List<ChatRoomDTO> MyChatRooms { get; set; }
     }
 }

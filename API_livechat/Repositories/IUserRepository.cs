@@ -8,7 +8,7 @@
         public bool UpdateUser(UserProfile user);
         public bool Register(UserProfile user);
         bool DeleteByCode(string pwd);
-        public bool DeleteByPassword(string pwd);
+        public bool DeleteByUser(string pwd);
 
     }
 }

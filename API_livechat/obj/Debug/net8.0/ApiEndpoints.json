@@ -154,6 +154,22 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.UserController",
+    "Method": "DeleteUser",
+    "RelativePath": "User/DeleteUser",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userLoginDTO",
+        "Type": "API_livechat.DTO.UserLoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.UserController",
     "Method": "GetListOfUsers",
     "RelativePath": "User/ListOfUsers",
     "HttpMethod": "GET",

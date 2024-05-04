@@ -91,11 +91,11 @@ namespace API_livechat.Repositories
             return false;
         }
 
-        public bool DeleteByPassword(string pwd)
+        public bool DeleteByUser(string user)
         {
             try
             {
-                _dbContext.Remove(_dbContext.Users.Single(u => u.Passwrd == pwd));
+                _dbContext.Remove(_dbContext.Users.Single(u => u.Username == user));
                 _dbContext.SaveChanges();
                 return true;
             }

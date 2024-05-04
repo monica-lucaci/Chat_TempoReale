@@ -13,19 +13,17 @@ namespace API_livechat.Repositories
         private readonly ILogger _logger;
         private readonly MessageRepository _messageRepository;
 
-        public ChatRoomRepository(IConfiguration configuration, ILogger<ChatRoomRepository> logger, MessageRepository repo)
+        public ChatRoomRepository(IConfiguration configuration, ILogger<ChatRoomRepository> logger, MessageRepository messageRepository)
         {
             this._logger = logger;
-            _messageRepository = repo;
-            string? connessioneLocale = configuration.GetValue<string>("ConnectionStrings:MongoDbConnection");
+            _messageRepository = messageRepository;
+            string? localConnection = configuration.GetValue<string>("ConnectionStrings:MongoDbConnection");
             string? databaseName = configuration.GetValue<string>("ConnectionStrings:MongoDbName");
 
-            MongoClient client = new MongoClient(connessioneLocale);
+            MongoClient client = new MongoClient(localConnection);
             IMongoDatabase _database = client.GetDatabase(databaseName);
-            _chatRooms = _database.GetCollection<ChatRoom>("Room");
-
+            _chatRooms = _database.GetCollection<ChatRoom>("ChatRoom");
         }
-
         #endregion
 
         public List<ChatRoom>? GetChatRooms()
