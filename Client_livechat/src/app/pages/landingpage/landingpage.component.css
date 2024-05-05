@@ -1,0 +1,34 @@
+.background{
+    background-image:url('../../../assets/img-chat/bg-pastel2.jpg') ;
+    background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
+    background-size: cover; /* Copre l'intera area dell'elemento */
+    background-position: center; /* Centra l'immagine nello sfondo */
+   
+}
+
+.landing-card{
+    height:80vh;
+    display: flex;
+    gap:30px;
+    align-items: center;
+    justify-content: center;
+    padding:50px;
+}
+
+.landing-title{
+    flex-direction: column;
+}
+
+.landing-title h1{
+    font-size: 72px;
+    color:rgb(107, 50, 112);
+    line-height: 1;
+}
+.landing-title h4{
+    color:rgb(109, 106, 106);
+}
+.image-landing img{
+    max-height:500px;
+    max-width: 800px;
+    border-radius: 25px;
+}
