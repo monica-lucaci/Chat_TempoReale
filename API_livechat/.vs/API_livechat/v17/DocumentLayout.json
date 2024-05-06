@@ -118,23 +118,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 488,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MessageController.cs",
-              "DocumentMoniker": "C:\\Users\\utente\\Desktop\\Chat_tempoReale\\Chat_TempoReale\\API_livechat\\Controllers\\MessageController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MessageController.cs",
-              "ToolTip": "C:\\Users\\utente\\Desktop\\Chat_tempoReale\\Chat_TempoReale\\API_livechat\\Controllers\\MessageController.cs",
-              "RelativeToolTip": "Controllers\\MessageController.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAgwBUAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-04T00:40:25.199Z"
             },
             {
               "$type": "Document",
@@ -146,8 +134,7 @@
               "RelativeToolTip": "Repositories\\ChatRoomRepository.cs",
               "ViewState": "AQIAAB0AAAAAAAAAAAAQwG0AAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T21:12:24.483Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-03T21:12:24.483Z"
             },
             {
               "$type": "Document",
@@ -181,10 +168,22 @@
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "C:\\Users\\utente\\Desktop\\Chat_tempoReale\\Chat_TempoReale\\API_livechat\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAaAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-05-02T11:04:49Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MessageController.cs",
+              "DocumentMoniker": "C:\\Users\\utente\\Desktop\\Chat_tempoReale\\Chat_TempoReale\\API_livechat\\Controllers\\MessageController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MessageController.cs",
+              "ToolTip": "C:\\Users\\utente\\Desktop\\Chat_tempoReale\\Chat_TempoReale\\API_livechat\\Controllers\\MessageController.cs",
+              "RelativeToolTip": "Controllers\\MessageController.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwBUAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-04T00:40:25.199Z"
             },
             {
               "$type": "Document",
