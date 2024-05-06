@@ -59,13 +59,14 @@ namespace API_livechat.Services
         }
         #endregion
 
-        public bool Register(UserLoginDTO userDTO)
+        public bool Register(UserLoginDTO userDTO, string img)
         {
             if(CheckUserReg(userDTO)) {
                 return _repository.Register(new UserProfile()
                 {
                     Username = userDTO.User,
-                    Passwrd = BCrypt.Net.BCrypt.HashPassword(userDTO.Pass) //SHA384
+                    Passwrd = BCrypt.Net.BCrypt.HashPassword(userDTO.Pass), //SHA384
+                    UsImg = img
                 });
             }
             return false;            

@@ -195,6 +195,11 @@
         "Name": "user",
         "Type": "API_livechat.DTO.UserLoginDTO",
         "IsRequired": true
+      },
+      {
+        "Name": "img",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -244,11 +249,17 @@
   {
     "ContainingType": "API_livechat.Controllers.UserController",
     "Method": "GetUserProfile",
-    "RelativePath": "User/UserProfile",
+    "RelativePath": "User/UserProfile/{username}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

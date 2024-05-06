@@ -23,7 +23,7 @@ namespace API_livechat.Controllers
         #endregion
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody]UserLoginDTO user)
+        public IActionResult Register(UserLoginDTO user, string img)
         {
             if(user.User.Trim().Equals("") || user.Pass.Trim().Equals("")) {
                 return BadRequest(new Response()
@@ -33,7 +33,7 @@ namespace API_livechat.Controllers
                 });
             }
 
-            if(_service.Register(user))
+            if(_service.Register(user, img))
             {
                 return Ok(new Response()
                 {
@@ -60,18 +60,15 @@ namespace API_livechat.Controllers
             });
         }
 
-        [HttpGet("UserProfile")]
-        [AuthorizeUserRole("USER")]
-        public IActionResult GetUserProfile()
+        [HttpGet("UserProfile/{username}")]
+        public IActionResult GetUserProfile(string username)
         {
-            var name = User.Claims.FirstOrDefault(n => n.Type == "Username")?.Value;
-
-            if(name != null)
+            if(username != null)
             {
                 return Ok(new Response()
                 {
                     Status = "SUCCESS",
-                    Data = _service.GetUser(name)
+                    Data = _service.GetUser(username)
                 });
             }
             return Ok(new Response()
@@ -193,6 +190,5 @@ namespace API_livechat.Controllers
                 });
             }
         }
-
     }
 }
