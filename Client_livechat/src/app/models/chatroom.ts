@@ -2,10 +2,10 @@ import { Message } from "./message";
 import { User } from "./user";
 
 export class Chatroom {
-    CRId: string | undefined;
-    Titl: string | undefined;
-    Desc: string | undefined;
-    Usrs: User[] | undefined;
-    Mges: Message[] | undefined;
+    crId: string | undefined;
+    titl: string | undefined;
+    desc: string | undefined;
+    usrs: User[] | undefined;
+    mges: Message[] | undefined;
 
 }
