@@ -75,6 +75,27 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "DeleteUserFromChatRoom",
+    "RelativePath": "ChatRoom/chat/removeUser/{cr_code}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cr_code",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
     "Method": "GetListChatRooms",
     "RelativePath": "ChatRoom/chat/viewList",
     "HttpMethod": "GET",

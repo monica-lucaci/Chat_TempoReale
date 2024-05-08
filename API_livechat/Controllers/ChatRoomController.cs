@@ -65,7 +65,15 @@ namespace API_livechat.Controllers
         {
             try
             {
-                if (_service.InsertUserIntoChatRoom(username, cr_code)) return Ok(new Response() { Status = "SUCCESS" });
+                if (_service.InsertUserIntoChatRoom(username, cr_code))
+                {
+                    return Ok(new Response()
+                    { 
+                        Status = "SUCCESS",
+                        Data = GetUserByRoom(cr_code)
+
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -73,6 +81,29 @@ namespace API_livechat.Controllers
             }
             return BadRequest();
         }
+
+        [HttpDelete("chat/removeUser/{cr_code}")]
+        public IActionResult DeleteUserFromChatRoom(string cr_code, string username) 
+        {
+            try
+            {
+                if (_service.DeleteUserFromChatRoom(username, cr_code))
+                {
+                    return Ok(new Response()
+                    {
+                        Status = "SUCCESS",
+                        Data = GetUserByRoom(cr_code)
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return BadRequest();
+        }
+
         [HttpGet("userOfRoom/{cr_code}")]
         public IActionResult GetUserByRoom(string cr_code)
         {

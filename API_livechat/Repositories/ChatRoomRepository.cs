@@ -3,19 +3,23 @@ using API_livechat.Models;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace API_livechat.Repositories
 {
     public class ChatRoomRepository : IChatRoomRepository
     {
         #region Injections
+        private readonly loginContext _dbContext;
         private IMongoCollection<ChatRoom> _chatRooms;
         private readonly ILogger _logger;
         private readonly MessageRepository _messageRepository;
 
-        public ChatRoomRepository(IConfiguration configuration, ILogger<ChatRoomRepository> logger, MessageRepository messageRepository)
+        public ChatRoomRepository(IConfiguration configuration, ILogger<ChatRoomRepository> logger, MessageRepository messageRepository, loginContext dbContext)
         {
             this._logger = logger;
+            _dbContext = dbContext;
             _messageRepository = messageRepository;
             string? localConnection = configuration.GetValue<string>("ConnectionStrings:MongoDbConnection");
             string? databaseName = configuration.GetValue<string>("ConnectionStrings:MongoDbName");
@@ -107,17 +111,24 @@ namespace API_livechat.Repositories
             return null;
         }
 
-        //TO DO: SOSTITUISCI STRING USERNAME CON UN OGGETTO UTENTE
         public bool Create(ChatRoom chatRoom, string user)
         {
             try
             {
-                if (_chatRooms.Find(cr => cr.Title == chatRoom.Title).ToList().Count > 0) return false;
+                List<UserProfile> users = _dbContext.Users.ToList();
 
-                chatRoom.Users.Add(user);
-                _chatRooms.InsertOne(chatRoom);
-                _logger.LogInformation("Room creata con successo");
-                return true;
+                foreach(UserProfile userProfile in users)
+                {
+                    if(userProfile.Username == user)
+                    {
+                        if (_chatRooms.Find(cr => cr.Title == chatRoom.Title).ToList().Count > 0) return false;
+
+                        chatRoom.Users.Add(user);
+                        _chatRooms.InsertOne(chatRoom);
+                        _logger.LogInformation("Room creata con successo");
+                        return true;
+                    }
+                }                
             }
             catch (Exception ex)
             {
@@ -126,25 +137,60 @@ namespace API_livechat.Repositories
 
             return false;
         }
-        //TO DO : SOSTITUISCI STRING USERNAME CON UN OGGETTO UTENTE
         public bool InsertUserIntoChatRoom(string username, string cr_code)
         {
-            ChatRoom? cr_temp = GetByCode(cr_code);
-
-            if (cr_temp != null)
+            try
             {
-                cr_temp.Users.Add(username);
+                if (UserReg(username))
+                {
+                    if (UserIsInChatRoom(username, cr_code)) return false;
+                    
+                    ChatRoom? cr_temp = GetByCode(cr_code);
+                    if (cr_temp != null)
+                    {
+                        cr_temp.Users.Add(username);
+                        var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, cr_temp.ChatRoomId);
+                        _chatRooms.ReplaceOne(filter, cr_temp);
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return false;
+        }
 
-                var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, cr_temp.ChatRoomId);
-                try
+        public bool DeleteUserFromChatRoom(string username, string cr_code)
+        {
+            try
+            {
+                if(UserReg(username))
                 {
-                    _chatRooms.ReplaceOne(filter, cr_temp);
-                    return true;
+                    if (!UserIsInChatRoom(username, cr_code)) return false;
+
+                    foreach (string usrsInCr in GetChatRoom(cr_code)!.Users)
+                    {
+                        //se la chatroom contiene l'utente passato in input allora lo elimino dalla chatroom
+                        if (usrsInCr == username)
+                        {
+                            ChatRoom? cr_temp = GetChatRoom(cr_code);
+                            if (cr_temp != null)
+                            {
+                                cr_temp.Users.Remove(username);
+                                var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, cr_temp.ChatRoomId);
+                                _chatRooms.ReplaceOne(filter, cr_temp);
+                                return true;
+                            }
+                        }
+                    }
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex.Message);
-                }
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
             }
             return false;
         }
@@ -164,6 +210,37 @@ namespace API_livechat.Repositories
             {
                 _logger.LogError(ex.Message);
             }
+            return false;
+        }
+
+        /// <summary>
+        /// Controllo se l'utente ha già effettuato una registrazione
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>true: utente registrato, altrimenti false</returns>
+        public bool UserReg(string username)
+        {
+            List<UserProfile> users = _dbContext.Users.ToList();
+            foreach (UserProfile userProfile in users)
+            {
+                if (userProfile.Username == username) return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Controllo se l'utente è nella chat room di cui codice passato in input
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="cr_code"></param>
+        /// <returns>true: utente in chat room, altrimenti false</returns>
+        public bool UserIsInChatRoom(string username, string cr_code)
+        {
+            foreach (string usrsInCr in GetChatRoom(cr_code)!.Users)
+            {
+                if (usrsInCr == username) return true;
+            }
+
             return false;
         }
     }

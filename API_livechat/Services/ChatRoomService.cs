@@ -107,10 +107,11 @@ namespace API_livechat.Services
         }
 
         public bool Insert(ChatRoomDTO chatRoomDTO, string user) {
-            ChatRoom cr = new ChatRoom();
-            cr.Description = chatRoomDTO.Desc;
-            cr.Title = chatRoomDTO.Titl;
-            return _repository.Create(cr, user);
+
+           ChatRoom cr = new ChatRoom();
+           cr.Description = chatRoomDTO.Desc;
+           cr.Title = chatRoomDTO.Titl;
+           return _repository.Create(cr, user);
         }
 
         public bool Delete(string cr_code, string user) 
@@ -155,6 +156,11 @@ namespace API_livechat.Services
         public bool InsertUserIntoChatRoom(string username, string cr_code)
         {
             return _repository.InsertUserIntoChatRoom(username, cr_code);
+        }
+
+        public bool DeleteUserFromChatRoom(string username, string cr_code)
+        {
+            return _repository.DeleteUserFromChatRoom(username, cr_code);
         }
     }
 }
