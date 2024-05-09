@@ -8,6 +8,7 @@ CREATE TABLE UserProfile(
 	username NVARCHAR(250) NOT NULL UNIQUE,
 	passwrd NVARCHAR(250) NOT NULL,
 	usImg VARCHAR(250),
+	email VARCHAR(250),
 	isDeleted BIT,
 	chatRoomsCode VARCHAR(250) UNIQUE,
 	usRole VARCHAR(50)
