@@ -9,6 +9,7 @@ CREATE TABLE UserProfile(
 	passwrd NVARCHAR(250) NOT NULL,
 	usImg VARCHAR(250),
 	isDeleted BIT,
+	chatRoomsCode VARCHAR(250) UNIQUE,
 	usRole VARCHAR(50)
 );
 
