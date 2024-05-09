@@ -9,7 +9,7 @@ export class SendmsgService {
   apiUrl: string = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  sendMessage(msgId: string, message: string) {
+  sendMessage(msgId: string, message: string, img:string) {
     const url = `${this.apiUrl}Message/sendMessage/${msgId}`;
 
     // Headers
@@ -20,6 +20,7 @@ export class SendmsgService {
     // Body
     const body = JSON.stringify({
       text: message,
+      img: img
     });
     let tokenKey = localStorage.getItem('token');
 

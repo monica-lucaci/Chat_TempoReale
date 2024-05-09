@@ -21,6 +21,9 @@ export class ChatroomService {
 
     });
   }
+  getRooms(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}ChatRoom/chat/viewList"`);
+  }
 
 
   newChatRoom(crTitle: string, crDesc: string, user: string): Observable<Response> {

@@ -13,5 +13,6 @@ export const routes: Routes = [
     { path: 'profilo', component: ProfiloutenteComponent },
     { path: 'register', component: RegisterComponent },
     {path: 'chat', component: ChatroomComponent},
-    {path: 'resetpassword', component: ForgotpasswordComponent}
+    {path: 'resetpassword', component: ForgotpasswordComponent},
+    {path: 'userProfile', component: ProfiloutenteComponent}
 ];

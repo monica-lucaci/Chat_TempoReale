@@ -30,7 +30,7 @@ export class UserService {
     return this.http.get<Risposta>(`${this.apiUrl}ListOfUsers`);
   }
 
-  updateImg(user: User) {
+  updateImg(user: User,) {
     let tokenKey = localStorage.getItem('token');
 
     let headerCustom = new HttpHeaders({
