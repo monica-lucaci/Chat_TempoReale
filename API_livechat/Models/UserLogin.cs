@@ -4,6 +4,7 @@
     {
         public int UserId { get; set; }
         public string? Code { get; set; } = Guid.NewGuid().ToString().ToUpper();
+        public string Email { get; set; } = null!;
         public string Username { get; set; } = null!;
         public string Passwrd { get; set; } = null!;
         public string? UsRole { get; set; } = "USER";

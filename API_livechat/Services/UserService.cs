@@ -24,6 +24,7 @@ namespace API_livechat.Services
         {
             return users.Select(u => new UserDTO()
             {
+                Email = u.Email,
                 User = u.Username,
                 Pass = u.Passwrd,
                 Img = u.UsImg
@@ -34,6 +35,7 @@ namespace API_livechat.Services
         {
             return new UserDTO()
             {
+                Email = user.Email,
                 User = user.Username,
                 Pass = user.Passwrd,
                 Img = user.UsImg
@@ -44,6 +46,7 @@ namespace API_livechat.Services
         {
             return new UserLoginDTO()
             {
+                Email = user.Email,
                 User = user.Username,
                 Pass = user.Passwrd
             };
@@ -53,6 +56,7 @@ namespace API_livechat.Services
         {
             return new UserLogin()
             {
+                Email = userLDTO.Email,
                 Username = userLDTO.User,
                 Passwrd = userLDTO.Pass
             };
@@ -64,6 +68,7 @@ namespace API_livechat.Services
             if(CheckUserReg(userDTO)) {
                 return _repository.Register(new UserProfile()
                 {
+                    Email=userDTO.Email,
                     Username = userDTO.User,
                     Passwrd = BCrypt.Net.BCrypt.HashPassword(userDTO.Pass), //SHA384
                     UsImg = img
@@ -97,21 +102,14 @@ namespace API_livechat.Services
         public UserDTO? GetUser(string name)
         {
             UserProfile? u = _repository.GetByUsername(name);
-            
-            if (u != null)
-            {
-                return ConvertToUserDTO(u);
-            }
-
+            if (u != null) return ConvertToUserDTO(u);
             return null;
         }
 
         public bool UpdateUserPassword(UserLoginDTO userDTO, string newPassword)
         {
             UserProfile user = _repository.GetByUsername(userDTO.User);
-
             user.Passwrd = BCrypt.Net.BCrypt.HashPassword(newPassword);
-
             return _repository.UpdateUser(user);
         }
         public bool UpdateImage(UserLoginDTO userLDTO, string newImage)
@@ -119,9 +117,7 @@ namespace API_livechat.Services
             if (CheckUserLog(userLDTO))
             {
                 UserProfile user = _repository.GetByUsername(userLDTO.User);
-
                 user.UsImg = newImage;
-
                 return _repository.UpdateUser(user);
             }
             return false;
@@ -130,13 +126,9 @@ namespace API_livechat.Services
         public bool CheckUserLog(UserLoginDTO userLDTO)
         {
             UserLoginDTO us = ConvertToUserDTO(_repository.GetByUsername(userLDTO.User));
-            
             if(us.Pass == null || us.User == null) return false;
-
             bool verified = BCrypt.Net.BCrypt.Verify(userLDTO.Pass, us.Pass);
-
             if (!verified) return false;
-
             return true;
         }
 
@@ -152,9 +144,7 @@ namespace API_livechat.Services
             if (CheckUserLog(userLDTO))
             {
                 UserProfile user = _repository.GetByUsername(userLDTO.User);
-
                 user.UsImg = null;
-
                 return _repository.UpdateUser(user);
             }
             return false;
