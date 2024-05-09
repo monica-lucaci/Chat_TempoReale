@@ -120,7 +120,8 @@ namespace API_livechat.Controllers
             {
                 return Ok(new Response()
                 {
-                    Status = "SUCCESS"
+                    Status = "SUCCESS",
+                    Data = "Eliminazione effettuata"
                 });
             }
             else

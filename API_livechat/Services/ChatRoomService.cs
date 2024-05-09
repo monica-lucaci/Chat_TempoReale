@@ -90,6 +90,7 @@ namespace API_livechat.Services
 
         public IEnumerable<ChatRoomDTO>? GetAllChatRooms()
         {
+            _repository.CheckUserInChatRooms();
             return ConvertToChatRoomsDTO(_repository.GetChatRooms());
 
         }
@@ -108,11 +109,11 @@ namespace API_livechat.Services
 
         public bool Insert(ChatRoomDTO chatRoomDTO, string user) {
 
-           ChatRoom cr = new ChatRoom();
-           cr.Title = chatRoomDTO.Titl;
-           cr.Description = chatRoomDTO.Desc;
-           cr.Image = chatRoomDTO.CRImg;
-           return _repository.Create(cr, user);
+            ChatRoom cr = new ChatRoom();
+            cr.Title = chatRoomDTO.Titl;
+            cr.Description = chatRoomDTO.Desc;
+            cr.Image = chatRoomDTO.CRImg;
+            return _repository.Create(cr, user);
         }
 
         public bool DeleteByCode(string cr_code, string user) 
@@ -131,8 +132,6 @@ namespace API_livechat.Services
             }
             return false;
         }
-
-
 
         public List<ChatRoomDTO>? GetRoomsByUser(string username)
         {

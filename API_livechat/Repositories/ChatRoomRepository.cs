@@ -128,6 +128,13 @@ namespace API_livechat.Repositories
                         chatRoom.Users.Add(user);
                         _chatRooms.InsertOne(chatRoom);
                         _logger.LogInformation("Room creata con successo");
+                        if (userProfile.ChatRoomsCode == null)
+                        {
+                            userProfile.ChatRoomsCode = new List<string>();
+                        }
+                        userProfile.ChatRoomsCode.Add(chatRoom.ChatRoomCode);
+                        _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
+                        _dbContext.SaveChanges();
                         return true;
                     }
                 }                
@@ -301,7 +308,7 @@ namespace API_livechat.Repositories
         /// controlla le stanze vuote, se esistono le elimina
         /// </summary>
         /// <param name="cr_code"></param>
-        /// <returns>true, se sono stati trovate ed eliminate o se non ci sono problemi, false altrimenti</returns>
+        /// <returns>true, se sono state trovate ed eliminate o se non ci sono problemi, false altrimenti</returns>
 
         public bool ChechEmptyChatrooms()
         {
@@ -328,12 +335,15 @@ namespace API_livechat.Repositories
         {
             try
             {
-                if (ChechEmptyChatrooms()) return true;
+                ChechEmptyChatrooms();
                 foreach (ChatRoom ctr in GetChatRooms())
                 {
                     foreach (string usr in ctr.Users)
                     {
-                        if (!UserReg(usr) && UserIsInChatRoom(usr, ctr.ChatRoomCode)) return DeleteUserNotRegFromChatRoom(usr, ctr.ChatRoomCode);
+                        if (!UserReg(usr) && UserIsInChatRoom(usr, ctr.ChatRoomCode))
+                        {
+                            return DeleteUserNotRegFromChatRoom(usr, ctr.ChatRoomCode) && ChechEmptyChatrooms();
+                        }
                     }
                 }
             }

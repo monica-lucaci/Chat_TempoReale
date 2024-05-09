@@ -60,9 +60,11 @@ namespace API_livechat.Services
 
         public bool InsertMessage(MessageDTO messageDTO, string cr_code)
         {
-            if (_roomRepository.GetByCode(cr_code) != null) 
+            ChatRoom? cr = _roomRepository.GetByCode(cr_code);
+            if (cr != null) 
             {
                 messageDTO.CRRIF = cr_code;
+                messageDTO.RRIF = cr.ChatRoomId;
                 return _repository.InsertMessage(ConvertToMessage(messageDTO));
             }
             return false;

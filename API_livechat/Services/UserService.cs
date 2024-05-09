@@ -29,7 +29,8 @@ namespace API_livechat.Services
                 Email = u.Email,
                 User = u.Username,
                 Pass = u.Passwrd,
-                Img = u.UsImg
+                Img = u.UsImg,
+                CRCode = u.ChatRoomsCode
             }).ToList();
         }
 
@@ -40,7 +41,8 @@ namespace API_livechat.Services
                 Email = user.Email,
                 User = user.Username,
                 Pass = user.Passwrd,
-                Img = user.UsImg
+                Img = user.UsImg,
+                CRCode = user.ChatRoomsCode
             };
         }
 
