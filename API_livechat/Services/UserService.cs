@@ -12,10 +12,12 @@ namespace API_livechat.Services
     {
         #region repository
         private readonly UserRepository _repository;
+        private readonly ChatRoomRepository _crRepository;
 
-        public UserService(UserRepository repository)
+        public UserService(UserRepository repository, ChatRoomRepository crRepository)
         {
             _repository = repository;
+            _crRepository = crRepository;
         }
         #endregion
 
@@ -77,7 +79,6 @@ namespace API_livechat.Services
             return false;            
         }
 
-
         public List<UserDTO> GetListOfUsers()
         {
             return ConvertToUsersDTO(_repository.GetListOfUsers());
@@ -129,6 +130,7 @@ namespace API_livechat.Services
             if(us.Pass == null || us.User == null) return false;
             bool verified = BCrypt.Net.BCrypt.Verify(userLDTO.Pass, us.Pass);
             if (!verified) return false;
+            if(userLDTO.Email != us.Email) return false;
             return true;
         }
 
@@ -137,6 +139,15 @@ namespace API_livechat.Services
             UserLoginDTO us = ConvertToUserLoginDTO(_repository.GetByUsername(userLDTO.User));
             UserLogin userLogin = ConvertToUserLogin(us);
             return userLogin != null;
+        }
+
+        public bool CheckEmailReg(string email)
+        {
+            foreach(UserLoginDTO usr in GetListOfUsers())
+            {
+                if(usr.Email == email) return true;
+            }
+            return false;
         }
 
         public bool DeleteImage(UserLoginDTO userLDTO)
@@ -152,9 +163,11 @@ namespace API_livechat.Services
 
         public bool DeleteUser(UserLoginDTO userLDTO)
         {
-            if (CheckUserLog(userLDTO))
-            {
-                return _repository.DeleteByUser(userLDTO.User);
+            if (CheckUserLog(userLDTO)) {
+            
+                return _crRepository.DeleteUserFromAllChatRooms(userLDTO.User) && 
+                        _repository.DeleteByUser(userLDTO.User) &&
+                        _crRepository.ChechEmptyChatrooms();
             }
             return false;
         }

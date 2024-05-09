@@ -19,6 +19,9 @@ namespace API_livechat.Models
         [BsonElement("description")]
         public string? Description { get; set; }
 
+        [BsonElement("image")]
+        public string? Image { get; set; }
+
         public List<string> Users { get; set; } = new List<string>();
         
         [BsonRepresentation(BsonType.ObjectId)]

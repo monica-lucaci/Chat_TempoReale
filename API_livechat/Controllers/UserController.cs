@@ -33,6 +33,15 @@ namespace API_livechat.Controllers
                 });
             }
 
+            if (_service.CheckEmailReg(user.Email))
+            {
+                return BadRequest(new Response()
+                {
+                    Status = "ERROR",
+                    Data = "Email già esistente nel database, inserire una nuova email"
+                });
+            }
+
             if(_service.Register(user, img))
             {
                 return Ok(new Response()

@@ -43,7 +43,7 @@ namespace API_livechat.Controllers
         [HttpGet("chat/viewList")]
         public IActionResult GetListChatRooms()
         {
-            return Ok(new Response
+            return Ok(new Response()
             {
                 Status = "SUCCESS",
                 Data = _service.GetAllChatRooms()
@@ -116,10 +116,21 @@ namespace API_livechat.Controllers
         [HttpDelete("chat/deleteChatRoom/{cr_code}")]
         public IActionResult DeleteChatRoom(string cr_code, string username)
         {
+            if(_service.DeleteByCode(cr_code, username))
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS"
+                });
+            }
+            else
+            {
+
+            }
             return Ok(new Response()
             {
-                Status = "SUCCESS",
-                Data = _service.Delete(cr_code, username)
+                Status = "Error",
+                Data = "Eliminazione non riuscita"
             });
         }
     }

@@ -25,6 +25,7 @@ namespace API_livechat.Services
                 CRCd = cr.ChatRoomCode,
                 Titl = cr.Title,
                 Desc = cr.Description,
+                CRImg = cr.Image,
                 Usrs = cr.Users.ToList()
             }).ToList();
         }
@@ -37,6 +38,7 @@ namespace API_livechat.Services
                 CRCd = chatRoom.ChatRoomCode,
                 Titl = chatRoom.Title,
                 Desc = chatRoom.Description,
+                CRImg = chatRoom.Image,
                 Usrs = chatRoom.Users.ToList()
             };
         }
@@ -45,9 +47,10 @@ namespace API_livechat.Services
         {
             return new ChatRoom()
             {
-                ChatRoomCode = chatRoomDTO.CRCd!,
                 Title = chatRoomDTO.Titl,
+                ChatRoomCode = chatRoomDTO.CRCd!,
                 Description = chatRoomDTO.Desc,
+                Image = chatRoomDTO.CRImg,
                 Users = chatRoomDTO.Usrs.ToList()
             };
         }
@@ -89,15 +92,12 @@ namespace API_livechat.Services
         {
             return ConvertToChatRoomsDTO(_repository.GetChatRooms());
 
-            List<ChatRoom>? cr = _repository.GetChatRooms();
-            if(cr != null) return ConvertToChatRoomsDTO(cr);
-            return null;
         }
 
         public ChatRoomDTO? GetByCode(string cr_code)
         {
             ChatRoom? cr = _repository.GetChatRoom(cr_code);
-            if (cr != null) return ConvertToChatRoomDTO(cr);
+            if (cr != null && _repository.CheckUserInChatRooms()) return ConvertToChatRoomDTO(cr);
             return null;
         }
 
@@ -109,12 +109,13 @@ namespace API_livechat.Services
         public bool Insert(ChatRoomDTO chatRoomDTO, string user) {
 
            ChatRoom cr = new ChatRoom();
-           cr.Description = chatRoomDTO.Desc;
            cr.Title = chatRoomDTO.Titl;
+           cr.Description = chatRoomDTO.Desc;
+           cr.Image = chatRoomDTO.CRImg;
            return _repository.Create(cr, user);
         }
 
-        public bool Delete(string cr_code, string user) 
+        public bool DeleteByCode(string cr_code, string user) 
         {
             List<ChatRoomDTO>? chatRoomDTOs = GetRoomsByUser(user);
             
@@ -131,6 +132,8 @@ namespace API_livechat.Services
             return false;
         }
 
+
+
         public List<ChatRoomDTO>? GetRoomsByUser(string username)
         {
             List<ChatRoom>? chats = _repository.GetRoomByUser(username);
@@ -145,6 +148,7 @@ namespace API_livechat.Services
                         CRCd = chatRoom.ChatRoomCode,
                         Titl = chatRoom.Title,
                         Desc = chatRoom.Description,
+                        CRImg = chatRoom.Image,
                         Usrs = chatRoom.Users,
                     };
                     chatRoomDTOs.Add(cr);
@@ -162,5 +166,16 @@ namespace API_livechat.Services
         {
             return _repository.DeleteUserFromChatRoom(username, cr_code);
         }
+
+        public bool DeleteUserFromAllChatRooms(string username)
+        {
+            return _repository.DeleteUserFromAllChatRooms(username);
+        }
+
+        public bool ChechEmptyChatrooms()
+        {
+            return _repository.ChechEmptyChatrooms();
+        }
+
     }
 }

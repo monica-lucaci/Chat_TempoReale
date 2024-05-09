@@ -3,6 +3,7 @@ using API_livechat.Models;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Runtime.ConstrainedExecution;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
@@ -73,7 +74,6 @@ namespace API_livechat.Repositories
         {
             ChatRoom? cr = GetByCode(cr_code);
             if(cr == null) return null;
-
             cr.Messages = new List<Message>();
             cr.Messages = _messageRepository.GetMessages(cr.ChatRoomId);
             return cr;
@@ -115,6 +115,8 @@ namespace API_livechat.Repositories
         {
             try
             {
+                if (!UserReg(user)) return false;
+
                 List<UserProfile> users = _dbContext.Users.ToList();
 
                 foreach(UserProfile userProfile in users)
@@ -122,7 +124,7 @@ namespace API_livechat.Repositories
                     if(userProfile.Username == user)
                     {
                         if (_chatRooms.Find(cr => cr.Title == chatRoom.Title).ToList().Count > 0) return false;
-
+                        if (_chatRooms.Find(cr => cr.Image == chatRoom.Image).ToList().Count > 0) return false;
                         chatRoom.Users.Add(user);
                         _chatRooms.InsertOne(chatRoom);
                         _logger.LogInformation("Room creata con successo");
@@ -196,6 +198,56 @@ namespace API_livechat.Repositories
             return false;
         }
 
+        public bool DeleteUserNotRegFromChatRoom(string username, string cr_code)
+        {
+            try
+            {
+                ChatRoom? ctr = GetByCode(cr_code);
+                if (ctr != null)
+                {
+                    ctr.Users.Remove(username);
+                    var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, ctr.ChatRoomId);
+                    _chatRooms.ReplaceOne(filter, ctr);
+                    return true;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return false;
+        }
+
+        public bool DeleteUserFromAllChatRooms(string username)
+        {
+            try
+            {
+                if (UserReg(username))
+                {
+                    foreach (ChatRoom ctr in GetChatRooms())
+                    {
+                        //se la chatroom contiene l'utente passato in input allora lo elimino dalla chatroom
+                        if (UserIsInChatRoom(username,ctr.ChatRoomCode))
+                        {
+                            if (ctr != null)
+                            {
+                                ctr.Users.Remove(username);
+                                var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, ctr.ChatRoomId);
+                                _chatRooms.ReplaceOne(filter, ctr);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return false;
+        }
         public bool DeleteChatRoomByCode(string cr_code) 
         {
             try
@@ -243,6 +295,54 @@ namespace API_livechat.Repositories
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// controlla le stanze vuote, se esistono le elimina
+        /// </summary>
+        /// <param name="cr_code"></param>
+        /// <returns>true, se sono stati trovate ed eliminate o se non ci sono problemi, false altrimenti</returns>
+
+        public bool ChechEmptyChatrooms()
+        {
+            try
+            {
+                foreach (ChatRoom ctr in GetChatRooms())
+                {
+                    if (ctr.Users.Count == 0) return DeleteChatRoomByCode(ctr.ChatRoomCode);
+                }
+            }
+            catch(Exception ex)
+            { 
+                _logger.LogError(ex.Message); 
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// controllo se ci sono utenti nella stanza che non sono più registrati
+        /// </summary>
+        /// <returns>true, se sono stati trovati ed eliminati o se non ci sono problemi, false altrimenti</returns>
+        public bool CheckUserInChatRooms()
+        {
+            try
+            {
+                if (ChechEmptyChatrooms()) return true;
+                foreach (ChatRoom ctr in GetChatRooms())
+                {
+                    foreach (string usr in ctr.Users)
+                    {
+                        if (!UserReg(usr) && UserIsInChatRoom(usr, ctr.ChatRoomCode)) return DeleteUserNotRegFromChatRoom(usr, ctr.ChatRoomCode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return false;
+            }
+            return true;
         }
     }
 }
