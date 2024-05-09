@@ -28,7 +28,7 @@ namespace API_livechat.Services
                 Data = m.Data,
                 Date = m.Date,
                 Sder = m.Sender,
-                RRIF = m.ChatRoomRIF
+                CRRIF = m.ChatRoomCode
             }).ToList();
         }
 
@@ -41,7 +41,7 @@ namespace API_livechat.Services
                 Data = msg.Data,
                 Date = msg.Date,
                 Sder = msg.Sender,
-                RRIF = msg.ChatRoomRIF
+                CRRIF = msg.ChatRoomCode
             };
         }
 
@@ -52,16 +52,17 @@ namespace API_livechat.Services
                 MessageCode = msgDTO.MCod!,
                 Data = msgDTO.Data,
                 Date = msgDTO.Date,
-                Sender = msgDTO.Sder
+                Sender = msgDTO.Sder,
+                ChatRoomCode = msgDTO.CRRIF
             };
         }
         #endregion
 
-        public bool InsertMessage(MessageDTO messageDTO, ObjectId chatRoomId)
+        public bool InsertMessage(MessageDTO messageDTO, string cr_code)
         {
-            if (_roomRepository.GetById(chatRoomId) != null) 
+            if (_roomRepository.GetByCode(cr_code) != null) 
             {
-                messageDTO.RRIF = chatRoomId;
+                messageDTO.CRRIF = cr_code;
                 return _repository.InsertMessage(ConvertToMessage(messageDTO));
             }
             return false;

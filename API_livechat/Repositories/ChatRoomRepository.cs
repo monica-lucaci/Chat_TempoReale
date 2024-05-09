@@ -137,6 +137,7 @@ namespace API_livechat.Repositories
 
             return false;
         }
+
         public bool InsertUserIntoChatRoom(string username, string cr_code)
         {
             try

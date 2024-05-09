@@ -8,5 +8,6 @@ namespace API_livechat.Models
     {
         public string? UsImg { get; set; }
         public bool? IsDeleted { get; set; }
+        public List<string>? ChatRoomsCode { get; set; }
     }
 }

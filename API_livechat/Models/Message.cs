@@ -24,5 +24,7 @@ namespace API_livechat.Models
 
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId ChatRoomRIF { get; set; }
+
+        public string? ChatRoomCode { get; set; }
     }
 }

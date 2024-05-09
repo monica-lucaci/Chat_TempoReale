@@ -3,6 +3,7 @@
     public class UserDTO : UserLoginDTO
     {
         public string? Img { get; set; }
-        public List<ChatRoomDTO> MyChatRooms { get; set; }
+        public List<string> CRCode { get; set; } = new List<string>();
+
     }
 }

@@ -127,8 +127,8 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.ChatRoomController",
-    "Method": "GetUserByRoom",
-    "RelativePath": "ChatRoom/userOfRoom/{cr_code}",
+    "Method": "GetUsersByRoom",
+    "RelativePath": "ChatRoom/usersOfRoom/{cr_code}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -144,7 +144,7 @@
   {
     "ContainingType": "API_livechat.Controllers.MessageController",
     "Method": "InsertMessage",
-    "RelativePath": "Message/sendMessage/{cr_Id}",
+    "RelativePath": "Message/sendMessage/{cr_code}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -155,7 +155,7 @@
         "IsRequired": true
       },
       {
-        "Name": "cr_Id",
+        "Name": "cr_code",
         "Type": "System.String",
         "IsRequired": true
       }

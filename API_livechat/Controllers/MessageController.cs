@@ -21,14 +21,12 @@ namespace API_livechat.Controllers
         }
         #endregion
 
-        [HttpPost("sendMessage/{cr_Id}")]
-        public IActionResult InsertMessage(MessageDTO m, string cr_Id)
+        [HttpPost("sendMessage/{cr_code}")]
+        public IActionResult InsertMessage(MessageDTO m, string cr_code)
         {
             try
             {
-                ObjectId chatRoomId = ObjectId.Parse(cr_Id);
-
-                if (_service.InsertMessage(m, chatRoomId))
+                if (_service.InsertMessage(m, cr_code))
                 {
                     return Ok(new Response()
                     {

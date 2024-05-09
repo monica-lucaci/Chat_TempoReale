@@ -10,6 +10,7 @@ namespace API_livechat.DTO
         public string? Data { get; set; }
         public DateTime Date { get; set; } 
         public string? Sder { get; set; }
-        public ObjectId? RRIF { get; set; }
+        public ObjectId RRIF { get; set; }  //id rif of chatroom
+        public string? CRRIF { get; set; }  //code rif of chatroom
     }
 }

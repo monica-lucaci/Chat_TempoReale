@@ -1,6 +1,8 @@
 ﻿using API_livechat.DTO;
 using API_livechat.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using MongoDB.Driver;
 
 namespace API_livechat.Repositories
 {

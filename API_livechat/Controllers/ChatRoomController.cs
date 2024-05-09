@@ -70,7 +70,7 @@ namespace API_livechat.Controllers
                     return Ok(new Response()
                     { 
                         Status = "SUCCESS",
-                        Data = GetUserByRoom(cr_code)
+                        Data = GetUsersByRoom(cr_code)
 
                     });
                 }
@@ -92,7 +92,7 @@ namespace API_livechat.Controllers
                     return Ok(new Response()
                     {
                         Status = "SUCCESS",
-                        Data = GetUserByRoom(cr_code)
+                        Data = GetUsersByRoom(cr_code)
 
                     });
                 }
@@ -104,8 +104,8 @@ namespace API_livechat.Controllers
             return BadRequest();
         }
 
-        [HttpGet("userOfRoom/{cr_code}")]
-        public IActionResult GetUserByRoom(string cr_code)
+        [HttpGet("usersOfRoom/{cr_code}")]
+        public IActionResult GetUsersByRoom(string cr_code)
         {
             return Ok(new Response()
             {
