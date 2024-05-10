@@ -65,6 +65,19 @@ namespace API_livechat.Services
                 Passwrd = userLDTO.Pass
             };
         }
+
+        ChatRoomDTO ConvertToChatRoomDTO(ChatRoom chatRoom)
+        {
+            return new ChatRoomDTO()
+            {
+                CRId = chatRoom.ChatRoomId,
+                CRCd = chatRoom.ChatRoomCode,
+                Titl = chatRoom.Title,
+                Desc = chatRoom.Description,
+                CRImg = chatRoom.Image,
+                Usrs = chatRoom.Users.ToList()
+            };
+        }
         #endregion
 
         public bool Register(UserLoginDTO userDTO, string img)

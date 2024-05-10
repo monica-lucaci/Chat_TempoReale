@@ -142,6 +142,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "GetChatRoomsOfUser",
+    "RelativePath": "ChatRoom/viewChatRooms/{username}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API_livechat.Controllers.MessageController",
     "Method": "GetMessagesOfRoom",
     "RelativePath": "Message/MessagesOfARoom/{cr_code}",

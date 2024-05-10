@@ -135,7 +135,7 @@ namespace API_livechat.Services
 
         public List<ChatRoomDTO>? GetRoomsByUser(string username)
         {
-            List<ChatRoom>? chats = _repository.GetRoomByUser(username);
+            List<ChatRoom>? chats = _repository.GetRoomsByUser(username);
             List<ChatRoomDTO>? chatRoomDTOs = new List<ChatRoomDTO>();
 
             if(chats != null)

@@ -85,7 +85,7 @@ namespace API_livechat.Repositories
             return null;
         }
 
-        public List<ChatRoom>? GetRoomByUser(string username)
+        public List<ChatRoom>? GetRoomsByUser(string username)
         {
             try
             {

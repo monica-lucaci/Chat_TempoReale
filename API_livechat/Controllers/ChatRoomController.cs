@@ -50,6 +50,23 @@ namespace API_livechat.Controllers
             });
         }
 
+        [HttpGet("viewChatRooms/{username}")]
+        public IActionResult GetChatRoomsOfUser(string username)
+        {
+            if (username != null)
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = _service.GetRoomsByUser(username)
+                });
+            }
+            return Ok(new Response()
+            {
+                Status = "ERROR"
+            });
+        }
+
         [HttpGet("chat/{cr_code}")]
         public IActionResult GetChatRoomAndMessages(string cr_code)
         {
