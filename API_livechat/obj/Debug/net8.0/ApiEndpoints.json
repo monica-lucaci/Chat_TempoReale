@@ -54,6 +54,22 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.ChatRoomController",
+    "Method": "ClearRoom",
+    "RelativePath": "ChatRoom/chat/ClearRoom/{cr_code}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cr_code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.ChatRoomController",
     "Method": "DeleteChatRoom",
     "RelativePath": "ChatRoom/chat/deleteChatRoom/{cr_code}",
     "HttpMethod": "DELETE",
@@ -159,6 +175,43 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.MessageController",
+    "Method": "DeleteMessage",
+    "RelativePath": "Message/chat/deleteMessage/{ms_code}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ms_code",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.MessageController",
+    "Method": "DeleteMessages",
+    "RelativePath": "Message/chat/deleteMessagesByUser/{username}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.MessageController",
     "Method": "GetMessagesOfRoom",
     "RelativePath": "Message/MessagesOfARoom/{cr_code}",
     "HttpMethod": "GET",
@@ -190,6 +243,32 @@
         "Name": "cr_code",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.MessageController",
+    "Method": "UpdateMessage",
+    "RelativePath": "Message/UpdateMessage/{ms_code}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ms_code",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "textMessage",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

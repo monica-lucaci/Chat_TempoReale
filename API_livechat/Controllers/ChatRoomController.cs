@@ -61,7 +61,7 @@ namespace API_livechat.Controllers
                     Data = _service.GetRoomsByUser(username)
                 });
             }
-            return Ok(new Response()
+            return BadRequest(new Response()
             {
                 Status = "ERROR"
             });
@@ -141,13 +141,27 @@ namespace API_livechat.Controllers
                     Data = "Eliminazione effettuata"
                 });
             }
-            else
+            return BadRequest(new Response()
             {
+                Status = "ERROR",
+                Data = "Eliminazione non riuscita"
+            });
+        }
 
-            }
-            return Ok(new Response()
+        [HttpDelete("chat/ClearRoom/{cr_code}")]
+        public IActionResult ClearRoom(string cr_code)
+        {
+            if(_service.ClearRoom(cr_code))
             {
-                Status = "Error",
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = "Eliminazione effettuata"
+                });
+            }
+            return BadRequest(new Response()
+            {
+                Status = "ERROR",
                 Data = "Eliminazione non riuscita"
             });
         }

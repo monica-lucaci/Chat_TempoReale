@@ -80,7 +80,7 @@ namespace API_livechat.Controllers
                     Data = _service.GetUser(username)
                 });
             }
-            return Ok(new Response()
+            return BadRequest(new Response()
             {
                 Status = "ERROR"
             });
@@ -107,7 +107,7 @@ namespace API_livechat.Controllers
             }
             else
             {
-                return Ok(new Response()
+                return BadRequest(new Response()
                 {
                     Status = "ERROR",
                     Data = "Utente non esistente o credenziali errate"
@@ -136,7 +136,7 @@ namespace API_livechat.Controllers
             }
             else
             {
-                return Ok(new Response()
+                return BadRequest(new Response()
                 {
                     Status = "ERROR",
                     Data = "Utente non esistente o credenziali errate"
@@ -163,7 +163,7 @@ namespace API_livechat.Controllers
                 });
             }else
             {
-                return Ok(new Response()
+                return BadRequest(new Response()
                 {
                     Status = "ERROR",
                     Data = "Utente non esistente o credenziali errate"
@@ -192,7 +192,7 @@ namespace API_livechat.Controllers
             }
             else
             {
-                return Ok(new Response()
+                return BadRequest(new Response()
                 {
                     Status = "ERROR",
                     Data = "Utente non esistente o credenziali errate"

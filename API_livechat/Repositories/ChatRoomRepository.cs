@@ -337,6 +337,7 @@ namespace API_livechat.Repositories
                                 userProfile.ChatRoomsCode.Remove(cr_code);
                                 _dbContext.Users.Update(userProfile);
                                 _dbContext.SaveChanges();
+                                ClearRoom(cr_code);
                                 break;
                             }
                         }
@@ -437,6 +438,24 @@ namespace API_livechat.Repositories
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Cancella tutti i messaggi di una chatroom
+        /// </summary>
+        /// <param name="cr_room"></param>
+        /// <returns>true se tutti i messaggi vengono cancellati, altrimenti false</returns>
+        public bool ClearRoom(string cr_room)
+        {
+            try
+            {
+                return _messageRepository.DeleteMessagesOfRoom(cr_room);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return false;
+            }
         }
     }
 }

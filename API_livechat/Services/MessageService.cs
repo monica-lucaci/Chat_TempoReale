@@ -52,7 +52,6 @@ namespace API_livechat.Services
             return new Message()
             {
                 ChatRoomRIF = msgDTO.RRIF,
-                MessageCode = msgDTO.MCod!,
                 Data = msgDTO.Data,
                 Date = msgDTO.Date,
                 Sender = msgDTO.Sder,
@@ -74,6 +73,11 @@ namespace API_livechat.Services
             return false;
         }
 
+        public Message? GetMessage(string ms_code)
+        {
+            return _repository.GetMessage(ms_code);
+        }
+
         public List<Message> GetMessagesOfRoom(string cr_code)
         {
             return _repository.GetMessagesOfRoom(cr_code);
@@ -83,10 +87,29 @@ namespace API_livechat.Services
         {
             return _repository.GetMessByUser(username);
         }
-        /*
-        public bool DeleteByCode(string cr_code, string user)
+        public bool DeleteMessage(string ms_code, string username)
         {
-            //TO DO
-        }*/
+            return _repository.DeleteMessage(ms_code, username);
+        }
+
+        public bool DeleteMessagesOfUser(string username)
+        {
+            return _repository.DeleteMessagesOfUser(username);
+        }
+
+        public bool UserReg(string username)
+        {
+            return _repository.UserReg(username);
+        }
+
+        public bool CheckUserSender(string ms_code, string username)
+        {
+            return _repository.CheckUserSender(ms_code, username);
+        }
+
+        public bool UpdateMessage(string ms_code, string textMessage)
+        {
+            return _repository.UpdateMessage(ms_code, textMessage);
+        }       
     }
 }

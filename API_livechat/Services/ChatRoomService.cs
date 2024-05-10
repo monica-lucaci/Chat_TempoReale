@@ -176,5 +176,10 @@ namespace API_livechat.Services
             return _repository.ChechEmptyChatrooms();
         }
 
+        public bool ClearRoom(string cr_room)
+        {
+            return _repository.ClearRoom(cr_room);
+        }
+
     }
 }
