@@ -14,39 +14,45 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './profiloutente.component.css'
 })
 export class ProfiloutenteComponent implements OnInit {
-  user: User | undefined;
+  utente: User | undefined;
   img!: string;
   showOpts: boolean = false;
+   currentDate :number = Date.now();
 
   constructor(
     private userService: UserService,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) 
+  {
+    if(!localStorage.getItem("token")){
+      this.router.navigateByUrl("")
+  }
+}
 
   ngOnInit() {
-    console.log('ngOnInit called');
-    this.loadProfile();
+    const username = this.authService.getCurrentUser();
+    if (username) {
+      this.getProfile(username);}
+      else
+        console.log('error')
   }
 
-  loadProfile() {
-    console.log("load profile chiamato")
-    // Call the getUserDetail method from the authService to fetch the user profile
-    this.authService.getUserDetail().subscribe(
-      (response: any) => {
-        this.user = response.data; // Assuming the user data is in a property called 'data'
-        console.log(this.user);
-      },
-      (error:any) => {
-        console.error('Error fetching user profile:', error);
-      }
-    );
-  }
+  getProfile(username:string){
+    this.userService.recuperaProfilo(username).subscribe(res=>{
+        this.utente=res.data;
+        console.log(this.utente)
+        console.log(this.utente?.img)
+    })
+}
+
+  // Other methods...
+
 
   changeImg() {
-    if (this.user) {
-      this.user.img = this.img;
-      this.userService.updateImg(this.user).subscribe({
+    if (this.utente) {
+      this.utente.img = this.img;
+      this.userService.updateImg(this.utente).subscribe({
         next: (res) => console.log('Image updated successfully'),
         error: (err) => console.error('Failed to update image:', err)
       });

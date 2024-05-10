@@ -31,22 +31,22 @@ export class AuthService {
     });
   }
   
+  private getToken = () : string | null => localStorage.getItem(this.tokenKey )
 
-  
-  
-  // getUserProfile(username: string) {
-  //   return this.http.get<any>(`${this.apiUrl}UserProfile/${username}`); // Use apiUrl here
-  // }
-
-  getUserDetail(): any {
-    const token = this.getToken();
-    if (!token) return null;
-    const decodedToken: any = jwtDecode(token);
-    const username = decodedToken.Username;
-  
-    return this.userService.getProfile(username); // Provide the 'username' argument here
+  getCurrentUser(): string | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        console.log(decodedToken.Username)
+        return decodedToken.Username; // Assuming 'Username' is the property that stores the username in your JWT payload
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        return null;
+      }
+    }
+    return null;
   }
-  
   
 
 
@@ -85,6 +85,6 @@ export class AuthService {
   }
 
 
-  private getToken = () : string | null => localStorage.getItem(this.tokenKey )
+
 
 }

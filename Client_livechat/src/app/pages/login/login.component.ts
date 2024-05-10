@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { OnInit, Inject, PLATFORM_ID, inject, Component } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -26,7 +27,9 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
+
     if (localStorage.getItem('token')) router.navigateByUrl('/userProfile');
   }
 
@@ -51,16 +54,10 @@ export class LoginComponent {
       }
     });
   }
-  // onSignIn(): void {
-  //   if (this.authService.isLoggedIn()) {
-  //     this.router.navigate(['/chat']); // Navigate when logged in
-  //   } else {
-  //     console.error('User is not logged in');
-  //     // Optionally perform the login here or show an error
-  //   }
-  // }
+
 
   ngOnInit(): void {
+   
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.form = this.fb.group({
@@ -68,6 +65,6 @@ export class LoginComponent {
       user: ['', [Validators.required]],
       pass: ['', [Validators.required]]
     });
-
+  
   }
 }

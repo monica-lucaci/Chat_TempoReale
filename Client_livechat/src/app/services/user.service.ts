@@ -13,17 +13,19 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getProfile(username: string = 'davide'): Observable<string> {
+
+  recuperaProfilo(username: string ): Observable<Risposta> {
     let tokenKey = localStorage.getItem('token');
 
     let headerCustom = new HttpHeaders({
       Authorization: `Bearer ${tokenKey}`,
     });
 
-    return this.http.get<string>(`${this.apiUrl}UserProfile/${username}`, {
+    return this.http.get<Risposta>(`${this.apiUrl}User/UserProfile/${username}`, {
       headers: headerCustom,
     });
   }
+
 
   getAllUsers(): Observable<Risposta> {
     return this.http.get<Risposta>(`${this.apiUrl}ListOfUsers`);
