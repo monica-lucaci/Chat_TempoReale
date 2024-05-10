@@ -16,8 +16,7 @@ namespace API_livechat.Models
         public string? Data { get; set; }
 
         [BsonElement("date")]
-        [BsonDateTimeOptions(DateOnly = true)]
-        public DateTime Date { get; set; } = DateTime.Now.Date;
+        public DateTime Date { get; set; }
 
         [BsonElement("sender")]
         public string? Sender {  get; set; }

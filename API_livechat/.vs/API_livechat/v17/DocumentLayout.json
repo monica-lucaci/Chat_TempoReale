@@ -3,6 +3,38 @@
   "WorkspaceRootPath": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\services\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:services\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\services\\chatroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:services\\chatroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\dto\\messagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:dto\\messagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\models\\chatroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:models\\chatroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\dto\\chatroomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:dto\\chatroomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\repositories\\ichatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:repositories\\ichatroomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,44 +47,12 @@
       "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:controllers\\chatroomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\services\\chatroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:services\\chatroomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\dto\\chatroomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:dto\\chatroomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\services\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:services\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\repositories\\messagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:repositories\\messagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\models\\chatroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:models\\chatroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\dto\\messagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|solutionrelative:dto\\messagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9461C136-65A8-421F-A433-63BAE5B414E6}|API_livechat.csproj|g:\\lavoro\\informatica\\i\u0026m\\appunti ing g. pace\\tasks\\task_chat\\api_livechat\\models\\userlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -118,23 +118,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 681,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MessageController.cs",
-              "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Controllers\\MessageController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MessageController.cs",
-              "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Controllers\\MessageController.cs",
-              "RelativeToolTip": "Controllers\\MessageController.cs",
-              "ViewState": "AQIAADcAAAAAAAAAAAAAwFMAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-04T00:40:25.199Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "UserService.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
@@ -142,25 +130,24 @@
               "RelativeToolTip": "Services\\UserService.cs",
               "ViewState": "AQIAAHQAAAAAAAAAAAASwHoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T17:19:34.148Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-02T17:19:34.148Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ChatRoomDTO.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\DTO\\ChatRoomDTO.cs",
               "RelativeDocumentMoniker": "DTO\\ChatRoomDTO.cs",
               "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\DTO\\ChatRoomDTO.cs",
               "RelativeToolTip": "DTO\\ChatRoomDTO.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAqwA8AAAAxAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAqwBIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-03T22:24:05.316Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ChatRoomService.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Services\\ChatRoomService.cs",
               "RelativeDocumentMoniker": "Services\\ChatRoomService.cs",
@@ -173,32 +160,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "UserController.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAjwFYAAAAJAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAWwFYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-02T10:44:45.164Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "MessageService.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Services\\MessageService.cs",
               "RelativeDocumentMoniker": "Services\\MessageService.cs",
               "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Services\\MessageService.cs",
               "RelativeToolTip": "Services\\MessageService.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAwwDgAAAAjAAAA",
+              "ViewState": "AQIAADEAAAAAAAAAAAA9wD8AAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T22:19:08.709Z"
+              "WhenOpened": "2024-05-03T22:19:08.709Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "ChatRoomRepository.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Repositories\\ChatRoomRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\ChatRoomRepository.cs",
@@ -206,37 +194,76 @@
               "RelativeToolTip": "Repositories\\ChatRoomRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwAsAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T21:12:24.483Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-03T21:12:24.483Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 2,
               "Title": "Message.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Models\\Message.cs",
               "RelativeDocumentMoniker": "Models\\Message.cs",
               "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Models\\Message.cs",
               "RelativeToolTip": "Models\\Message.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAxwBMAAAAtAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAQwA4AAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T20:57:11.445Z"
+              "WhenOpened": "2024-05-03T20:57:11.445Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "IChatRoomRepository.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Repositories\\IChatRoomRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\IChatRoomRepository.cs",
               "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Repositories\\IChatRoomRepository.cs",
               "RelativeToolTip": "Repositories\\IChatRoomRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA1AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-03T21:29:20.342Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
+              "Title": "ChatRoom.cs",
+              "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Models\\ChatRoom.cs",
+              "RelativeDocumentMoniker": "Models\\ChatRoom.cs",
+              "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Models\\ChatRoom.cs",
+              "RelativeToolTip": "Models\\ChatRoom.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABwAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-03T20:47:40.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MessageDTO.cs",
+              "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\DTO\\MessageDTO.cs",
+              "RelativeDocumentMoniker": "DTO\\MessageDTO.cs",
+              "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\DTO\\MessageDTO.cs",
+              "RelativeToolTip": "DTO\\MessageDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAkAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-03T22:23:52.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MessageController.cs",
+              "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Controllers\\MessageController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MessageController.cs",
+              "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Controllers\\MessageController.cs",
+              "RelativeToolTip": "Controllers\\MessageController.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAmwBwAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-04T00:40:25.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "ChatRoomController.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Controllers\\ChatRoomController.cs",
               "RelativeDocumentMoniker": "Controllers\\ChatRoomController.cs",
@@ -244,12 +271,11 @@
               "RelativeToolTip": "Controllers\\ChatRoomController.cs",
               "ViewState": "AQIAACwAAAAAAAAAAAAwwDYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-04T00:40:38.173Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-04T00:40:38.173Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "MessageRepository.cs",
               "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Repositories\\MessageRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\MessageRepository.cs",
@@ -282,30 +308,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-03T13:18:30.444Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ChatRoom.cs",
-              "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Models\\ChatRoom.cs",
-              "RelativeDocumentMoniker": "Models\\ChatRoom.cs",
-              "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\Models\\ChatRoom.cs",
-              "RelativeToolTip": "Models\\ChatRoom.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwBwAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T20:47:40.208Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "MessageDTO.cs",
-              "DocumentMoniker": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\DTO\\MessageDTO.cs",
-              "RelativeDocumentMoniker": "DTO\\MessageDTO.cs",
-              "ToolTip": "G:\\Lavoro\\Informatica\\I\u0026M\\Appunti ing G. Pace\\Tasks\\task_chat\\API_livechat\\DTO\\MessageDTO.cs",
-              "RelativeToolTip": "DTO\\MessageDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAkAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T22:23:52.171Z"
             },
             {
               "$type": "Document",

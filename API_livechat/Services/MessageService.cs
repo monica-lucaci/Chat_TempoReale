@@ -68,6 +68,7 @@ namespace API_livechat.Services
             {
                 messageDTO.CRRIF = cr_code;
                 messageDTO.RRIF = cr.ChatRoomId;
+                messageDTO.Date = DateTime.Now;
                 return _repository.InsertMessage(ConvertToMessage(messageDTO));
             }
             return false;
