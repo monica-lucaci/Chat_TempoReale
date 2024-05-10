@@ -10,7 +10,7 @@ CREATE TABLE UserProfile(
 	usImg TEXT,
 	email VARCHAR(250),
 	isDeleted BIT,
-	chatRoomsCode TEXT,
+	chatRoomsCode VARCHAR(250),
 	usRole VARCHAR(50)
 );
 
