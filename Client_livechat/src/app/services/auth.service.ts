@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { LoginRequest } from '../interfaces/login-request';
 import { AuthResponse } from '../interfaces/auth-response';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient , HttpHeaders , HttpResponse} from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { Risposta } from '../interfaces/risposta';
 import { User } from '../models/user';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -18,45 +19,35 @@ export class AuthService {
   apiUrl: string = environment.apiUrl;
   private tokenKey='token';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
-  login(username: string, password: string): Observable<AuthResponse> {
-    // return this.http.post<any>(`${this.apiUrl}Auth/login`, { username, password })
-    //   .pipe(
-    //     map((response: any) => {
-    //       if (response.status === 'SUCCESS') {
-    //         localStorage.setItem(this.tokenKey, response.data.token);
-    //       }
-    //       return response;
-    //     })
-    //   );
-    //}
-    let headerCustom = new HttpHeaders();
-    headerCustom.set('Content-Type', 'application/json');
-
-    let invio = {
-      username,
-      password,
-    };
-
-    return this.http.post<any>(`${this.apiUrl}Auth/login`, invio, {
-      headers: headerCustom,
+  login(email: string, user: string, pass: string): Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const payload = { email, user, pass };
+  
+    return this.http.post<string>(`${this.apiUrl}Auth/login`, payload, {
+      headers: headers,
+      responseType: 'text' as 'json' // Tells Angular to handle the response as plain text
     });
   }
   
 
+  
+  
+  // getUserProfile(username: string) {
+  //   return this.http.get<any>(`${this.apiUrl}UserProfile/${username}`); // Use apiUrl here
+  // }
 
   getUserDetail(): any {
     const token = this.getToken();
     if (!token) return null;
     const decodedToken: any = jwtDecode(token);
-    const userDetail = {
-      username: decodedToken.Username,
-      // Add more fields as needed
-    };
-    return userDetail;
+    const username = decodedToken.Username;
+  
+    return this.userService.getProfile(username); // Provide the 'username' argument here
   }
-
+  
+  
 
 
   isLoggedIn = (): boolean=>{
@@ -79,13 +70,19 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey)
   }
 
-  registra(user: string, pass: string): Observable<Risposta> {
-    let utente: User = new User();
-    utente.user = user;
-    utente.pass = pass;
-    return this.http.post<any>(`${this.apiUrl}user/register`, utente);
-  }
+  registra(email: string, user: string, pass: string, img: string =''): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = JSON.stringify({ email, user, pass, img });
 
+    // Include the query parameter for 'img'
+    return this.http.post(`${this.apiUrl}User/register?img=${img}`, body, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Registration error:', error);
+          return throwError(() => new Error('Registration failed due to server error'));
+        })
+      );
+  }
 
 
   private getToken = () : string | null => localStorage.getItem(this.tokenKey )

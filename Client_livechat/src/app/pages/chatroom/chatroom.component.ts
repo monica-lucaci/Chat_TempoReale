@@ -20,11 +20,12 @@ export class ChatroomComponent implements OnInit {
   selectedChatroom: Chatroom | null = null;
   currentUser: User | null = null;
 
+
   constructor(private chatroomService: ChatroomService, private userService: UserService, private sendmsgService: SendmsgService) {}
 
   ngOnInit(): void {
     this.fetchChatRooms();
-    this.fetchCurrentUser();
+    // this.fetchCurrentUser();
   }
 
   fetchChatRooms(): void {
@@ -40,12 +41,12 @@ export class ChatroomComponent implements OnInit {
     // Optionally fetch messages for the selected chatroom here
   }
 
-  fetchCurrentUser(): void {
-    this.userService.getProfile().subscribe({
-      next: (response) => this.currentUser = response.data,
-      error: (error) => console.error('Error fetching user profile:', error)
-    });
-  }
+  // fetchCurrentUser(): void {
+  //   this.userService.getProfile(user).subscribe({
+  //     next: (response) => this.currentUser = response.data,
+  //     error: (error) => console.error('Error fetching user profile:', error)
+  //   });
+  // }
 
   // Add properties to the component for binding
 

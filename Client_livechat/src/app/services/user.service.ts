@@ -1,27 +1,26 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Risposta } from '../interfaces/risposta'
-import { User } from '../models/user'
+import { Risposta } from '../interfaces/risposta';
+import { User } from '../models/user';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UserService {
   apiUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getProfile(): Observable<Risposta> {
+  getProfile(username: string = 'davide'): Observable<string> {
     let tokenKey = localStorage.getItem('token');
 
     let headerCustom = new HttpHeaders({
       Authorization: `Bearer ${tokenKey}`,
     });
 
-    return this.http.get<Risposta>(`${this.apiUrl}UserProfile/{username}`, {
+    return this.http.get<string>(`${this.apiUrl}UserProfile/${username}`, {
       headers: headerCustom,
     });
   }
@@ -30,21 +29,15 @@ export class UserService {
     return this.http.get<Risposta>(`${this.apiUrl}ListOfUsers`);
   }
 
-  updateImg(user: User,) {
+  updateImg(user: User) {
     let tokenKey = localStorage.getItem('token');
 
     let headerCustom = new HttpHeaders({
       Authorization: `Bearer ${tokenKey}`,
     });
 
-    return this.http.put<Risposta>(
-      `${this.apiUrl}UpdateImage`,
-      user,
-      {
-        headers: headerCustom,
-      }
-    );
+    return this.http.put<Risposta>(`${this.apiUrl}UpdateImage`, user, {
+      headers: headerCustom,
+    });
   }
-
 }
-

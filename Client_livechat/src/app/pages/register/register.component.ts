@@ -12,21 +12,38 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  username: string = '';
-  password: string = '';
+  img: string='';
+  email: string= '';
+  user: string = '';
+  pass: string = '';
   agree!: boolean;
-  constructor(private service: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   register(): void {
-    this.service
-      .registra(this.username, this.password)
-      .subscribe((result) => {
-        this.service.login(this.username, this.password).subscribe(res=>{
-          if (res.token) {
-            localStorage.setItem('token', res.token);
-            this.router.navigateByUrl("/login")
-          }
-        });
-      });
+    console.log("Agree status:", this.agree);
+    if (!this.agree) {
+      alert('Please agree to the terms.');
+      return;
+    }
+    this.authService.registra(this.email, this.user, this.pass, this.img).subscribe({
+      next: (response: any) => {
+        if (response.status === "SUCCESS") {
+          // Registration successful, handle further logic if needed
+          console.log("Registration successful");
+          this.authService.login(this.email, this.user, this.pass).subscribe({
+            next: (token: string) => { // Directly handle token as a string
+              localStorage.setItem('token', token);
+              this.router.navigateByUrl("/login"); // Navigate to dashboard
+            },
+            error: error => console.error('Login after registration failed:', error)
+          });
+        } else {
+          // Registration failed
+          console.error('Registration failed:', response.data);
+        }
+      },
+      error: error => console.error('Registration failed:', error)
+    });
   }
+  
 }

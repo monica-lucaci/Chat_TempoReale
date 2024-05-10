@@ -30,9 +30,9 @@ export class SendmsgComponent {
     this.activeRoute.params.subscribe((p) => {
       this.id = p['cd'];
     });
-    this.userSvc.getProfile().subscribe(res=>{
-      this.currentUser = res.data;
-    })
+    // this.userSvc.getProfile().subscribe(res=>{
+    //   this.currentUser = res.data;
+    // })
   }
 
   sendMessage() {

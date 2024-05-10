@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-
-
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -14,29 +12,42 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  matSnackBar = inject(MatSnackBar)
+  email: string = '';
+  user: string = '';
+  pass: string = '';
+  matSnackBar = inject(MatSnackBar);
   hide = true;
   form!: FormGroup;
   fb = inject(FormBuilder);
 
-
-  constructor(private authService: AuthService, private router: Router) {
-    if(localStorage.getItem("ilToken"))
-      router.navigateByUrl("/profilo")
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {
+    if (localStorage.getItem('token')) router.navigateByUrl('/userProfile');
   }
 
-
-  login() {
-    this.authService.login(this.password,this.username).subscribe(
-    (result) => {
-      if(result.token){
-        localStorage.setItem('token', result.token);
-        this.router.navigateByUrl("/chat")
+  onLogin() {
+    console.log('Login function triggered');
+    console.log(
+      'Email:',
+      this.email,
+      'User:',
+      this.user,
+      'Password:',
+      this.pass,
+    );
+    this.authService.login(this.email, this.user, this.pass).subscribe({
+      next: (token) => {
+        localStorage.setItem('token', token);
+        console.log('Received token:', token);
+        this.router.navigateByUrl("/userProfile");
+      },
+      error: (error) => {
+        console.error('Error during login:', error);
       }
     });
   }
@@ -47,14 +58,16 @@ export class LoginComponent {
   //     console.error('User is not logged in');
   //     // Optionally perform the login here or show an error
   //   }
-  // }   
+  // }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      user: ['', [Validators.required]],
+      pass: ['', [Validators.required]]
     });
+
   }
 }

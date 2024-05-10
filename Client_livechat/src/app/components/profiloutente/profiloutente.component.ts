@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profiloutente',
@@ -17,32 +18,45 @@ export class ProfiloutenteComponent implements OnInit {
   img!: string;
   showOpts: boolean = false;
 
-  protected readonly localStorage = localStorage;
-
-  constructor(private userService: UserService,private router:Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.getUserProfile();
+    console.log('ngOnInit called');
+    this.loadProfile();
   }
 
-  getUserProfile() {
-    this.userService.getProfile().subscribe({
-      next: (response) => this.userService = response.data,
-      error: (err) => console.error('Error fetching user profile:', err)
-    });
+  loadProfile() {
+    console.log("load profile chiamato")
+    // Call the getUserDetail method from the authService to fetch the user profile
+    this.authService.getUserDetail().subscribe(
+      (response: any) => {
+        this.user = response.data; // Assuming the user data is in a property called 'data'
+        console.log(this.user);
+      },
+      (error:any) => {
+        console.error('Error fetching user profile:', error);
+      }
+    );
   }
 
   changeImg() {
-    this.user!.img = this.img;
-    this.userService.updateImg(this.user!).subscribe({
-      next: (res) => console.log('Image updated successfully'),
-      error: (err) => console.error('Failed to update image:', err)
-    });
+    if (this.user) {
+      this.user.img = this.img;
+      this.userService.updateImg(this.user).subscribe({
+        next: (res) => console.log('Image updated successfully'),
+        error: (err) => console.error('Failed to update image:', err)
+      });
+    }
   }
 
   logOut() {
-    localStorage.removeItem("token")
-    this.router.navigateByUrl("")
+    console.log('Logging out...');
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('');
   }
 
   show() {
