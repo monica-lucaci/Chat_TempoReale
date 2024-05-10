@@ -90,15 +90,19 @@ namespace API_livechat.Repositories
             try
             {
                 List<ChatRoom> cr = new List<ChatRoom>();
-                if(GetChatRooms() != null)
+                List<string> cr_codes = new List<string>();
+                if (GetChatRooms() != null)
                 {
                     foreach(ChatRoom r in GetChatRooms())
                     {
                         if (r.Users.Contains(username))
                         {
                             cr.Add(r);
+                            cr_codes.Add(r.ChatRoomCode);
                         }
                     }
+                    _dbContext.Users.FirstOrDefault(c => c.ChatRoomsCode == cr_codes);
+                    _dbContext.SaveChanges();
                     return cr;
                 }
             }
@@ -122,7 +126,6 @@ namespace API_livechat.Repositories
                     if(userProfile.Username == user)
                     {
                         if (_chatRooms.Find(cr => cr.Title == chatRoom.Title).ToList().Count > 0) return false;
-                        if (_chatRooms.Find(cr => cr.Image == chatRoom.Image).ToList().Count > 0) return false;
                         chatRoom.Users.Add(user);
                         _chatRooms.InsertOne(chatRoom);
                         _logger.LogInformation("Room creata con successo");
@@ -132,6 +135,7 @@ namespace API_livechat.Repositories
                         }
                         userProfile.ChatRoomsCode.Add(chatRoom.ChatRoomCode);
                         _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
+                        _dbContext.Users.Update(userProfile);
                         _dbContext.SaveChanges();
                         return true;
                     }
@@ -159,6 +163,24 @@ namespace API_livechat.Repositories
                         cr_temp.Users.Add(username);
                         var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, cr_temp.ChatRoomId);
                         _chatRooms.ReplaceOne(filter, cr_temp);
+
+                        List<UserProfile> users = _dbContext.Users.ToList();
+                        foreach (UserProfile userProfile in users)
+                        {
+                            if (userProfile.Username == username)
+                            {
+                                if (userProfile.ChatRoomsCode == null)
+                                {
+                                    userProfile.ChatRoomsCode = new List<string>();
+                                }
+                                userProfile.ChatRoomsCode.Add(cr_temp.ChatRoomCode);
+                                _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
+                                _dbContext.Users.Update(userProfile);
+                                _dbContext.SaveChanges();
+                                return true;
+                            }
+                        }
+
                         return true;
                     }
                 }
@@ -186,9 +208,25 @@ namespace API_livechat.Repositories
                             ChatRoom? cr_temp = GetChatRoom(cr_code);
                             if (cr_temp != null)
                             {
+                                List<UserProfile> users = _dbContext.Users.ToList();
+                                foreach (UserProfile userProfile in users)
+                                {
+                                    if (userProfile.Username == username)
+                                    {
+                                        if (userProfile.ChatRoomsCode != null && userProfile.ChatRoomsCode.Contains(cr_code))
+                                        {
+                                            userProfile.ChatRoomsCode.Remove(cr_temp.ChatRoomCode);
+                                            _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
+                                            _dbContext.Users.Update(userProfile);
+                                            _dbContext.SaveChanges();
+                                        }
+                                    }
+                                }
+
                                 cr_temp.Users.Remove(username);
                                 var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, cr_temp.ChatRoomId);
                                 _chatRooms.ReplaceOne(filter, cr_temp);
+
                                 return true;
                             }
                         }
@@ -210,6 +248,21 @@ namespace API_livechat.Repositories
                 ChatRoom? ctr = GetByCode(cr_code);
                 if (ctr != null)
                 {
+                    List<UserProfile> users = _dbContext.Users.ToList();
+                    foreach (UserProfile userProfile in users)
+                    {
+                        if (userProfile.Username == username)
+                        {
+                            if (userProfile.ChatRoomsCode != null && userProfile.ChatRoomsCode.Contains(cr_code))
+                            {
+                                userProfile.ChatRoomsCode.Remove(ctr.ChatRoomCode);
+                                _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
+                                _dbContext.Users.Update(userProfile);
+                                _dbContext.SaveChanges();
+                            }
+                        }
+                    }
+
                     ctr.Users.Remove(username);
                     var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, ctr.ChatRoomId);
                     _chatRooms.ReplaceOne(filter, ctr);
@@ -237,6 +290,21 @@ namespace API_livechat.Repositories
                         {
                             if (ctr != null)
                             {
+                                List<UserProfile> users = _dbContext.Users.ToList();
+                                foreach (UserProfile userProfile in users)
+                                {
+                                    if (userProfile.Username == username)
+                                    {
+                                        if (userProfile.ChatRoomsCode != null && userProfile.ChatRoomsCode.Contains(ctr.ChatRoomCode))
+                                        {
+                                            userProfile.ChatRoomsCode.Remove(ctr.ChatRoomCode);
+                                            _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
+                                            _dbContext.Users.Update(userProfile);
+                                            _dbContext.SaveChanges();
+                                        }
+                                    }
+                                }
+
                                 ctr.Users.Remove(username);
                                 var filter = Builders<ChatRoom>.Filter.Eq(cr => cr.ChatRoomId, ctr.ChatRoomId);
                                 _chatRooms.ReplaceOne(filter, ctr);
@@ -253,10 +321,28 @@ namespace API_livechat.Repositories
             }
             return false;
         }
-        public bool DeleteChatRoomByCode(string cr_code) 
+        public bool DeleteChatRoomByCode(string cr_code)
         {
             try
             {
+                List<UserProfile> users = _dbContext.Users.ToList();
+                foreach (UserProfile userProfile in users)
+                {
+                    if (userProfile.ChatRoomsCode != null )
+                    {
+                        foreach (string crc in userProfile.ChatRoomsCode)
+                        {
+                            if (userProfile.ChatRoomsCode.Contains(cr_code))
+                            {
+                                userProfile.ChatRoomsCode.Remove(cr_code);
+                                _dbContext.Users.Update(userProfile);
+                                _dbContext.SaveChanges();
+                                break;
+                            }
+                        }
+                    }
+                }
+
                 var filter = Builders<ChatRoom>.Filter.Eq(c => c.ChatRoomCode, cr_code);
                 if (filter != null)
                 {
