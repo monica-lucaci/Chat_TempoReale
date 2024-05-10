@@ -13,6 +13,6 @@ namespace API_livechat.DTO
         public string? CRImg { get; set; }
         public List<string> Usrs { get; set; } = new List<string>();
         public List<ObjectId> MRIF{ get; set; } = new List<ObjectId>();
-        public List<MessageDTO>? Mges { get; set; }
+        public List<string> Mges { get; set; } = new List<string>();
     }
 }

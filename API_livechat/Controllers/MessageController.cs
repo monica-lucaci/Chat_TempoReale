@@ -49,5 +49,38 @@ namespace API_livechat.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet("MessagesOfARoom/{cr_code}")]
+        public IActionResult GetMessagesOfRoom(string cr_code) 
+        {
+            return Ok(new Response()
+            {
+                Status = "SUCCESS",
+                Data = _service.GetMessagesOfRoom(cr_code)
+            });
+        }
+        /*
+        [HttpDelete("chat/deleteMessage/{ms_code}")]
+        public IActionResult DeleteChatRoom(string ms_code, string username)
+        {
+            if (_service.DeleteByCode(ms_code, username))
+            {
+                return Ok(new Response()
+                {
+                    Status = "SUCCESS",
+                    Data = "Eliminazione effettuata"
+                });
+            }
+            else
+            {
+
+            }
+            return Ok(new Response()
+            {
+                Status = "Error",
+                Data = "Eliminazione non riuscita"
+            });
+        }
+        */
     }
 }

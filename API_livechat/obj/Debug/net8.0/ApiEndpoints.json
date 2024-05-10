@@ -143,6 +143,22 @@
   },
   {
     "ContainingType": "API_livechat.Controllers.MessageController",
+    "Method": "GetMessagesOfRoom",
+    "RelativePath": "Message/MessagesOfARoom/{cr_code}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cr_code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_livechat.Controllers.MessageController",
     "Method": "InsertMessage",
     "RelativePath": "Message/sendMessage/{cr_code}",
     "HttpMethod": "POST",

@@ -26,7 +26,6 @@ namespace API_livechat.Models
         
         [BsonRepresentation(BsonType.ObjectId)]
         public List<ObjectId> MessageRIF { get; set; } = new List<ObjectId>();
-
-        public List<Message>? Messages { get; set; } 
+        public List<string> Messages { get; set; } = new List<string>(); 
     }
 }

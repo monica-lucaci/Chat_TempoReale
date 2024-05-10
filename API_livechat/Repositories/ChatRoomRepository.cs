@@ -73,9 +73,7 @@ namespace API_livechat.Repositories
         public ChatRoom? GetChatRoom(string cr_code)
         {
             ChatRoom? cr = GetByCode(cr_code);
-            if(cr == null) return null;
-            cr.Messages = new List<Message>();
-            cr.Messages = _messageRepository.GetMessages(cr.ChatRoomId);
+            if (cr == null) return null;
             return cr;
         }
 

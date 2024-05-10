@@ -5,7 +5,8 @@ namespace API_livechat.Repositories
 {
     public interface IMessageRepository
     {
-        public List<Message> GetMessages(ObjectId roomRif);
+        public Message? GetMessage(string ms_code);
+
         public bool InsertMessage(Message message);
     }
 }

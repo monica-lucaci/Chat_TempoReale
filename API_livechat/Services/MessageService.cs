@@ -28,7 +28,8 @@ namespace API_livechat.Services
                 Data = m.Data,
                 Date = m.Date,
                 Sder = m.Sender,
-                CRRIF = m.ChatRoomCode
+                CRRIF = m.ChatRoomCode,
+                RRIF = m.ChatRoomRIF
             }).ToList();
         }
 
@@ -41,7 +42,8 @@ namespace API_livechat.Services
                 Data = msg.Data,
                 Date = msg.Date,
                 Sder = msg.Sender,
-                CRRIF = msg.ChatRoomCode
+                CRRIF = msg.ChatRoomCode,
+                RRIF = msg.ChatRoomRIF
             };
         }
 
@@ -49,6 +51,7 @@ namespace API_livechat.Services
         {
             return new Message()
             {
+                ChatRoomRIF = msgDTO.RRIF,
                 MessageCode = msgDTO.MCod!,
                 Data = msgDTO.Data,
                 Date = msgDTO.Date,
@@ -69,5 +72,20 @@ namespace API_livechat.Services
             }
             return false;
         }
+
+        public List<Message> GetMessagesOfRoom(string cr_code)
+        {
+            return _repository.GetMessagesOfRoom(cr_code);
+        }
+
+        public List<Message>? GetMessByUser(string username)
+        {
+            return _repository.GetMessByUser(username);
+        }
+        /*
+        public bool DeleteByCode(string cr_code, string user)
+        {
+            //TO DO
+        }*/
     }
 }
