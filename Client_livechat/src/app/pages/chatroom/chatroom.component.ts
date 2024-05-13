@@ -3,55 +3,126 @@ import { Chatroom } from '../../models/chatroom';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { ChatroomService } from '../../services/chatroom.service';
-import { SendmsgService } from '../../services/sendmsg.service';
+import { interval, Subscription } from 'rxjs';
 import { SendmsgComponent } from '../../components/sendmsg/sendmsg.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Message } from '../../models/message';
+import { AuthService } from '../../services/auth.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-chatroom',
   standalone: true,
-  imports: [SendmsgComponent,CommonModule,FormsModule],
+  imports: [SendmsgComponent, CommonModule, FormsModule],
   templateUrl: './chatroom.component.html',
-  styleUrl: './chatroom.component.css'
+  styleUrl: './chatroom.component.css',
 })
 export class ChatroomComponent implements OnInit {
   chatrooms: Chatroom[] = [];
   selectedChatroom: Chatroom | null = null;
-  currentUser: User | null = null;
+  messages: Message[] = [];
+  currentUser: string | null = null; // Initialize here
+  utente: User | undefined;
+  isSelected: boolean = false; // Initially, no item is selected
+  pollingInterval = 2000; // Added polling interval property
+  private pollingSubscription: Subscription | undefined; // Added subscription for polling
 
-
-  constructor(private chatroomService: ChatroomService, private userService: UserService, private sendmsgService: SendmsgService) {}
+  constructor(
+    private chatroomService: ChatroomService,
+    private authService: AuthService,
+    private userService: UserService,
+    private msgService: MessageService,
+  ) {}
 
   ngOnInit(): void {
-    this.fetchChatRooms();
-    // this.fetchCurrentUser();
+    this.currentUser = this.authService.getCurrentUser();
+    console.log(this.currentUser);
+
+    const username = this.authService.getCurrentUser();
+    if (username) {
+      this.getProfile(username);
+    } else console.log('error');
+    this.startPolling();
+  }
+  ngOnDestroy(): void {
+    // Stop polling when the component is destroyed
+    this.stopPolling();
   }
 
-  fetchChatRooms(): void {
-    // Assuming getRooms is a method that fetches all chatrooms
-    this.chatroomService.getRooms().subscribe({
-      next: (response) => this.chatrooms = response.data,
-      error: (error) => console.error('Error fetching chatrooms:', error)
+  startPolling(): void {
+    this.pollingSubscription = interval(this.pollingInterval).subscribe(() => {
+      if (this.selectedChatroom?.crCd) {
+        this.getMessagesForRoom(this.selectedChatroom.crCd);
+      }
     });
   }
 
-  selectChatroom(chatroom: Chatroom): void {
-    this.selectedChatroom = chatroom;
-    // Optionally fetch messages for the selected chatroom here
+  stopPolling(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+    }
   }
 
-  // fetchCurrentUser(): void {
-  //   this.userService.getProfile(user).subscribe({
-  //     next: (response) => this.currentUser = response.data,
-  //     error: (error) => console.error('Error fetching user profile:', error)
-  //   });
-  // }
+  getProfile(username: string) {
+    this.userService.recuperaProfilo(username).subscribe((res) => {
+      this.utente = res.data;
+      console.log(this.utente);
+      console.log(this.utente?.img);
+    });
+    this.loadChatrooms();
+  }
 
-  // Add properties to the component for binding
+  loadChatrooms() {
+    if (this.currentUser) {
+      this.chatroomService
+        .getChatroomsOfUser(this.currentUser)
+        .subscribe((response) => {
+          this.chatrooms = response.data;
+          const lastChatroomId = localStorage.getItem('lastChatroomId');
+          if (lastChatroomId) {
+            // Find the chatroom with the stored ID
+            const lastChatroom = this.chatrooms.find(
+              (chatroom) => chatroom.crCd === lastChatroomId,
+            );
+            if (lastChatroom) {
+              // Show messages for the last selected chatroom
+              this.showChatMessages(lastChatroom);
+            }
+          }
+        });
+    }
+    console.log('chatrooms loaded');
+  }
 
+  showChatMessages(chatroom: Chatroom | null) {
+    if (chatroom && chatroom.crCd) {
+      this.chatroomService
+        .getChatroomAndMessages(chatroom.crCd)
+        .subscribe((response) => {
+          this.selectedChatroom = chatroom;
+          if (chatroom.crCd)
+            localStorage.setItem('lastChatroomId', chatroom.crCd);
+          const code = this.selectedChatroom?.crCd;
+          console.log(this.selectedChatroom);
+          if (code) {
+            // Ensure that code is defined before passing it
+            this.getMessagesForRoom(code);
+          }
+        });
+    }
+  }
 
-// Example sendMessage method
-
-
+  getMessagesForRoom(crCode: string): void {
+    this.msgService.getMessagesOfRoom(crCode).subscribe(
+      (response) => {
+        this.messages = response.data;
+        console.log(this.messages[0]);
+        // Assuming the response directly contains messages
+      },
+      (error) => {
+        console.error('Error loading messages for room:', error);
+      },
+    );
+  }
 }

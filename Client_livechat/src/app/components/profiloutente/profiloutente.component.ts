@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-profiloutente',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './profiloutente.component.html',
   styleUrl: './profiloutente.component.css'
 })
@@ -25,9 +25,9 @@ export class ProfiloutenteComponent implements OnInit {
     private authService: AuthService
   ) 
   {
-    if(!localStorage.getItem("token")){
-      this.router.navigateByUrl("")
-  }
+  //   if(!localStorage.getItem("token")){
+  //     this.router.navigateByUrl("")
+  // }
 }
 
   ngOnInit() {

@@ -1,7 +1,9 @@
 export class Message {
-    MsId: string | undefined;
-    Data: string | undefined;
-    Date: Date | undefined;
-    Sder: string | undefined;
-    RRIF: string | undefined;
+    messageId: string | undefined;
+    messageCode: string | undefined;
+    data: string | undefined;
+    date: Date | undefined;
+    sender: string | undefined;
+    chatRoomRIF: string | undefined;
+    chatRoomCode: string | undefined;
 }

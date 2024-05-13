@@ -1,350 +1,200 @@
-<!-- Chat Room Component Template -->
-<div class="container mx-auto px-4 py-5">
-    <div class="flex">
-        <!-- Sidebar for chat rooms -->
-        <div class="w-1/3 bg-white shadow-md rounded-lg overflow-hidden">
-            <div class="bg-gray-100 p-4 font-bold">Chat Rooms</div>
-            <ul class="list-none">
-                <li *ngFor="let chatroom of chatrooms" (click)="selectChatroom(chatroom)" class="p-4 hover:bg-gray-100 cursor-pointer">
-                    <p class="font-semibold">{{ chatroom.titl }}</p>
-                    <p class="text-gray-600 text-sm">{{ chatroom.desc }}</p>
-                </li>
-            </ul>
-        </div>
-        
-        <!-- Chat messages area -->
-        <div class="w-2/3 bg-gray-100 p-4">
-            <div *ngIf="selectedChatroom">
-                <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-                    <div class="font-bold text-lg">{{ selectedChatroom.titl }}</div>
-                    <div class="text-gray-600">{{ selectedChatroom.desc }}</div>
-                </div>
-                <div class="bg-white shadow-md rounded-lg p-4 overflow-auto" style="height: 300px;">
-                    <div *ngFor="let message of selectedChatroom.mges" class="p-2 border-b border-gray-100">
-                        <div class="text-sm text-gray-800">{{ message.Sder }} says:</div>
-                        <div class="text-gray-600">{{ message.Data }}</div>
-                        <div class="text-right text-xs text-gray-400">{{ message.Date | date:'shortTime' }}</div>
-                    </div>
-                </div>
-         
-            </div>
-            <div *ngIf="!selectedChatroom" class="text-gray-500">Select a chat room to view messages</div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
 <div class="background">
-    <div class="w-full h-32" style="background-color: #94c37e"></div>
+  <div class="w-full h-32" style="background-color: #94c37e"></div>
 
-    <div class="container mx-auto" style="margin-top: -128px;">
-        <div class="py-6 h-screen">
-            <div class="flex border border-grey rounded shadow-lg h-full">
+  <div class="container mx-auto" style="margin-top: -128px">
+    <div class="py-6 h-screen">
+      <div class="flex border border-grey rounded shadow-lg h-full">
+        <!-- Left -->
+        <div class="w-1/3 border flex flex-col">
+          <!-- Header -->
+          <div class="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
+            <div>
+              <img class="w-10 h-10 rounded-full" [src]="utente?.img" />
+            </div>
 
-                <!-- Left -->
-                <div class="w-1/3 border flex flex-col">
+            <div class="flex">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="#727A7E"
+                    d="M12 20.664a9.163 9.163 0 0 1-6.521-2.702.977.977 0 0 1 1.381-1.381 7.269 7.269 0 0 0 10.024.244.977.977 0 0 1 1.313 1.445A9.192 9.192 0 0 1 12 20.664zm7.965-6.112a.977.977 0 0 1-.944-1.229 7.26 7.26 0 0 0-4.8-8.804.977.977 0 0 1 .594-1.86 9.212 9.212 0 0 1 6.092 11.169.976.976 0 0 1-.942.724zm-16.025-.39a.977.977 0 0 1-.953-.769 9.21 9.21 0 0 1 6.626-10.86.975.975 0 1 1 .52 1.882l-.015.004a7.259 7.259 0 0 0-5.223 8.558.978.978 0 0 1-.955 1.185z">
+                  </path>
+                </svg>
+              </div>
 
-                    <!-- Header -->
-                    <div class="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
-                        <div>
-                            <img class="w-10 h-10 rounded-full" src="data:image/jpeg;base64,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"/>
-                        </div>
+              <div class="ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path opacity=".55" fill="#263238"
+                    d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z">
+                  </path>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="#263238" fill-opacity=".6"
+                    d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </div>
 
-                        <div class="flex">
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#727A7E" d="M12 20.664a9.163 9.163 0 0 1-6.521-2.702.977.977 0 0 1 1.381-1.381 7.269 7.269 0 0 0 10.024.244.977.977 0 0 1 1.313 1.445A9.192 9.192 0 0 1 12 20.664zm7.965-6.112a.977.977 0 0 1-.944-1.229 7.26 7.26 0 0 0-4.8-8.804.977.977 0 0 1 .594-1.86 9.212 9.212 0 0 1 6.092 11.169.976.976 0 0 1-.942.724zm-16.025-.39a.977.977 0 0 1-.953-.769 9.21 9.21 0 0 1 6.626-10.86.975.975 0 1 1 .52 1.882l-.015.004a7.259 7.259 0 0 0-5.223 8.558.978.978 0 0 1-.955 1.185z"></path></svg>
-                            </div>
-                            
-                            <div class="ml-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path opacity=".55" fill="#263238" d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z"></path></svg>
-                            </div>
-                            <div class="ml-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" fill-opacity=".6" d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"></path>
-                                </svg>
-                            </div>
-                        </div>
+          <!-- Search -->
+          <div class="py-2 px-2 bg-grey-lightest">
+            <input type="text" class="w-full px-2 py-2 text-sm" placeholder="Search or start new chat" />
+          </div>
+          <!--[class.bg-white]="!isSelected" [class.bg-transparent]="isSelected"-->
+          <!-- Contacts -->
+          <div class="bg-grey-lighter flex-1 overflow-auto">
+            <ul class="list-none">
+              <li *ngFor="let chatroom of chatrooms" class=" cursor-pointer" (click)="showChatMessages(chatroom)">
+                <div class="bg-white px-3 flex items-center hover:bg-transparent cursor-pointer ">
+                  <div>
+                    <img class="h-12 w-12 rounded-full" [src]="chatroom.crImg" />
+                  </div>
+                  <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
+                    <div class="flex items-bottom justify-between">
+                      <p class="text-grey-darkest">{{ chatroom.titl }}</p>
+                      <p class="text-xs text-grey-darkest">12:45 pm</p>
                     </div>
+                    <p class="text-grey-dark mt-1 text-sm">{{ chatroom.desc }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="bg-white px-3 flex items-center hover:bg-transparent cursor-pointer">
+              <div>
+                <img class="h-12 w-12 rounded-full"
+                  src="https://darrenjameseeley.files.wordpress.com/2014/09/expendables3.jpeg" />
+              </div>
+              <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
+                <div class="flex items-bottom justify-between">
+                  <p class="text-grey-darkest">New Movie! Expendables 4</p>
+                  <p class="text-xs text-grey-darkest">12:45 pm</p>
+                </div>
+                <p class="text-grey-dark mt-1 text-sm">
+                  Get Andrés on this movie ASAP!
+                </p>
+              </div>
+            </div>
 
-                    <!-- Search -->
-                    <div class="py-2 px-2 bg-grey-lightest">
-                        <input type="text" class="w-full px-2 py-2 text-sm" placeholder="Search or start new chat"/>
-                    </div>
+            <div class="bg-white px-3 flex items-center hover:bg-grey-lighter cursor-pointer hover:bg-transparent">
+              <div>
+                <img class="h-12 w-12 rounded-full"
+                  src="https://www.famousbirthdays.com/headshots/russell-crowe-6.jpg" />
+              </div>
+              <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
+                <div class="flex items-bottom justify-between">
+                  <p class="text-grey-darkest">Russell Crowe</p>
+                  <p class="text-xs text-grey-darkest">12:45 pm</p>
+                </div>
+                <p class="text-grey-dark mt-1 text-sm">Hold the line!</p>
+              </div>
+            </div>
+            <div class="bg-white px-3 flex items-center hover:bg-transparent cursor-pointer">
+              <div>
+                <img class="h-12 w-12 rounded-full"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGpYTzuO0zLW7yadaq4jpOz2SbsX90okb24Z9GtEvK6Z9x2zS5" />
+              </div>
+              <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
+                <div class="flex items-bottom justify-between">
+                  <p class="text-grey-darkest">Tom Cruise</p>
+                  <p class="text-xs text-grey-darkest">12:45 pm</p>
+                </div>
+                <p class="text-grey-dark mt-1 text-sm">Show me the money!</p>
+              </div>
+            </div>
 
-                    <!-- Contacts -->
-                    <div class="bg-grey-lighter flex-1 overflow-auto">
-                        <ul class="list-none">
-                            <li *ngFor="let chatroom of chatrooms" (click)="selectChatroom(chatroom)" class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="font-semibold">{{ chatroom.titl }}</p>
-                                <p class="text-gray-600 text-sm">{{ chatroom.desc }}</p>
-                            </li>
-                        </ul>
-                        <div class=" bg-white px-3 flex items-center  hover:bg-transparent cursor-pointer">
-                            <div>
-                                <img class="h-12 w-12 rounded-full"
-                                     src="https://darrenjameseeley.files.wordpress.com/2014/09/expendables3.jpeg"/>
-                            </div>
-                            <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
-                                <div class="flex items-bottom justify-between">
-                                    <p class="text-grey-darkest">
-                                        New Movie! Expendables 4
-                                    </p>
-                                    <p class="text-xs text-grey-darkest">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                                <p class="text-grey-dark mt-1 text-sm">
-                                    Get Andrés on this movie ASAP!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="bg-white px-3 flex items-center  cursor-pointer  hover:bg-transparent">
-                            <div>
-                                <img class="h-12 w-12 rounded-full"
-                                     src="data:image/jpeg;base64,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"/>
-                            </div>
-                            <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
-                                <div class="flex items-bottom justify-between">
-                                    <p class="text-grey-darkest">
-                                        Jhoel Canulli
-                                    </p>
-                                    <p class="text-xs text-grey-darkest">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                                <p class="text-grey-dark mt-1 text-sm">
-                                    I'll be back
-                                </p>
-                            </div>
-                        </div>
-                        <div class="bg-white px-3 flex items-center hover:bg-grey-lighter cursor-pointer  hover:bg-transparent">
-                            <div>
-                                <img class="h-12 w-12 rounded-full"
-                                     src="https://www.famousbirthdays.com/headshots/russell-crowe-6.jpg"/>
-                            </div>
-                            <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
-                                <div class="flex items-bottom justify-between">
-                                    <p class="text-grey-darkest">
-                                        Russell Crowe
-                                    </p>
-                                    <p class="text-xs text-grey-darkest">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                                <p class="text-grey-dark mt-1 text-sm">
-                                    Hold the line!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="bg-white px-3 flex items-center hover:bg-grey-lighter cursor-pointer">
-                            <div>
-                                <img class="h-12 w-12 rounded-full"
-                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGpYTzuO0zLW7yadaq4jpOz2SbsX90okb24Z9GtEvK6Z9x2zS5"/>
-                            </div>
-                            <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
-                                <div class="flex items-bottom justify-between">
-                                    <p class="text-grey-darkest">
-                                        Tom Cruise
-                                    </p>
-                                    <p class="text-xs text-grey-darkest">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                                <p class="text-grey-dark mt-1 text-sm">
-                                    Show me the money!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="bg-white px-3 flex items-center hover:bg-grey-lighter cursor-pointer">
-                            <div>
-                                <img class="h-12 w-12 rounded-full"
-                                     src="https://media.licdn.com/dms/image/D4D03AQHab6KsUWbAMg/profile-displayphoto-shrink_200_200/0/1681837669533?e=2147483647&v=beta&t=UFroywpjK9OuzaOskIZ5g9biKdIAFQ1dekUhslgEGOo"/>
-                            </div>
-                            <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
-                                <div class="flex items-bottom justify-between">
-                                    <p class="text-grey-darkest">
-                                        Davide Giungato
-                                    </p>
-                                    <p class="text-xs text-grey-darkest">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                                <p class="text-grey-dark mt-1 text-sm">
-                                    Tell Java I have the money
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+        </div>
 
+        <!-- Right -->
+        <div class="w-2/3 border flex flex-col">
+          <!-- Header -->
+          <div class="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
+            <div class="flex items-center">
+              <div>
+                <img class="w-10 h-10 rounded-full" [src]="selectedChatroom?.crImg" />
+              </div>
+              <div class="ml-4">
+                <p class="text-grey-darkest">{{ selectedChatroom?.titl }}</p>
+                <p class="text-grey-darker text-xs mt-1">
+                  <span *ngFor="let user of selectedChatroom?.usrs; let last = last">{{ user }}{{ !last ? ', ' : ''
+                    }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="#263238" fill-opacity=".5"
+                    d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z">
+                  </path>
+                </svg>
+              </div>
+              <div class="ml-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="#263238" fill-opacity=".5"
+                    d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z">
+                  </path>
+                </svg>
+              </div>
+              <div class="ml-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="#263238" fill-opacity=".6"
+                    d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div class="flex-1 overflow-auto" style="background-color: #dad3cc">
+            <div class="py-2 px-3">
+              <div class="flex justify-center mb-2">
+                <div class="rounded py-2 px-4" style="background-color: #ddecf2">
+                  <p class="text-sm uppercase">February 20, 2018</p>
+                </div>
+              </div>
+
+              <div class="flex justify-center mb-4">
+                <div class="rounded py-2 px-4" style="background-color: #fcf4cb">
+                  <p class="text-xs">
+                    Messages to this chat and calls are now secured with
+                    end-to-end encryption. Tap for more info.
+                  </p>
+                </div>
+              </div>
+              <ng-container *ngFor="let message of messages">
+                <div *ngIf="message.sender == currentUser" class="flex justify-end mb-2">
+                  <div class="rounded py-2 px-3" style="background-color: #e2f7cb">
+                    <p class="text-sm mt-1">  {{ message.data }}</p>
+                    <p class="text-right text-xs text-grey-dark mt-1">{{ message.date | date: 'hh:mm a' }}</p>
+                  </div>
                 </div>
 
 
-                <!-- Right -->
-                <div class="w-2/3 border flex flex-col">
+                <div *ngIf="message.sender !== currentUser" class="flex mb-2">
+                  <div class="rounded py-2 px-3" style="background-color: #f2f2f2">
+                    <p class="text-sm text-teal">{{ message.sender }}</p>
+                    <p class="text-sm mt-1">
+                      {{ message.data }}
+                    </p>
+                    <p class="text-right text-xs text-grey-dark mt-1">{{ message.date | date: 'hh:mm a' }}</p>
+                  </div>
 
-                    <!-- Header -->
-                    <div class="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
-                        <div class="flex items-center">
-                            <div>
-                                <img class="w-10 h-10 rounded-full" src="https://darrenjameseeley.files.wordpress.com/2014/09/expendables3.jpeg"/>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-grey-darkest">
-                                    New Movie! Expendables 4
-                                </p>
-                                <p class="text-grey-darker text-xs mt-1">
-                                    Andrés, Tom, Harrison, Arnold, Sylvester
-                                </p>
-                            </div>
-                        </div>
+                </div>
 
-                        <div class="flex">
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" fill-opacity=".5" d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z"></path></svg>
-                            </div>
-                            <div class="ml-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" fill-opacity=".5" d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z"></path></svg>
-                            </div>
-                            <div class="ml-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" fill-opacity=".6" d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"></path></svg>
-                            </div>
-                        </div>
-                    </div>
+             
 
-                    <!-- Messages -->
-                    <div class="flex-1 overflow-auto" style="background-color: #DAD3CC">
-                        <div class="py-2 px-3">
+              </ng-container>
 
-                            <div class="flex justify-center mb-2">
-                                <div class="rounded py-2 px-4" style="background-color: #DDECF2">
-                                    <p class="text-sm uppercase">
-                                        February 20, 2018
-                                    </p>
-                                </div>
-                            </div>
+            </div>
+          </div>
 
-                            <div class="flex justify-center mb-4">
-                                <div class="rounded py-2 px-4" style="background-color: #FCF4CB">
-                                    <p class="text-xs">
-                                        Messages to this chat and calls are now secured with end-to-end encryption. Tap for more info.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #F2F2F2">
-                                    <p class="text-sm text-teal">
-                                        Sylverter Stallone
-                                    </p>
-                                    <p class="text-sm mt-1">
-                                        Hi everyone! Glad you could join! I am making a new movie.
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #F2F2F2">
-                                    <p class="text-sm text-purple">
-                                        Tom Cruise
-                                    </p>
-                                    <p class="text-sm mt-1">
-                                        Hi all! I have one question for the movie
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #F2F2F2">
-                                    <p class="text-sm text-orange">
-                                        Davide Giungato
-                                    </p>
-                                    <p class="text-sm mt-1">
-                                        Again?
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #F2F2F2">
-                                    <p class="text-sm text-orange">
-                                        Russell Crowe
-                                    </p>
-                                    <p class="text-sm mt-1">
-                                        Is Andrés coming for this one?
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #F2F2F2">
-                                    <p class="text-sm text-teal">
-                                        Sylverter Stallone
-                                    </p>
-                                    <p class="text-sm mt-1">
-                                        He is. Just invited him to join.
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex justify-end mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #E2F7CB">
-                                    <p class="text-sm mt-1">
-                                        Hi guys.
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex justify-end mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #E2F7CB">
-                                    <p class="text-sm mt-1">
-                                        Count me in
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex mb-2">
-                                <div class="rounded py-2 px-3" style="background-color: #F2F2F2">
-                                    <p class="text-sm text-purple">
-                                        Tom Cruise
-                                    </p>
-                                    <p class="text-sm mt-1">
-                                        Get Andrés on this movie ASAP!
-                                    </p>
-                                    <p class="text-right text-xs text-grey-dark mt-1">
-                                        12:45 pm
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Input -->
-                    <!-- <div class="bg-grey-lighter px-4 py-4 flex items-center">
+          <!-- Input -->
+          <!-- <div class="bg-grey-lighter px-4 py-4 flex items-center">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path opacity=".45" fill="#263238" d="M9.153 11.603c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962zm-3.204 1.362c-.026-.307-.131 5.218 6.063 5.551 6.066-.25 6.066-5.551 6.066-5.551-6.078 1.416-12.129 0-12.129 0zm11.363 1.108s-.669 1.959-5.051 1.959c-3.505 0-5.388-1.164-5.607-1.959 0 0 5.912 1.055 10.658 0zM11.804 1.011C5.609 1.011.978 6.033.978 12.228s4.826 10.761 11.021 10.761S23.02 18.423 23.02 12.228c.001-6.195-5.021-11.217-11.216-11.217zM12 21.354c-5.273 0-9.381-3.886-9.381-9.159s3.942-9.548 9.215-9.548 9.548 4.275 9.548 9.548c-.001 5.272-4.109 9.159-9.382 9.159zm3.108-9.751c.795 0 1.439-.879 1.439-1.962s-.644-1.962-1.439-1.962-1.439.879-1.439 1.962.644 1.962 1.439 1.962z"></path></svg>
                         </div>
@@ -356,13 +206,9 @@
                         </div>
                     </div> -->
 
-          
-                    <app-sendmsg></app-sendmsg>
-     
-
-                </div>
-
-            </div>
+          <app-sendmsg *ngIf="currentUser" [currentUser]="currentUser"  [selectedChatroom]="selectedChatroom"  (messageSent)="showChatMessages(selectedChatroom)"></app-sendmsg>
         </div>
+      </div>
     </div>
+  </div>
 </div>

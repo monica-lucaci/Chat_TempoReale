@@ -11,8 +11,7 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: LandingpageComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'chat', component: ChatroomComponent },
+    { path: 'chat', component: ChatroomComponent, canActivate: [AuthguardService] }, // Apply AuthguardService here{ path: 'chat', component: ChatroomComponent },
     { path: 'resetpassword', component: ForgotpasswordComponent },
     { path: 'userProfile', component: ProfiloutenteComponent, canActivate: [AuthguardService] }
 ];
