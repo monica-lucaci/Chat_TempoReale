@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { Message } from '../../models/message';
 import { AuthService } from '../../services/auth.service';
 import { MessageService } from '../../services/message.service';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-chatroom',
@@ -21,12 +22,15 @@ import { MessageService } from '../../services/message.service';
 export class ChatroomComponent implements OnInit {
   chatrooms: Chatroom[] = [];
   selectedChatroom: Chatroom | null = null;
+  filteredChatrooms: Chatroom[] = [];
   messages: Message[] = [];
   currentUser: string | null = null; // Initialize here
   utente: User | undefined;
   isSelected: boolean = false; // Initially, no item is selected
-  pollingInterval = 2000; // Added polling interval property
+  pollingInterval = 90000; // Added polling interval property
   private pollingSubscription: Subscription | undefined; // Added subscription for polling
+  searchQuery: string = '';
+
 
   constructor(
     private chatroomService: ChatroomService,
@@ -37,7 +41,7 @@ export class ChatroomComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
-    console.log(this.currentUser);
+   // console.log(this.currentUser);
 
     const username = this.authService.getCurrentUser();
     if (username) {
@@ -45,6 +49,8 @@ export class ChatroomComponent implements OnInit {
     } else console.log('error');
     this.startPolling();
   }
+
+
   ngOnDestroy(): void {
     // Stop polling when the component is destroyed
     this.stopPolling();
@@ -67,8 +73,8 @@ export class ChatroomComponent implements OnInit {
   getProfile(username: string) {
     this.userService.recuperaProfilo(username).subscribe((res) => {
       this.utente = res.data;
-      console.log(this.utente);
-      console.log(this.utente?.img);
+     // console.log(this.utente);
+     // console.log(this.utente?.img);
     });
     this.loadChatrooms();
   }
@@ -81,18 +87,19 @@ export class ChatroomComponent implements OnInit {
           this.chatrooms = response.data;
           const lastChatroomId = localStorage.getItem('lastChatroomId');
           if (lastChatroomId) {
-            // Find the chatroom with the stored ID
             const lastChatroom = this.chatrooms.find(
               (chatroom) => chatroom.crCd === lastChatroomId,
             );
             if (lastChatroom) {
-              // Show messages for the last selected chatroom
               this.showChatMessages(lastChatroom);
             }
           }
+          
+          // Apply filtering logic here
+          this.applyFilter();
+
         });
     }
-    console.log('chatrooms loaded');
   }
 
   showChatMessages(chatroom: Chatroom | null) {
@@ -104,7 +111,7 @@ export class ChatroomComponent implements OnInit {
           if (chatroom.crCd)
             localStorage.setItem('lastChatroomId', chatroom.crCd);
           const code = this.selectedChatroom?.crCd;
-          console.log(this.selectedChatroom);
+        //  console.log(this.selectedChatroom);
           if (code) {
             // Ensure that code is defined before passing it
             this.getMessagesForRoom(code);
@@ -124,5 +131,15 @@ export class ChatroomComponent implements OnInit {
         console.error('Error loading messages for room:', error);
       },
     );
+  }
+
+  applyFilter() {
+    // Apply filtering logic here whenever searchQuery changes
+    this.filteredChatrooms = this.chatrooms.filter(
+      (chatroom) =>
+        chatroom && chatroom.titl && chatroom.titl.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+   // console.log('Search Query:', this.searchQuery);
+   // console.log('Chatrooms:', this.chatrooms);
   }
 }

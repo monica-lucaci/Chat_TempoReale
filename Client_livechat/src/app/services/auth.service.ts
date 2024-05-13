@@ -9,6 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 import { Risposta } from '../interfaces/risposta';
 import { User } from '../models/user';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +17,12 @@ import { UserService } from './user.service';
 export class AuthService {
   apiUrl: string = environment.apiUrl;
   private tokenKey = 'token';
+ 
 
   constructor(
     private http: HttpClient,
     private userService: UserService,
+    private router: Router,
   ) {}
 
   login(email: string, user: string, pass: string): Observable<string> {
@@ -61,13 +64,15 @@ export class AuthService {
     if (!token) return true;
     const decoded = jwtDecode(token);
     const isTokenExpired = Date.now() >= decoded['exp']! * 1000;
+   // console.log("here you see when token expires " + isTokenExpired)
     if (isTokenExpired) this.logout();
-    console.log('is token expired ' + isTokenExpired);
+   // console.log('is token expired ' + Date.now() + " " + decoded['exp']! * 1000);
     return isTokenExpired;
   }
 
   logout = (): void => {
     localStorage.removeItem(this.tokenKey);
+    this.router.navigateByUrl('/login');
   };
 
   registra(
