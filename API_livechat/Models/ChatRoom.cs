@@ -23,6 +23,7 @@ namespace API_livechat.Models
         public string? Image { get; set; }
 
         public List<string> Users { get; set; } = new List<string>();
+        public List<string> ImgUser { get; set; } = new List<string>();
         
         [BsonRepresentation(BsonType.ObjectId)]
         public List<ObjectId> MessageRIF { get; set; } = new List<ObjectId>();

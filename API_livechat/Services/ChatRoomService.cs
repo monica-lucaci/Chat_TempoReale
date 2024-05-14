@@ -26,7 +26,8 @@ namespace API_livechat.Services
                 Titl = cr.Title,
                 Desc = cr.Description,
                 CRImg = cr.Image,
-                Usrs = cr.Users.ToList()
+                Usrs = cr.Users.ToList(),
+                ImgU = cr.ImgUser.ToList()
             }).ToList();
         }
 
@@ -39,7 +40,8 @@ namespace API_livechat.Services
                 Titl = chatRoom.Title,
                 Desc = chatRoom.Description,
                 CRImg = chatRoom.Image,
-                Usrs = chatRoom.Users.ToList()
+                Usrs = chatRoom.Users.ToList(),
+                ImgU = chatRoom.ImgUser.ToList()
             };
         }
 
@@ -51,7 +53,9 @@ namespace API_livechat.Services
                 ChatRoomCode = chatRoomDTO.CRCd!,
                 Description = chatRoomDTO.Desc,
                 Image = chatRoomDTO.CRImg,
-                Users = chatRoomDTO.Usrs.ToList()
+                Users = chatRoomDTO.Usrs.ToList(),
+                ImgUser = chatRoomDTO.ImgU.ToList()
+                
             };
         }
 

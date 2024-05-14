@@ -126,6 +126,8 @@ namespace API_livechat.Repositories
                     if(userProfile.Username == user)
                     {
                         if (_chatRooms.Find(cr => cr.Title == chatRoom.Title).ToList().Count > 0) return false;
+                        if (userProfile.UsImg == null) userProfile.UsImg = "";  //se non è mai stata inserita un'immagine dell'utente in User 
+                        chatRoom.ImgUser.Add(userProfile.UsImg);
                         chatRoom.Users.Add(user);
                         _chatRooms.InsertOne(chatRoom);
                         _logger.LogInformation("Room creata con successo");
@@ -137,6 +139,7 @@ namespace API_livechat.Repositories
                         _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
                         _dbContext.Users.Update(userProfile);
                         _dbContext.SaveChanges();
+
                         return true;
                     }
                 }                
@@ -174,9 +177,13 @@ namespace API_livechat.Repositories
                                     userProfile.ChatRoomsCode = new List<string>();
                                 }
                                 userProfile.ChatRoomsCode.Add(cr_temp.ChatRoomCode);
-                                _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
                                 _dbContext.Users.Update(userProfile);
                                 _dbContext.SaveChanges();
+
+                                if (userProfile.UsImg == null) userProfile.UsImg = "";  //se non è mai stata inserita un'immagine dell'utente in User 
+                                cr_temp.ImgUser.Add(userProfile.UsImg);
+                                _chatRooms.ReplaceOne(filter, cr_temp);
+
                                 return true;
                             }
                         }
@@ -219,6 +226,9 @@ namespace API_livechat.Repositories
                                             _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
                                             _dbContext.Users.Update(userProfile);
                                             _dbContext.SaveChanges();
+
+                                            if (userProfile.UsImg == null) userProfile.UsImg = "";
+                                            cr_temp.ImgUser.Remove(userProfile.UsImg);
                                         }
                                     }
                                 }
@@ -259,6 +269,8 @@ namespace API_livechat.Repositories
                                 _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
                                 _dbContext.Users.Update(userProfile);
                                 _dbContext.SaveChanges();
+                                if (userProfile.UsImg == null) userProfile.UsImg = "";
+                                ctr.ImgUser.Remove(userProfile.UsImg);
                             }
                         }
                     }
@@ -301,6 +313,9 @@ namespace API_livechat.Repositories
                                             _dbContext.Users.SingleOrDefault(c => c.ChatRoomsCode == userProfile.ChatRoomsCode);
                                             _dbContext.Users.Update(userProfile);
                                             _dbContext.SaveChanges();
+
+                                            if (userProfile.UsImg == null) userProfile.UsImg = "";
+                                            ctr.ImgUser.Remove(userProfile.UsImg);
                                         }
                                     }
                                 }
