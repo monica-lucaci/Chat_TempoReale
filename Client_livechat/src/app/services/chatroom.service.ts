@@ -22,8 +22,12 @@ export class ChatroomService {
 
 
 //-----------------------------------------------------
-createChatroom(newRoom: Chatroom, user: string): Observable<Risposta> {
-  return this.http.post<Risposta>(`${this.apiUrl}ChatRoom/newChatRoom/${user}`, newRoom);
+createChatroomForCurrentUser(chatroomData: Chatroom, currentUser: string): Observable<Risposta> {
+  return this.http.post<Risposta>(`${this.apiUrl}ChatRoom/newChatRoom/${currentUser}`, chatroomData);
+}
+
+addUserToChatRoom(cr_code: string, username: string): Observable<Risposta> {
+  return this.http.post<Risposta>(`${this.apiUrl}ChatRoom/chat/addUser/${cr_code}?username=${username}`, null);
 }
 
 getChatrooms(): Observable<Risposta> {
@@ -38,9 +42,7 @@ getChatroomAndMessages(cr_code: string): Observable<Risposta> {
   return this.http.get<Risposta>(`${this.apiUrl}ChatRoom/chat/${cr_code}`);
 }
 
-addUserToChatRoom(cr_code: string, username: string): Observable<Risposta> {
-  return this.http.post<Risposta>(`${this.apiUrl}ChatRoom/chat/addUser/${cr_code}`, { username });
-}
+
 
 deleteUserFromChatRoom(cr_code: string, username: string): Observable<Risposta> {
   return this.http.delete<Risposta>(`${this.apiUrl}ChatRoom/chat/removeUser/${cr_code}/${username}`);

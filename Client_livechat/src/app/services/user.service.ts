@@ -28,7 +28,7 @@ export class UserService {
 
 
   getAllUsers(): Observable<Risposta> {
-    return this.http.get<Risposta>(`${this.apiUrl}ListOfUsers`);
+    return this.http.get<Risposta>(`${this.apiUrl}User/ListOfUsers`);
   }
 
   updateImg(user: User) {

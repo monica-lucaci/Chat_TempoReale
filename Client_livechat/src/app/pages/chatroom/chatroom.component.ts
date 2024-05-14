@@ -10,12 +10,14 @@ import { FormsModule } from '@angular/forms';
 import { Message } from '../../models/message';
 import { AuthService } from '../../services/auth.service';
 import { MessageService } from '../../services/message.service';
-import { Pipe, PipeTransform } from '@angular/core';
+import { CreatechatComponent } from '../../components/createchat/createchat.component';
+import { EventEmitter, Output } from '@angular/core';
+import { AddusertochatComponent } from '../../components/addusertochat/addusertochat.component';
 
 @Component({
   selector: 'app-chatroom',
   standalone: true,
-  imports: [SendmsgComponent, CommonModule, FormsModule],
+  imports: [SendmsgComponent, CommonModule, FormsModule,CreatechatComponent,AddusertochatComponent],
   templateUrl: './chatroom.component.html',
   styleUrl: './chatroom.component.css',
 })
@@ -26,11 +28,19 @@ export class ChatroomComponent implements OnInit {
   messages: Message[] = [];
   currentUser: string | null = null; // Initialize here
   utente: User | undefined;
-  isSelected: boolean = false; // Initially, no item is selected
+  //isSelected: boolean = false; // Initially, no item is selected
   pollingInterval = 90000; // Added polling interval property
   private pollingSubscription: Subscription | undefined; // Added subscription for polling
   searchQuery: string = '';
+  searchQuery2: string= '';
+  isSearchInputActive: boolean = false;
 
+  canShowModal = false;
+  canShowModal2= false;
+  // canShowPopup = false;
+  // @Output() showPopup: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  messagePopups: boolean[] = [];
 
   constructor(
     private chatroomService: ChatroomService,
@@ -41,7 +51,7 @@ export class ChatroomComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
-   // console.log(this.currentUser);
+    console.log(this.currentUser);
 
     const username = this.authService.getCurrentUser();
     if (username) {
@@ -124,7 +134,7 @@ export class ChatroomComponent implements OnInit {
     this.msgService.getMessagesOfRoom(crCode).subscribe(
       (response) => {
         this.messages = response.data;
-        console.log(this.messages[0]);
+       // console.log(this.messages[0]);
         // Assuming the response directly contains messages
       },
       (error) => {
@@ -141,5 +151,36 @@ export class ChatroomComponent implements OnInit {
     );
    // console.log('Search Query:', this.searchQuery);
    // console.log('Chatrooms:', this.chatrooms);
+  }
+
+  highlightKeyword(message: string, keyword: string): string {
+    if (!keyword) return message;
+    const regex = new RegExp(keyword, 'gi');
+    return message.replace(regex, (match) => `<span class="text-yellow-500">${match}</span>`);
+  }
+
+  getMessageStyle(message: Message): any {
+    if (!this.searchQuery2 || !message.data) return {};
+    const regex = new RegExp(this.searchQuery2, 'gi');
+    return regex.test(message.data) ? { backgroundColor: 'blue' } : {};
+  }
+
+  toggleSearchInput() {
+    this.isSearchInputActive = !this.isSearchInputActive;
+    // Reset the search query when toggling
+    if (!this.isSearchInputActive) {
+      this.searchQuery2 = ''; // Reset the search query
+      this.applyFilter(); // Reapply any existing filter
+    }
+  }
+
+  // togglePopup() {
+  //   this.canShowPopup = !this.canShowPopup;
+  //   // Emitting the boolean value to parent component
+  //   this.showPopup.emit(this.canShowPopup);
+  // }
+  togglePopup(index: number) {
+    // Toggle the popup state for the clicked message
+    this.messagePopups[index] = !this.messagePopups[index];
   }
 }
