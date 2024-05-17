@@ -6,6 +6,7 @@ import { Risposta } from '../../interfaces/risposta';
 import { Chatroom } from '../../models/chatroom';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-createchat',
@@ -16,20 +17,25 @@ import { UserService } from '../../services/user.service';
 })
 export class CreatechatComponent {
 
-
+  chatroomCrd ="";
   @Input('show')
   show=true;
 
   @Output('close')
   onClose = new EventEmitter()
 
+  @Output() chatroomCreated = new EventEmitter();
+
   @Input() currentUser: string | null = null;; // Define currentUser as an input property
+  @Input() selectedChatroom:  Chatroom | null = null;
   newChatroom: Chatroom = new Chatroom(); 
+ 
   users: User[] = [];
 
-  constructor(private chatroomService: ChatroomService, private userService: UserService) {
+  constructor(private chatroomService: ChatroomService, private userService: UserService,private snackBar: MatSnackBar) {
     this.loadUsers();
   }
+
   loadUsers() {
     this.userService.getAllUsers().subscribe(
       (response: Risposta) => {
@@ -54,7 +60,16 @@ export class CreatechatComponent {
           console.log('Chat room created successfully:', response);
           console.log(response)
           this.newChatroom = new Chatroom(); // Reset the newChatroom object
-          this.onClose.emit();
+
+
+          if (response.data && response.data.crCd) {
+            this.chatroomCrd = response.data.crCd;
+            console.log(this.chatroomCrd);
+            this.chatroomCreated.emit(this.chatroomCrd);
+          }
+
+        //  this.onClose.emit();
+        this.openSnackBar('ChatRoom created successfully');
         },
         (error) => {
           // Handle error
@@ -66,28 +81,35 @@ export class CreatechatComponent {
     }
   }
 
-  addToChatroom(user: User) {
-    console.log(this.newChatroom.crCd);
-    console.log(user.user);
-    if (this.newChatroom.crCd && user.user) {
-    
-      console.log(this.newChatroom.crCd);
-      console.log(user.user);
-      this.chatroomService.addUserToChatRoom(this.newChatroom.crCd, user.user).subscribe(
+  addToChatroom(user: User, chatroomCode: string) {
+   
+    if (chatroomCode && user.user) {
+      this.chatroomService.addUserToChatRoom(chatroomCode, user.user).subscribe(
         (response: Risposta) => {
           // Handle success
           console.log('User added to chat room successfully:', response);
+          
+          this.openSnackBar('User added successfully');
           // Optionally, you can update the UI or take further actions upon success
         },
-        (error) => {
+        (error:any ) => {
           // Handle error
           console.error('Error adding user to chat room:', error);
+          this.openSnackBar('Error adding user to chat room');
         }
       );
     } else {
       console.error('Invalid data to add user to chat room');
+      this.openSnackBar('Invalid data');
     }
   }
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, // Duration in milliseconds
+      horizontalPosition: 'center', // Position horizontally (start, center, end, left, right)
+      verticalPosition: 'bottom', // Position vertically (top, bottom)
+    });
   
   
+}
 }

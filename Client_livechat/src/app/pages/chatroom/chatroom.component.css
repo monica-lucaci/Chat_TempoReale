@@ -1,7 +1,6 @@
-.background{
-    background-image:url('../../../assets/img-chat/bg-pastel2.jpg') ;
+.backgroundChat {
+    background-image: url("../../../assets/img-chat/chatbg.jpg");
     background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
     background-size: cover; /* Copre l'intera area dell'elemento */
     background-position: center; /* Centra l'immagine nello sfondo */
-    height:100vh;
-}
+  }

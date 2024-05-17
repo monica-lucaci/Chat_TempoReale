@@ -71,8 +71,10 @@ export class AuthService {
   }
 
   logout = (): void => {
+    //console.log('Token retreived:', localStorage.getItem(this.tokenKey)); // Should be null
     localStorage.removeItem(this.tokenKey);
-    this.router.navigateByUrl('/login');
+    console.log('Token removed:', localStorage.getItem(this.tokenKey)); // Should be null
+    //this.router.navigateByUrl('/home');
   };
 
   registra(

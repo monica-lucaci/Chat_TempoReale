@@ -6,6 +6,8 @@ import { ForgotpasswordComponent } from './pages/forgotpassword/forgotpassword.c
 import { ProfiloutenteComponent } from './components/profiloutente/profiloutente.component';
 import { ChatroomComponent } from './pages/chatroom/chatroom.component';
 import { AuthguardService } from './services/authguard.service';
+import { LogoutModalComponent } from './components/logout-modal/logout-modal.component'
+import { SettingsComponent } from './pages/settings/settings.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,5 +15,8 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'chat', component: ChatroomComponent, canActivate: [AuthguardService] }, // Apply AuthguardService here{ path: 'chat', component: ChatroomComponent },
     { path: 'resetpassword', component: ForgotpasswordComponent },
-    { path: 'userProfile', component: ProfiloutenteComponent, canActivate: [AuthguardService] }
+    { path: 'userProfile', component: ProfiloutenteComponent, canActivate: [AuthguardService] },
+    { path: 'register', component: RegisterComponent},
+    { path: 'logout', component: LogoutModalComponent},
+    { path: 'settings', component: SettingsComponent}
 ];

@@ -22,7 +22,7 @@ export class AddusertochatComponent {
 
   @Output('close')
   onClose = new EventEmitter()
-  @Input() currentUser: string | null = null;; // Define currentUser as an input property
+  @Input() currentUser: string | null = null; // Define currentUser as an input property
   @Input() selectedChatroom:  Chatroom | null = null;
   newChatroom: Chatroom = new Chatroom(); 
   users: User[] = [];
@@ -30,17 +30,20 @@ export class AddusertochatComponent {
   constructor(private chatroomService: ChatroomService, private userService: UserService,private snackBar: MatSnackBar) {
     this.loadUsers();
   }
+
   loadUsers() {
     this.userService.getAllUsers().subscribe(
       (response: Risposta) => {
-        this.users = response.data;
-        console.log(this.users)
+        // Filter out the current user
+        this.users = response.data.filter((user: User) => user.user !== this.currentUser);
+        console.log(this.users);
       },
-      (error:any) => {
+      (error: any) => {
         console.error('Error fetching users:', error);
       }
     );
   }
+  
 
 
 
@@ -53,7 +56,9 @@ export class AddusertochatComponent {
         (response: Risposta) => {
           // Handle success
           console.log('User added to chat room successfully:', response);
+           this.loadUsers();
           this.openSnackBar('User added successfully');
+         
           // Optionally, you can update the UI or take further actions upon success
         },
         (error:any ) => {

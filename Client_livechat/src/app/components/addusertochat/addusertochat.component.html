@@ -58,9 +58,12 @@
           <span class="sr-only">Close modal</span>
         </button>
       </div>
-        <div class="user-list">
-          <h2>User List</h2>
-          <ul class="flex gap-2">
+      <div class="h-12 w-full mb-6 py-2  bg-grey-lightest">
+        <!-- <label for="searchUsers">Search for Users</label> -->
+        <input placeholder="Insert username" type="text"class="h-full w-full text-grey-darker md:text-md text-xs mt-1" name="searchUsers" id="searchUsers"/>
+      </div>
+        <div class="user-list ">
+          <ul class="flex gap-3 flex-wrap">
             <li *ngFor="let user of users">
               <button (click)="addToChatroom(user, selectedChatroom)">
                 <svg
@@ -92,4 +95,4 @@
     </div>
   </div>
 </section>
->
+

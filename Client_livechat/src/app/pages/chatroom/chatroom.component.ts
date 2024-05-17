@@ -13,11 +13,15 @@ import { MessageService } from '../../services/message.service';
 import { CreatechatComponent } from '../../components/createchat/createchat.component';
 import { EventEmitter, Output } from '@angular/core';
 import { AddusertochatComponent } from '../../components/addusertochat/addusertochat.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LogoutModalComponent } from '../../components/logout-modal/logout-modal.component'
+import { EditMessageModalComponent } from '../../components/edit-message-modal/edit-message-modal.component';
+import { ProfiloutenteComponent } from '../../components/profiloutente/profiloutente.component';
 
 @Component({
   selector: 'app-chatroom',
   standalone: true,
-  imports: [SendmsgComponent, CommonModule, FormsModule,CreatechatComponent,AddusertochatComponent],
+  imports: [ProfiloutenteComponent,SendmsgComponent, CommonModule, FormsModule,CreatechatComponent,AddusertochatComponent,EditMessageModalComponent,LogoutModalComponent],
   templateUrl: './chatroom.component.html',
   styleUrl: './chatroom.component.css',
 })
@@ -29,27 +33,36 @@ export class ChatroomComponent implements OnInit {
   currentUser: string | null = null; // Initialize here
   utente: User | undefined;
   //isSelected: boolean = false; // Initially, no item is selected
-  pollingInterval = 90000; // Added polling interval property
+  pollingInterval = 20000; // Added polling interval property
   private pollingSubscription: Subscription | undefined; // Added subscription for polling
   searchQuery: string = '';
   searchQuery2: string= '';
   isSearchInputActive: boolean = false;
-
+  isDropdownVisible: boolean = false;
   canShowModal = false;
   canShowModal2= false;
+  canShowModal3= false;
+
   // canShowPopup = false;
   // @Output() showPopup: EventEmitter<boolean> = new EventEmitter<boolean>();
+  
 
   messagePopups: boolean[] = [];
+
+
+  showEditModal: boolean = false;
+  selectedMessage: any = null;
 
   constructor(
     private chatroomService: ChatroomService,
     private authService: AuthService,
     private userService: UserService,
     private msgService: MessageService,
+    private snackBar: MatSnackBar 
   ) {}
 
   ngOnInit(): void {
+    console.log('Chatrooms:', this.chatrooms)
     this.currentUser = this.authService.getCurrentUser();
     console.log(this.currentUser);
 
@@ -95,6 +108,7 @@ export class ChatroomComponent implements OnInit {
         .getChatroomsOfUser(this.currentUser)
         .subscribe((response) => {
           this.chatrooms = response.data;
+          console.log(this.chatrooms)
           const lastChatroomId = localStorage.getItem('lastChatroomId');
           if (lastChatroomId) {
             const lastChatroom = this.chatrooms.find(
@@ -174,13 +188,126 @@ export class ChatroomComponent implements OnInit {
     }
   }
 
-  // togglePopup() {
-  //   this.canShowPopup = !this.canShowPopup;
-  //   // Emitting the boolean value to parent component
-  //   this.showPopup.emit(this.canShowPopup);
-  // }
+  toggleDropdown() {
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+  
   togglePopup(index: number) {
     // Toggle the popup state for the clicked message
     this.messagePopups[index] = !this.messagePopups[index];
   }
+
+  // toggleDropdown(){
+  //   this.canShowModal3 = !this.canShowModal3
+  // }
+
+
+  copyMessage(message: string | undefined, event: MouseEvent, index: number) {
+    event.preventDefault();
+    if (!message) {
+      console.error('Message is undefined or empty');
+      return;
+    }
+  
+    // Check if the browser supports the Clipboard API
+    if (navigator.clipboard) {
+      // Write the message to the clipboard
+      navigator.clipboard.writeText(message)
+        .then(() => {
+          console.log('Message copied to clipboard:', message);
+          // Close the popup for the clicked message
+          this.messagePopups[index] = false;
+          // Optionally, provide feedback to the user
+          // e.g., show a toast message
+        })
+        .catch((error) => {
+          console.error('Failed to copy message:', error);
+          // Handle errors, e.g., show an error message to the user
+        });
+    } else {
+      // Fallback for browsers that don't support the Clipboard API
+      console.error('Clipboard API not supported');
+      // You can provide a fallback mechanism here, e.g., prompt the user to copy manually
+    }
+  }
+  
+
+  deleteMessage(messageCode: string | undefined , username: string |undefined , event: MouseEvent,index: number): void {
+    event.preventDefault();
+    if (messageCode && username) {
+      this.msgService.deleteMessage(messageCode, username).subscribe(
+        (response) => {
+          // Handle successful deletion
+          this.snackBar.open('Message deleted successfully', 'Close', {
+            duration: 3000, // Duration in milliseconds
+          });
+
+          if (this.selectedChatroom?.crCd) {
+            this.getMessagesForRoom(this.selectedChatroom.crCd);
+          }
+          this.messagePopups[index] = false;
+          // Refresh messages or perform any other necessary actions
+        },
+        (error) => {
+          console.error('Error deleting message:', error);
+          // Handle error if deletion fails
+        }
+      );
+    }
+
+
+  
+  }
+
+
+  editMessage(message: any,event: MouseEvent, index:number): void {
+    event.preventDefault();
+    this.selectedMessage = message;
+    this.showEditModal = true;
+    this.messagePopups[index] = false;
+  }
+
+  closeEditModal(): void {
+    this.showEditModal = false;
+    this.selectedMessage = null;
+  }
+
+  saveEditedMessage(newText: string): void {
+   
+    if (this.selectedMessage) {
+      this.msgService.updateMessage(this.selectedMessage.messageCode, this.selectedMessage.sender, newText)
+        .subscribe(response => {
+          this.snackBar.open('Message updated successfully', 'Close', {
+            duration: 3000, // Duration in milliseconds
+          });
+          if (this.selectedChatroom?.crCd) {
+            this.getMessagesForRoom(this.selectedChatroom.crCd);
+          }
+          //  this.messagePopups[index] = false;
+        },
+        (error) => {
+          console.error('Error deleting message:', error);
+        }
+      );
+    }
+  }
+
+  // updateMessage(messageCode: string | undefined,username:string | undefined, newText: string | undefined, event: MouseEvent,index: number) {
+  //   event.preventDefault();
+  //   this.msgService.updateMessage(messageCode, username,newText).subscribe(
+  //     (response) => {
+  //       this.snackBar.open('Message updated successfully', 'Close', {
+  //         duration: 3000, // Duration in milliseconds
+  //       });
+  //       if (this.selectedChatroom?.crCd) {
+  //         this.getMessagesForRoom(this.selectedChatroom.crCd);
+  //       }
+  //       this.messagePopups[index] = false;
+  //     },
+  //     (error) => {
+  //       console.error('Error deleting message:', error);
+  //     }
+  //   );
+  // }
+
 }

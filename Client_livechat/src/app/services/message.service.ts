@@ -44,7 +44,7 @@ export class MessageService {
       );
   }
 
-  updateMessage(messageCode: string, username: string, textMessage: string): Observable<Risposta> {
+  updateMessage(messageCode: string | undefined, username: string | undefined, textMessage: string | undefined): Observable<Risposta> {
     return this.http.post<Risposta>(`${this.apiUrl}Message/UpdateMessage/${messageCode}?username=${username}&textMessage=${textMessage}`, {})
       .pipe(
         catchError(this.handleError)

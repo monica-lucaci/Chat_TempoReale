@@ -1,120 +1,126 @@
 <div
-  class="background  h-screen lg:w-screen group-data-[theme-color=violet]:bg-slate-50 group-data-[theme-color=green]:bg-green-50/20 group-data-[theme-color=red]:bg-red-50/20 shadow overflow-y-hidden mb-[80px] lg:mb-0 group-data-[theme-color=violet]:dark:bg-zinc-700 group-data-[theme-color=green]:dark:bg-zinc-700 group-data-[theme-color=red]:dark:bg-zinc-700"
->
+  class="background  h-screen lg:w-screen group-data-[theme-color=violet]:bg-slate-50 group-data-[theme-color=green]:bg-green-50/20 group-data-[theme-color=red]:bg-red-50/20 shadow overflow-y-hidden mb-[80px] lg:mb-0 group-data-[theme-color=violet]:dark:bg-zinc-700 group-data-[theme-color=green]:dark:bg-zinc-700 group-data-[theme-color=red]:dark:bg-zinc-700">
   <div class="flex items-center flex-col justify-center">
     <!-- Start Profile tab-pane -->
     <div class="tab-content active w-2/3">
       <!-- Start profile content -->
       <div>
         <div class="px-6 pt-12 text-center">
-          <h4 class="mb-0 text-gray-700 dark:text-gray-50">My Profile</h4>
+          <h4 class="mb-0 text-white dark:text-gray-50">{{ utente?.user }}'s Profile</h4>
         </div>
 
-        <div
-          class="p-6 text-center border-b border-gray-100 dark:border-zinc-600"
-        >
+        <div class="p-6 text-center border-b border-gray-100 dark:border-zinc-600 ">
           <div class="mb-4">
-            <img
-              [src]="utente?.img"
-              class="w-24 h-24 p-1 mx-auto border border-gray-100 rounded-full dark:border-zinc-800"
-              alt=""
-            />
+            <img [src]="utente?.img"
+              class=" glow w-32 h-32 p-1 mx-auto border border-gray-100 rounded-full dark:border-zinc-800" alt="" />
           </div>
 
-          <h5 class="mb-1 text-16 dark:text-gray-50">{{ utente?.user }}</h5>
+          <!-- <h5 class="mb-1 text-24 text-white dark:text-gray-50">{{ utente?.user }}</h5> -->
 
-          <h5 class="mb-0 truncate text-14 ltr:block rtl:hidden">
-            <a href="#" class="text-gray-500 dark:text-gray-50"
-              ><i
-                class="text-green-500 ltr:ml-1 rtl:mr-1 ri-record-circle-fill text-10"
-              ></i>
-              Active</a
-            >
-          </h5>
+          <div class="w-full flex items-center justify-center gap-10">
+            <div class="text-white w-38 p-3 rounded-full glow cursor-pointer mb-4 hover:text-teal-500">
+              <a href="chat">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                  <path
+                    d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z" />
+                  <path
+                    d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z" />
+                </svg>
+              </a>
+
+            </div>
+            <div class="text-white w-38 p-3 rounded-full glow cursor-pointer mt-8  hover:text-teal-500">
+              <a href="settings"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                  class="w-6 h-6">
+                  <path fill-rule="evenodd"
+                    d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
+                    clip-rule="evenodd" />
+                </svg></a>
+
+
+
+            </div>
+            <div class="text-white w-38 p-3 rounded-full glow cursor-pointer mb-4  hover:text-teal-500">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path fill-rule="evenodd"
+                  d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
+                  clip-rule="evenodd" />
+              </svg>
+
+
+            </div>
+
+          </div>
         </div>
+
+
         <!-- End profile user -->
 
         <!-- Start user-profile-desc -->
-        <div class="p-6 h-[550px]" data-simplebar="init">
+        <div class="p-6 h-[550px]  rounded-xl" data-simplebar="init">
           <div class="simplebar-wrapper" style="margin: -24px">
             <div class="simplebar-height-auto-observer-wrapper">
               <div class="simplebar-height-auto-observer"></div>
             </div>
             <div class="simplebar-mask">
               <div class="simplebar-offset" style="right: 0px; bottom: 0px">
-                <div
-                  class="simplebar-content-wrapper"
-                  tabindex="0"
-                  role="region"
-                  aria-label="scrollable content"
-                  style="height: 100%; overflow: hidden"
-                >
+                <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content"
+                  style="height: 100%; overflow: hidden">
                   <div class="simplebar-content" style="padding: 24px">
                     <div>
-                      <p
-                        class="text-center mb-6 text-gray-500 dark:text-gray-300"
-                      >
+                      <p class="text-center mb-6 text-gray-200 dark:text-gray-300">
                         If several languages coalesce, the grammar of the
                         resulting language is more simple and regular than that
                         of the individual.
                       </p>
                     </div>
 
-                    <div data-tw-accordion="collapse">
-                      <div class="text-gray-700 accordion-item">
-                     
-                          <button
-                            type="button"
-                            class="flex items-center justify-between w-full px-3 py-2 font-medium text-left border border-gray-100 rounded-t accordion-header group active dark:border-b-zinc-600 dark:bg-zinc-600 dark:border-zinc-600"
-                          >
-                            <span
-                              class="m-0 text-[14px] dark:text-gray-50 font-semibold ltr:block rtl:hidden"
-                            >
-                              <i
-                                class="mr-2 align-middle ri-user-2-line d-inline-block"
-                              ></i>
-                              About
-                            </span>
+                    <div data-tw-accordion="collapse ">
+                      <div class="text-gray-700 accordion-item glow">
 
-                            <i
-                              class="mdi mdi-chevron-down text-lg group-[.active]:rotate-180 dark:text-gray-50"
-                            ></i>
-                          </button>
-                
+                        <button type="button"
+                          class="flex items-center justify-between w-full px-3 py-2 font-medium text-left border border-gray-100 rounded-t accordion-header group active dark:border-b-zinc-600 dark:bg-zinc-600 dark:border-zinc-600">
+                          <span class="m-0 text-[14px] text-white dark:text-gray-50 font-semibold ltr:block rtl:hidden">
+                            <i class="mr-2 align-middle ri-user-2-line d-inline-block"></i>
+                            About
+                          </span>
+
+                          <i class="mdi mdi-chevron-down text-lg group-[.active]:rotate-180 dark:text-gray-50"></i>
+                        </button>
+
 
                         <div
-                          class="block bg-opacity-50 bg-white border border-t-0 border-gray-100 accordion-body dark:bg-transparent dark:border-zinc-600"
-                        >
+                          class="block bg-opacity-20 bg-[#1e7d78] border border-t-0 border-gray-100 accordion-body dark:bg-transparent dark:border-zinc-600">
                           <div class="p-5">
                             <div>
-                              <p class="mb-1 text-gray-500 dark:text-gray-300">
+                              <p class="mb-1 text-gray-50 dark:text-gray-300">
                                 Name
                               </p>
-                              <h5 class="text-sm dark:text-gray-50">
+                              <h5 class="text-sm text-white  dark:text-gray-50">
                                 {{ utente?.user }}
                               </h5>
                             </div>
                             <div class="mt-5">
-                              <p class="mb-1 text-gray-500 dark:text-gray-300">
+                              <p class="mb-1  dark:text-gray-500 text-gray-50">
                                 Email
                               </p>
-                              <h5 class="text-sm dark:text-gray-50">
+                              <h5 class="text-sm dark:text-gray-50  text-white">
                                 {{ utente?.email }}
                               </h5>
                             </div>
                             <div class="mt-5">
-                              <p class="mb-1 text-gray-500 dark:text-gray-300">
+                              <p class="mb-1 text-gray-50 dark:text-gray-300">
                                 Time
                               </p>
-                              <h5 class="text-sm dark:text-gray-50">
+                              <h5 class="text-sm text-white dark:text-gray-50">
                                 {{ currentDate }}
                               </h5>
                             </div>
                             <div class="mt-5">
-                              <p class="mb-1 text-gray-500 dark:text-gray-300">
+                              <p class="mb-1 text-gray-50 dark:text-gray-300">
                                 Location
                               </p>
-                              <h5 class="text-sm dark:text-gray-50">
+                              <h5 class="text-sm text-white dark:text-gray-50">
                                 California, USA
                               </h5>
                             </div>
@@ -124,46 +130,36 @@
 
                       <div class="mt-2 text-gray-700 accordion-item">
                         <h2>
-                            <a href="chat">  <button
-                            type="button" 
-                            class="flex justify-between w-full px-3 py-2 font-medium text-left border border-gray-100 rounded accordion-header group dark:border-b-zinc-600 dark:bg-zinc-600 dark:border-zinc-600"
-                          >
-                            <span
-                              class="m-0 text-[14px] dark:text-gray-50 font-semibold ltr:block rtl:hidden"
-                            >
-                              <i
-                                class="mr-2 align-middle ri-attachment-line d-inline-block"
-                              ></i>
-                            MychatRooms
-                            </span>
-                            <div
-                              class="py-1 mt-5 mb-5  "
-                            >
-                              <span
-                                class="group-data-[theme-color=violet]:bg-slate-100 group-data-[theme-color=green]:bg-green-50 group-data-[theme-color=red]:bg-red-50 pe-1 ps-3 group-data-[theme-color=violet]:dark:bg-zinc-600 group-data-[theme-color=green]:dark:bg-zinc-600 group-data-[theme-color=red]:dark:bg-zinc-600"
-                                id="basic-addon1"
-                              >
-                                <i
-                                  class="text-lg text-gray-400 ri-search-line search-icon dark:text-gray-200"
-                                ></i>
+                          <a href="chat">
+                            <button type="button"
+                              class="flex justify-between w-full px-3 py-2 font-medium text-left border border-gray-100 rounded accordion-header group dark:border-b-zinc-600 dark:bg-zinc-600 dark:border-zinc-600">
+                              <span class="m-0 text-[14px] text-gray-50 font-semibold ltr:block rtl:hidden">
+                                <i class="mr-2 text-white align-middle ri-attachment-line d-inline-block"></i>
+                                MychatRooms
                               </span>
-                              <input
-                                type="text"
-                                class="border-0 group-data-[theme-color=violet]:bg-slate-100 group-data-[theme-color=green]:bg-green-50 group-data-[theme-color=red]:bg-red-50 placeholder:text-[14px] focus:ring-offset-0 focus:outline-none focus:ring-0 group-data-[theme-color=violet]:dark:bg-zinc-600 group-data-[theme-color=green]:dark:bg-zinc-600 group-data-[theme-color=red]:dark:bg-zinc-600 placeholder:text-gray-400"
-                                placeholder="Search messages or users"
-                                aria-label="Search messages or users"
-                                aria-describedby="basic-addon1"
-                              />
-                            </div>
 
-                            <i
-                              class="mdi mdi-chevron-down text-lg group-[.active]:rotate-180 dark:text-gray-50"
-                            ></i>
-                          </button>
-                            </a>
-                        
-                          <span></span>
+
+
+                            </button>
+
+                          </a>
+
+
                         </h2>
+                        <div class="chatrooms-list mt-8 flex">
+
+                          <ul class="list-none justify-around flex gap-3 w-full">
+                            <li *ngFor="let chatroom of chatrooms" class="mb-4 ">
+                              <a href="chat">
+                                <div class="">
+                                  <img class="h-12 w-12 rounded-full" [src]="chatroom.crImg" alt="Chatroom image" />
+
+                                  <p class="text-white">{{ chatroom.titl }}</p>
+                                </div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
 
                       </div>
                     </div>
