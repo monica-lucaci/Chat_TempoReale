@@ -55,10 +55,20 @@ div#main > div {
 }
 
 .glow {
-    box-shadow: 
-        0 0 2px #fff, 
-        inset 0 0 2px #fff, 
-        0 0 5px #18a8a1, 
-        0 0 15px #18a8a1, 
-        0 0 30px #18a8a1;
+  box-shadow:
+    0 0 2px #fff,
+    inset 0 0 2px #fff,
+    0 0 5px #18a8a1,
+    0 0 15px #18a8a1,
+    0 0 30px #18a8a1;
 }
+
+/* 
+.glow {
+  box-shadow: 
+      0 0 2px #fff, 
+      inset 0 0 2px #fff, 
+      0 0 5px #474095, 
+      0 0 15px #f73dd8, 
+      0 0 30px #a762d8;
+} */

@@ -18,7 +18,7 @@ import { Chatroom } from '../../models/chatroom';
 })
 export class ProfiloutenteComponent implements OnInit {
   utente: User | undefined;
-  img!: string;
+
   showOpts: boolean = false;
    currentDate :number = Date.now();
    chatrooms: Chatroom[] = [];
@@ -61,15 +61,7 @@ loadChatrooms(username: string): void {
 }
 
 
-  changeImg() {
-    if (this.utente) {
-      this.utente.img = this.img;
-      this.userService.updateImg(this.utente).subscribe({
-        next: (res) => console.log('Image updated successfully'),
-        error: (err) => console.error('Failed to update image:', err)
-      });
-    }
-  }
+
 
   // logOut() {
   //   console.log('Logging out...');
