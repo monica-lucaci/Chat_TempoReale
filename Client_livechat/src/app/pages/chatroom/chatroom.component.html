@@ -17,64 +17,41 @@
             <div class="flex">
               <div class="text-[#CCCCCC] hover:text-teal-500 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                  <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
+                    clip-rule="evenodd" />
                 </svg>
-                
+
               </div>
 
               <div class="ml-4">
-                <svg
-                  (click)="this.canShowModal = true"
-                  class="rounded-sm p-1 cursor-pointer glow hover:bg-teal-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  height="28"
-                >
-                  <path
-                    opacity=".55"
-                    fill="#CCCCCC"
-                    d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z"
-                  ></path>
+                <svg (click)="this.canShowModal = true" class="rounded-sm p-1 cursor-pointer glow hover:bg-teal-400"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                  <path opacity=".55" fill="#CCCCCC"
+                    d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646zm-4.989 9.869H7.041V11.1h6.975v1.944zm3-4H7.041V7.1h9.975v1.944z">
+                  </path>
                 </svg>
               </div>
               <div class="ml-4 relative">
-                <svg
-                  (click)="toggleDropdown()"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="rounded-sm p-1 glow hover:bg-teal-400"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  height="28"
-                >
-                  <path
-                    fill="#CCCCCC"
-                    fill-opacity=".6"
-                    d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"
-                  ></path>
+                <svg (click)="toggleDropdown()" xmlns="http://www.w3.org/2000/svg"
+                  class="rounded-sm p-1 glow hover:bg-teal-400" viewBox="0 0 24 24" width="28" height="28"
+                  fill="currentColor">
+                  <path fill="#CCCCCC" fill-opacity=".6"
+                    d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z">
+                  </path>
                 </svg>
-                <div
-                  *ngIf="isDropdownVisible"
-                  class="absolute right-0 mt-2 dropdown-content bg-[#18a8a1] divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
-                >
-                  <ul
-                    class="py-2 text-sm text-white dark:text-gray-200"
-                    aria-labelledby="dropdownMenuIconButton"
-                  >
+                <div *ngIf="isDropdownVisible"
+                  class="absolute right-0 mt-2 dropdown-content bg-[#18a8a1] divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
+                  <ul class="py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
                     <li>
-                      <p
-                        (click)="this.canShowModal3 = true"
-                        class="cursor-pointer block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
+                      <p (click)="this.canShowModal3 = true"
+                        class="cursor-pointer block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">
                         Logout
                       </p>
                     </li>
                     <li>
-                      <a
-                        href="settings"
-                        class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >Settings</a
-                      >
+                      <a href="settings"
+                        class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
                     </li>
                   </ul>
                 </div>
@@ -84,32 +61,20 @@
 
           <!-- Search -->
           <div class="mb-2 mt-1 px-2 bg-transparent">
-            <input
-              type="text"
-              class="border-2 border-teal-400 rounded-md bg-transparent w-full px-2 py-1 text-sm"
-              placeholder="Search or start new chat"
-              [(ngModel)]="searchQuery"
-              name="searchQuery"
-              (ngModelChange)="applyFilter()"
-            />
+            <input type="text" class="border-2 border-teal-400 rounded-md bg-transparent w-full px-2 py-1 text-sm"
+              placeholder="Search or start new chat" [(ngModel)]="searchQuery" name="searchQuery"
+              (ngModelChange)="applyFilter()" />
           </div>
           <!--[class.bg-white]="!isSelected" [class.bg-transparent]="isSelected"-->
           <!-- Contacts -->
           <div class="bg-grey-lighter flex-1 overflow-auto">
             <ul class="list-none">
-              <li
-                *ngFor="let chatroom of filteredChatrooms"
-                class="cursor-pointer"
-                (click)="showChatMessages(chatroom)"
-              >
+              <li *ngFor="let chatroom of filteredChatrooms" class="cursor-pointer"
+                (click)="showChatMessages(chatroom)">
                 <div
-                  class="bg-gray-900 bg-opacity-20 text-white px-3 flex items-center hover:bg-[#18a8a1] cursor-pointer focus:ring-2 focus:ring-black"
-                >
+                  class="bg-gray-900 bg-opacity-20 text-white px-3 flex items-center hover:bg-[#18a8a1] cursor-pointer focus:ring-2 focus:ring-black">
                   <div>
-                    <img
-                      class="h-12 w-12 rounded-full"
-                      [src]="chatroom.crImg"
-                    />
+                    <img class="h-12 w-12 rounded-full" [src]="chatroom.crImg" />
                   </div>
                   <div class="ml-4 flex-1 border-b border-teal-500 py-4">
                     <div class="flex items-bottom justify-between">
@@ -129,86 +94,66 @@
         <!-- Right -->
         <div class="w-2/3 rounded-r-md border border-teal-400 flex flex-col">
           <!-- Header -->
-          <div
-            class="py-2 px-3 bg-transparent border-b-2 border-teal-400 flex flex-row justify-between items-center"
-          >
+          <div class="py-2 px-3 bg-transparent border-b-2 border-teal-400 flex flex-row justify-between items-center">
             <div class="flex items-center">
               <div>
-                <img
-                  class="w-10 h-10 rounded-full"
-                  [src]="selectedChatroom?.crImg"
-                />
+                <img class="w-10 h-10 rounded-full" [src]="selectedChatroom?.crImg" />
               </div>
               <div class="ml-4">
                 <p class="text-white">{{ selectedChatroom?.titl }}</p>
                 <p class="text-gray-400 text-xs mt-1">
-                  <span
-                    *ngFor="let user of selectedChatroom?.usrs; let last = last"
-                    >{{ user }}{{ !last ? ", " : "" }}</span
-                  >
+                  <span *ngFor="let user of selectedChatroom?.usrs; let last = last">{{ user }}{{ !last ? ", " : ""
+                    }}</span>
                 </p>
               </div>
             </div>
 
             <div class="flex">
               <div *ngIf="isSearchInputActive">
-                <input
-                  name="searchQuery2"
-                  type="text"
-                  class="bg-transparent cursor-pointer glow w-full px-2 py-2 text-sm"
-                  placeholder="Search messages"
-                  [(ngModel)]="searchQuery2"
-                  (ngModelChange)="applyFilter()"
-                />
+                <input name="searchQuery2" type="text"
+                  class="bg-transparent cursor-pointer glow w-full px-2 py-2 text-sm" placeholder="Search messages"
+                  [(ngModel)]="searchQuery2" (ngModelChange)="applyFilter()" />
               </div>
-              <div
-                (click)="toggleSearchInput()"
-                *ngIf="!isSearchInputActive"
-                class="cursor-pointer glow hover:bg-teal-400"
-              >
-                <svg
-                  class="cursor-pointer rounded-sm p-1 "
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  height="28"
-                >
+              <div (click)="toggleSearchInput()" *ngIf="!isSearchInputActive"
+                class="cursor-pointer glow hover:bg-teal-400 text-[#CCCCCC]">
+                <svg class="cursor-pointer rounded-sm p-1 text-[#CCCCCC]" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
                   <path
-                    fill="#CCCCCC"
-                    fill-opacity=".5"
-                    d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z"
-                  ></path>
+                    d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z">
+                  </path>
                 </svg>
               </div>
-              <div class="ml-6 glow cursor-pointer  hover:bg-teal-400">
-                <svg
-                  class="cursor-pointer p-1 rounded-sm hover:bg-teal-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  height="28"
-                >
-                  <path
-                    fill="#CCCCCC"
-                    fill-opacity=".5"
-                    d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z"
-                  ></path>
+              <div class=" relative ml-6 glow cursor-pointer  hover:bg-teal-400 text-[#CCCCCC]">
+                <svg (click)="toggleDropdown2()" class="cursor-pointer p-1 rounded-sm hover:bg-teal-400 text-[#CCCCCC]"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                    clip-rule="evenodd" />
                 </svg>
+                <div *ngIf="isDropdown2Visible"
+                  class="absolute right-0 mt-2 dropdown-content bg-[#18a8a1] divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
+                  <ul class="py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
+                    <li>
+                      <p *ngIf="selectedChatroom?.crCd" (click)="deleteRoom(selectedChatroom?.crCd,utente?.user)"
+                        class="cursor-pointer block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">
+                        Delete Chatroom
+                      </p>
+                    </li>
+                    <li>
+                      <p *ngIf="selectedChatroom?.crCd"  (click)="clearRoom(selectedChatroom?.crCd)"
+                        class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">
+                        Clear Chatroom
+                      </p>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div class="ml-6 glow  hover:bg-teal-400">
-                <svg
-                  (click)="this.canShowModal2 = true"
-                  class="p-1 rounded-sm cursor-pointer hover:bg-teal-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  height="28"
-                >
+              <div class="ml-6 glow  hover:bg-teal-400 text-[#CCCCCC] relative">
+                <svg (click)="this.canShowModal2 = true"
+                  class="p-1 rounded-sm cursor-pointer hover:bg-teal-400 text-[#CCCCCC]"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
                   <path
-                    fill="#CCCCCC"
-                    fill-opacity=".6"
-                    d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"
-                  ></path>
+                    d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
                 </svg>
               </div>
             </div>
@@ -218,9 +163,7 @@
           <div class="flex-1 overflow-auto backgroundChat">
             <div class="py-2 px-3">
               <div class="flex justify-center mb-2">
-                <div
-                  class="bg-gray-900 bg-opacity-90 rounded py-2 px-4 text-white"
-                >
+                <div class="bg-gray-900 bg-opacity-90 rounded py-2 px-4 text-white">
                   <p class="text-sm uppercase">February 20, 2018</p>
                 </div>
               </div>
@@ -237,73 +180,41 @@
               <!--Messages  bubbles-->
 
               <ng-container *ngFor="let message of messages; let i = index">
-                <div
-                  *ngIf="message.sender == currentUser"
-                  class="flex justify-end mb-2"
-                >
+                <div *ngIf="message.sender == currentUser" class="flex justify-end mb-2">
                   <div class="relative inline-flex">
-                    <button
-                      (click)="togglePopup(i)"
-                      id="dropdownMenuIconButton"
+                    <button (click)="togglePopup(i)" id="dropdownMenuIconButton"
                       class="dropdown-button inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg hover:bg-teal-400 focus:ring-2 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
-                      type="button"
-                    >
-                      <svg
-                        class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 4 15"
-                      >
+                      type="button">
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
                         <path
-                          d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
-                        />
+                          d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                       </svg>
                     </button>
-                    <div
-                      *ngIf="messagePopups[i]"
-                      id="dropdownDots"
-                      class="absolute bottom-20 right-0 mt-2 dropdown-content bg-[#18a8a1] divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
-                    >
-                      <ul
-                        class="py-2 text-sm text-white dark:text-gray-200"
-                        aria-labelledby="dropdownMenuIconButton"
-                      >
+                    <div *ngIf="messagePopups[i]" id="dropdownDots"
+                      class="absolute bottom-20 right-0 mt-2 dropdown-content bg-[#18a8a1] divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
+                      <ul class="py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
                         <li>
-                          <a
-                            href="#"
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Reply</a
-                          >
+                          <a href="#"
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Reply</a>
                         </li>
                         <li>
-                          <a
-                            href="javascript:void(0);"
-                            (click)="editMessage(message, $event, i)"
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Edit</a
-                          >
+                          <a href="javascript:void(0);" (click)="editMessage(message, $event, i)"
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                         </li>
                         <li>
-                          <a
-                            href="javascript:void(0);"
+                          <a href="javascript:void(0);"
                             class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            (click)="copyMessage(message.data, $event, i)"
-                          >
+                            (click)="copyMessage(message.data, $event, i)">
                             Copy
                           </a>
                         </li>
                         <li>
-                          <a
-                            href="#"
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Report</a
-                          >
+                          <a href="#"
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
                         </li>
                         <li>
-                          <a
-                            href="javascript:void(0);"
-                            (click)="
+                          <a href="javascript:void(0);" (click)="
                               deleteMessage(
                                 message.messageCode,
                                 message.sender,
@@ -311,27 +222,20 @@
                                 i
                               )
                             "
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Delete</a
-                          >
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div
-                    class="rounded py-2 px-3"
-                    style="background-color: #18a8a1"
-                  >
+                  <div class="rounded py-2 px-3" style="background-color: #18a8a1">
                     <p class="text-sm text-teal">{{ message.sender }}</p>
                     <p class="text-sm mt-1">
                       <!-- Highlight or underline the matched keyword -->
-                      <span
-                        [innerHTML]="
+                      <span [innerHTML]="
                           message.data
                             ? highlightKeyword(message.data, searchQuery2)
                             : ''
-                        "
-                      ></span>
+                        "></span>
                     </p>
                     <p class="text-right text-xs text-grey-dark mt-1">
                       {{ message.date | date: "hh:mm a" }}
@@ -339,93 +243,58 @@
                   </div>
                 </div>
                 <div *ngIf="message.sender !== currentUser" class="flex mb-2">
-                  <img
-                    class="w-8 h-8 rounded-full"
-                    [src]="selectedChatroom?.crImg"
-                    alt="Jese image"
-                  />
+                  <img class="w-8 h-8 rounded-full" [src]="selectedChatroom?.crImg" alt="Jese image" />
                   <div
-                    class="text-gray-200 rounded py-2 px-3 bg-opacity-60 bg-gradient-to-br from-gray-900 to-cyan-800"
-                  >
+                    class="text-gray-200 rounded py-2 px-3 bg-opacity-60 bg-gradient-to-br from-gray-900 to-cyan-800">
                     <p class="text-sm text-teal">{{ message.sender }}</p>
                     <p class="text-sm mt-1">
                       <!-- Highlight or underline the matched keyword -->
-                      <span
-                        [innerHTML]="
+                      <span [innerHTML]="
                           message.data
                             ? highlightKeyword(message.data, searchQuery2)
                             : ''
-                        "
-                      ></span>
+                        "></span>
                     </p>
                     <p class="text-right text-xs text-grey-dark mt-1">
                       {{ message.date | date: "hh:mm a" }}
                     </p>
                   </div>
                   <div class="relative inline-block">
-                    <button
-                      (click)="togglePopup(i)"
-                      id="dropdownMenuIconButton"
+                    <button (click)="togglePopup(i)" id="dropdownMenuIconButton"
                       class="dropdown-button inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-transparent rounded-lg hover:bg-teal-400 focus:ring-2 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
-                      type="button"
-                    >
-                      <svg
-                        class=" w-4 h-4 text-gray-500 dark:text-gray-400"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 4 15"
-                      >
+                      type="button">
+                      <svg class=" w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
                         <path
-                          d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
-                        />
+                          d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                       </svg>
                     </button>
-                    <div
-                      *ngIf="messagePopups[i]"
-                      id="dropdownDots"
-                      class="absolute top-10 left-0 dropdown-content bg-[#18a8a1]  divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
-                    >
-                      <ul
-                        class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownMenuIconButton"
-                      >
+                    <div *ngIf="messagePopups[i]" id="dropdownDots"
+                      class="absolute top-10 left-0 dropdown-content bg-[#18a8a1]  divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
+                      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownMenuIconButton">
                         <li>
-                          <a
-                            href="javascript:void(0);"
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Reply</a
-                          >
+                          <a href="javascript:void(0);"
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Reply</a>
                         </li>
                         <li>
-                          <a
-                            href="javascript:void(0);"
-                            (click)="editMessage(message, $event, i)"
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Edit</a
-                          >
+                          <a href="javascript:void(0);" (click)="editMessage(message, $event, i)"
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                         </li>
                         <li>
-                          <a
-                            href="javascript:void(0);"
+                          <a href="javascript:void(0);"
                             class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            (click)="copyMessage(message.data, $event, i)"
-                          >
+                            (click)="copyMessage(message.data, $event, i)">
                             Copy
                           </a>
                         </li>
 
                         <li>
-                          <a
-                            href="#"
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Report</a
-                          >
+                          <a href="#"
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
                         </li>
                         <li>
-                          <a
-                            href="javascript:void(0);"
-                            (click)="
+                          <a href="javascript:void(0);" (click)="
                               deleteMessage(
                                 message.messageCode,
                                 message.sender,
@@ -433,9 +302,7 @@
                                 i
                               )
                             "
-                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >Delete</a
-                          >
+                            class="block px-4 py-2 hover:bg-teal-400 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
                         </li>
                       </ul>
                     </div>
@@ -445,43 +312,22 @@
             </div>
           </div>
           <!--Input Sending messages-->
-          <app-sendmsg
-            *ngIf="currentUser"
-            [currentUser]="currentUser"
-            [selectedChatroom]="selectedChatroom"
-            (messageSent)="showChatMessages(selectedChatroom)"
-          ></app-sendmsg>
+          <app-sendmsg *ngIf="currentUser" [currentUser]="currentUser" [selectedChatroom]="selectedChatroom"
+            (messageSent)="showChatMessages(selectedChatroom)"></app-sendmsg>
         </div>
       </div>
     </div>
   </div>
 
-  <app-createchat
-    *ngIf="currentUser"
-    [currentUser]="currentUser"
-    (close)="this.canShowModal = false"
-    [show]="this.canShowModal"
-    (chatroomCreated)="loadChatrooms()"
-  />
+  <app-createchat *ngIf="currentUser" [currentUser]="currentUser" (close)="this.canShowModal = false"
+    [show]="this.canShowModal"  (chatroomCreated)="onChatroomCreated($event)" />
 
-  <app-addusertochat
-    *ngIf="currentUser"
-    [currentUser]="currentUser"
-    [selectedChatroom]="selectedChatroom"
-    (close)="this.canShowModal2 = false"
-    [show2]="this.canShowModal2"
-  />
-  <app-edit-message-modal
-    [show]="showEditModal"
-    [message]="selectedMessage?.data"
-    (onClose)="closeEditModal()"
-    (onSave)="saveEditedMessage($event)"
-  >
+  <app-addusertochat *ngIf="currentUser" [currentUser]="currentUser" [selectedChatroom]="selectedChatroom"
+    (close)="this.canShowModal2 = false" [show2]="this.canShowModal2" />
+  <app-edit-message-modal [show]="showEditModal" [message]="selectedMessage?.data" (onClose)="closeEditModal()"
+    (onSave)="saveEditedMessage($event)">
   </app-edit-message-modal>
-  <app-logout-modal
-    (close)="this.canShowModal3 = false"
-    [showLogout]="this.canShowModal3"
-  ></app-logout-modal>
+  <app-logout-modal (close)="this.canShowModal3 = false" [showLogout]="this.canShowModal3"></app-logout-modal>
 </div>
 
 <!-- 

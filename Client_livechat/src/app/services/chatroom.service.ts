@@ -53,8 +53,9 @@ getUsersByRoom(cr_code: string): Observable<Risposta> {
 }
 
 deleteChatRoom(cr_code: string, username: string): Observable<Risposta> {
-  return this.http.delete<Risposta>(`${this.apiUrl}ChatRoom/chat/deleteChatRoom/${cr_code}/${username}`);
+  return this.http.delete<Risposta>(`${this.apiUrl}ChatRoom/chat/deleteChatRoom/${cr_code}?username=${username}`);
 }
+
 
 clearRoom(cr_code: string): Observable<Risposta> {
   return this.http.delete<Risposta>(`${this.apiUrl}ChatRoom/chat/ClearRoom/${cr_code}`);

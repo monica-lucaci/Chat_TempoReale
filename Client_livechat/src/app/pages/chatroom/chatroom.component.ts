@@ -39,6 +39,7 @@ export class ChatroomComponent implements OnInit {
   searchQuery2: string= '';
   isSearchInputActive: boolean = false;
   isDropdownVisible: boolean = false;
+  isDropdown2Visible: boolean = false;
   canShowModal = false;
   canShowModal2= false;
   canShowModal3= false;
@@ -102,30 +103,66 @@ export class ChatroomComponent implements OnInit {
     this.loadChatrooms();
   }
 
+  // loadChatrooms() {
+  //   if (this.currentUser) {
+  //     this.chatroomService
+  //       .getChatroomsOfUser(this.currentUser)
+  //       .subscribe((response) => {
+  //         this.chatrooms = response.data;
+  //         console.log(this.chatrooms)
+  //         const lastChatroomId = localStorage.getItem('lastChatroomId');
+  //         if (lastChatroomId) {
+  //           const lastChatroom = this.chatrooms.find(
+  //             (chatroom) => chatroom.crCd === lastChatroomId,
+  //           );
+  //           if (lastChatroom) {
+  //             this.showChatMessages(lastChatroom);
+  //           }
+  //         }
+          
+  //         // Apply filtering logic here
+  //         this.applyFilter();
+
+  //       });
+  //   }
+  // }
+
   loadChatrooms() {
     if (this.currentUser) {
       this.chatroomService
         .getChatroomsOfUser(this.currentUser)
         .subscribe((response) => {
           this.chatrooms = response.data;
-          console.log(this.chatrooms)
+          console.log(this.chatrooms);
           const lastChatroomId = localStorage.getItem('lastChatroomId');
           if (lastChatroomId) {
             const lastChatroom = this.chatrooms.find(
-              (chatroom) => chatroom.crCd === lastChatroomId,
+              (chatroom) => chatroom.crCd === lastChatroomId
             );
             if (lastChatroom) {
               this.showChatMessages(lastChatroom);
+            } else if (this.chatrooms.length > 0) {
+              this.showChatMessages(this.chatrooms[0]);
+            } else {
+              this.selectedChatroom = null;
+              this.messages = [];
             }
+          } else if (this.chatrooms.length > 0) {
+            this.showChatMessages(this.chatrooms[0]);
+          } else {
+            this.selectedChatroom = null;
+            this.messages = [];
           }
-          
+  
           // Apply filtering logic here
           this.applyFilter();
-
         });
     }
   }
 
+
+  
+  
   showChatMessages(chatroom: Chatroom | null) {
     if (chatroom && chatroom.crCd) {
       this.chatroomService
@@ -190,16 +227,17 @@ export class ChatroomComponent implements OnInit {
 
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
+    //toggle for the 3 dott svg in the left-settings and logout
+  }
+  toggleDropdown2() {
+    this.isDropdown2Visible = !this.isDropdown2Visible;
+    //toggle for the delete chatroom svg
   }
   
   togglePopup(index: number) {
     // Toggle the popup state for the clicked message
     this.messagePopups[index] = !this.messagePopups[index];
   }
-
-  // toggleDropdown(){
-  //   this.canShowModal3 = !this.canShowModal3
-  // }
 
 
   copyMessage(message: string | undefined, event: MouseEvent, index: number) {
@@ -292,22 +330,51 @@ export class ChatroomComponent implements OnInit {
     }
   }
 
-  // updateMessage(messageCode: string | undefined,username:string | undefined, newText: string | undefined, event: MouseEvent,index: number) {
-  //   event.preventDefault();
-  //   this.msgService.updateMessage(messageCode, username,newText).subscribe(
-  //     (response) => {
-  //       this.snackBar.open('Message updated successfully', 'Close', {
-  //         duration: 3000, // Duration in milliseconds
-  //       });
-  //       if (this.selectedChatroom?.crCd) {
-  //         this.getMessagesForRoom(this.selectedChatroom.crCd);
-  //       }
-  //       this.messagePopups[index] = false;
-  //     },
-  //     (error) => {
-  //       console.error('Error deleting message:', error);
-  //     }
-  //   );
-  // }
+  clearRoom(cr_code:string | undefined): void {
+    if(cr_code)
+      this.chatroomService.clearRoom(cr_code).subscribe(
+        response => {
+          this.snackBar.open('Messages canceled', 'Close', {
+            duration: 3000,
+          });
+          if (this.selectedChatroom?.crCd) {
+            this.getMessagesForRoom(this.selectedChatroom.crCd);
+          }
+       
 
-}
+      },
+      (error) => {
+        console.error('Error deleting messages:', error);
+      }
+    )
+  }
+
+  deleteRoom(cr_code: string | undefined, username: string | undefined): void {
+    if (cr_code && username) {
+      this.chatroomService.deleteChatRoom(cr_code, username).subscribe(
+        response => {
+          this.snackBar.open('Chatroom deleted successfully', 'Close', {
+            duration: 3000,
+          });
+          this.loadChatrooms();
+        },
+        error => {
+          console.error('Error deleting room:', error);
+          // Display an error message to the user
+          this.snackBar.open('Error deleting chatroom', 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    } else {
+      console.error('Chatroom code or username is undefined');
+    }
+  }
+
+  onChatroomCreated(newChatroom: Chatroom) {
+    this.chatrooms.push(newChatroom);
+    this.filteredChatrooms.push(newChatroom);
+    this.loadChatrooms();
+    this.showChatMessages(newChatroom);
+  }
+}  
