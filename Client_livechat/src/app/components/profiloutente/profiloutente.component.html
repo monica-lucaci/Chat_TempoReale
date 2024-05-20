@@ -11,7 +11,7 @@
 
         <div class="p-6 text-center border-b border-gray-100 dark:border-zinc-600 ">
           <div class="mb-4">
-            <img [src]="utente?.img"
+           <img [src]="utente?.img ? utente?.img : '../../../assets/img-chat/defaultUser.jpg'"
               class=" glow w-32 h-32 p-1 mx-auto border border-gray-100 rounded-full dark:border-zinc-800" alt="" />
           </div>
 
