@@ -54,8 +54,10 @@ export class SettingsComponent {
     });
   }
 
-  openPasswordModal() {
-    this.isModalVisible = true; // Show the modal
+  openPasswordModal(action: 'update' | 'delete') {
+    this.modalAction = action;
+    this.isModalVisible = true;  // Show the modal
+
   }
 
   closePasswordModal() {
@@ -63,27 +65,52 @@ export class SettingsComponent {
   }
 
   onPasswordSubmitted(password: string | null) {
-    console.log(password, this.utente);
+    this.closePasswordModal();
     if (password && this.utente) {
-      const updatedUser = { ...this.utente, pass: password };
-      this.userService.updateImg(updatedUser, this.imgLink).subscribe({
-        next: (res) => {
-          console.log('Image updated successfully');
-          alert('Image updated successfully'); // Show success message
-          this.closePasswordModal();
-          if (this.utente.user) this.getProfile(this.utente.user);
-        },
-        error: (err) => {
-          console.error('Failed to update image:', err);
-          alert('Failed to update image. Please try again.'); // Show error message
-        },
-      });
+      if (this.modalAction === 'update') {
+        const updatedUser = { ...this.utente, pass: password };
+        this.userService.updateImg(updatedUser, this.imgLink).subscribe({
+          next: res => {
+            console.log('Image updated successfully');
+            alert('Image updated successfully'); // Show success message
+            if(this.utente.user)
+              this.getProfile(this.utente.user);
+          },
+          error: err => {
+            console.error('Failed to update image:', err);
+            alert('Failed to update image. Please try again.'); // Show error message
+          }
+        });
+      } else if (this.modalAction === 'delete') {
+        const userWithPassword = { ...this.utente, pass: password };
+        this.userService.deleteImage(userWithPassword).subscribe({
+          next: res => {
+            console.log('Image deleted successfully');
+            alert('Image deleted successfully'); // Show success message
+            if(this.utente.user)
+              this.getProfile(this.utente.user);
+          },
+          error: err => {
+            console.error('Failed to delete image:', err);
+            alert('Failed to delete image. Please try again.'); // Show error message
+          }
+        });
+      }
     } else if (password === '') {
       console.log('Password submission was cancelled.');
     } else {
-      console.error('Password is required to update the image.');
+      console.error('Password is required to update or delete the image.');
     }
   }
+
+  deleteImg() {
+    this.openPasswordModal('delete');
+  }
+
+  updateImg() {
+    this.openPasswordModal('update');
+  }
+
 
   // changeImg() {
   //   if (this.utente && this.utente.user) {
@@ -98,19 +125,19 @@ export class SettingsComponent {
   //   }
   // }
 
-  deleteImg() {
-    if (this.utente && this.utente.user) {
-      this.userService.deleteImage(this.utente.user).subscribe({
-        next: (res) => {
-          console.log('Image deleted successfully');
-          this.utente.img = '../../../assets/img-chat/defaultUser.jpg';
-        },
-        error: (err) => console.error('Failed to delete image:', err),
-      });
-    } else {
-      console.error('User information is not available');
-    }
-  }
+  // deleteImg() {
+  //   if (this.utente && this.utente.user) {
+  //     this.userService.deleteImage(this.utente.user).subscribe({
+  //       next: (res) => {
+  //         console.log('Image deleted successfully');
+  //         this.utente.img = '../../../assets/img-chat/defaultUser.jpg';
+  //       },
+  //       error: (err) => console.error('Failed to delete image:', err),
+  //     });
+  //   } else {
+  //     console.error('User information is not available');
+  //   }
+  // }
 
   resetPassword() {
     if (this.utente && this.utente.user && this.newPassword) {

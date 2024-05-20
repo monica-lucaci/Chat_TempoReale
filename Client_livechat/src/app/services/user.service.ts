@@ -51,14 +51,18 @@ export class UserService {
     });
   }
 
-  deleteImage(username: string): Observable<Risposta> {
+  deleteImage(user: User): Observable<Risposta> {
     let tokenKey = localStorage.getItem('token');
 
     let headerCustom = new HttpHeaders({
       Authorization: `Bearer ${tokenKey}`,
     });
 
-    const body = { user: username };
+    const body = {
+      email: user.email,
+      user: user.user,
+      pass: user.pass
+    };
 
     return this.http.delete<Risposta>(`${this.apiUrl}User/DeleteImage`, {
       headers: headerCustom,

@@ -7,12 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ChatroomService } from '../../services/chatroom.service';
 import { Chatroom } from '../../models/chatroom';
+import { LogoutModalComponent } from '../../components/logout-modal/logout-modal.component'
 
 
 @Component({
   selector: 'app-profiloutente',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, LogoutModalComponent],
   templateUrl: './profiloutente.component.html',
   styleUrl: './profiloutente.component.css'
 })
@@ -22,6 +23,7 @@ export class ProfiloutenteComponent implements OnInit {
   showOpts: boolean = false;
    currentDate :number = Date.now();
    chatrooms: Chatroom[] = [];
+   canShowModalLogout= false;
 
   constructor(
     private userService: UserService,
@@ -63,11 +65,11 @@ loadChatrooms(username: string): void {
 
 
 
-  // logOut() {
-  //   console.log('Logging out...');
-  //   localStorage.removeItem('token');
-  //   this.router.navigateByUrl('');
-  // }
+  logOut() {
+    console.log('Logging out...');
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('');
+  }
 
   show() {
     this.showOpts = !this.showOpts;
