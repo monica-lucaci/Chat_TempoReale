@@ -7,7 +7,8 @@ export class Chatroom {
     titl: string | undefined;
     desc: string | undefined;
     crImg: string | undefined;
-    usrs: User[] | undefined;
+    usrs: string[] | undefined;
     mges: Message[] | undefined;
+    imgU: string[] | undefined;
 
 }

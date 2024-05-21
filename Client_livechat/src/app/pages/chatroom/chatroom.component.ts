@@ -63,6 +63,7 @@ export class ChatroomComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+ 
     console.log('Chatrooms:', this.chatrooms)
     this.currentUser = this.authService.getCurrentUser();
     console.log(this.currentUser);
@@ -102,30 +103,6 @@ export class ChatroomComponent implements OnInit {
     });
     this.loadChatrooms();
   }
-
-  // loadChatrooms() {
-  //   if (this.currentUser) {
-  //     this.chatroomService
-  //       .getChatroomsOfUser(this.currentUser)
-  //       .subscribe((response) => {
-  //         this.chatrooms = response.data;
-  //         console.log(this.chatrooms)
-  //         const lastChatroomId = localStorage.getItem('lastChatroomId');
-  //         if (lastChatroomId) {
-  //           const lastChatroom = this.chatrooms.find(
-  //             (chatroom) => chatroom.crCd === lastChatroomId,
-  //           );
-  //           if (lastChatroom) {
-  //             this.showChatMessages(lastChatroom);
-  //           }
-  //         }
-          
-  //         // Apply filtering logic here
-  //         this.applyFilter();
-
-  //       });
-  //   }
-  // }
 
   loadChatrooms() {
     if (this.currentUser) {
@@ -172,10 +149,16 @@ export class ChatroomComponent implements OnInit {
           if (chatroom.crCd)
             localStorage.setItem('lastChatroomId', chatroom.crCd);
           const code = this.selectedChatroom?.crCd;
+          console.log("the code is "+ code)
+          const images = this.selectedChatroom?.imgU;
+          console.log("the img is "+ images)
+         // console.log('lets check the arrays '+this.selectedChatroom + ' another one  '+ this.selectedChatroom?.imgU)
         //  console.log(this.selectedChatroom);
           if (code) {
             // Ensure that code is defined before passing it
             this.getMessagesForRoom(code);
+            this.getChatRoomImgs(code)
+      
           }
         });
     }
@@ -370,6 +353,34 @@ export class ChatroomComponent implements OnInit {
       console.error('Chatroom code or username is undefined');
     }
   }
+  getChatRoomImgs(cr_code: string | undefined): void {
+    if (!cr_code) {
+      console.error('Chatroom code is undefined');
+      return;
+    }
+  
+    this.chatroomService.getChatroomAndMessages(cr_code).subscribe(
+      response => {
+        const chatroomData = response.data;
+        console.log(chatroomData.imgU[1] + " chatroom data is")
+        if (this.selectedChatroom) {
+          this.selectedChatroom.usrs = chatroomData.usrs;
+          this.selectedChatroom.imgU = chatroomData.imgU;
+          if(this.selectedChatroom?.imgU)
+            console.log(this.selectedChatroom?.imgU[1] + " chatroom data is")
+        }
+  
+     
+     
+      },
+      error => {
+        console.error('Error getting rooms images:', error);
+       
+      }
+    );
+  }
+  
+  
 
   onChatroomCreated(newChatroom: Chatroom) {
     this.chatrooms.push(newChatroom);
@@ -377,4 +388,18 @@ export class ChatroomComponent implements OnInit {
     this.loadChatrooms();
     this.showChatMessages(newChatroom);
   }
+
+  getUserImage(username: string | undefined): string | undefined {
+    if (!this.selectedChatroom || !username) return undefined;
+  
+    const userIndex = this.selectedChatroom.usrs?.indexOf(username);
+    if (userIndex !== undefined && userIndex !== -1) {
+      return this.selectedChatroom.imgU?.[userIndex];
+    }
+    return undefined;
+  }
+  
+
+
+
 }  

@@ -38,7 +38,7 @@ getChatroomsOfUser(username: string): Observable<Risposta> {
   return this.http.get<Risposta>(`${this.apiUrl}ChatRoom/viewChatRooms/${username}`);
 }
 
-getChatroomAndMessages(cr_code: string): Observable<Risposta> {
+getChatroomAndMessages(cr_code: string | undefined): Observable<Risposta> {
   return this.http.get<Risposta>(`${this.apiUrl}ChatRoom/chat/${cr_code}`);
 }
 
